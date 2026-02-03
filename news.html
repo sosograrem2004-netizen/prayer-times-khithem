@@ -19,13 +19,17 @@ header{
   color:white;
   padding:15px 20px;
   position:relative;
+  height:100px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
 }
 
 .header-right{
   display:flex;
   justify-content:flex-end;
   align-items:center;
-  gap:15px;
+  gap:20px;
 }
 
 .header-right h1{
@@ -35,8 +39,8 @@ header{
 }
 
 .header-right span{
-  font-size:18px;
-  font-weight:700;
+  font-size:28px; /* نفس حجم العنوان */
+  font-weight:900;
   display:flex;
   align-items:center;
 }
@@ -49,41 +53,57 @@ header{
   display:inline-block;
 }
 
-/* الجملة الذهبية في أسفل الهيدر */
+/* الجملة الذهبية الرقيقة على حافة الهيدر */
 .header-bottom{
-  text-align:center;
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
   color:gold;
   font-weight:400;
-  font-size:16px;
-  margin-top:10px;
+  font-size:8px;
+  padding-bottom:2px;
 }
 
 /* ===== البطاقات ===== */
 .cards-container{
   display:flex;
   justify-content:center;
-  flex-wrap:wrap;
-  gap:15px;
-  padding:20px;
+  gap:10px;
+  padding:15px 20px;
+  overflow-x:auto;
 }
 
 .card{
   background-color:black;
   border:2px solid gold;
   border-radius:12px;
-  padding:20px 25px;
+  padding:10px 15px;
   color:white;
   font-weight:700;
-  font-size:18px;
+  font-size:14px;
   text-align:center;
-  min-width:120px;
+  min-width:110px;
   cursor:pointer;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .card:hover{
   transform: translateY(-5px);
-  box-shadow:0 0 15px gold;
+  box-shadow:0 0 10px gold;
+}
+
+/* محتوى البطاقة */
+.card .news-title{
+  font-weight:900;
+  font-size:14px;
+  margin-bottom:5px;
+}
+
+.card .news-datetime{
+  font-weight:400;
+  font-size:12px;
+  color:gold;
 }
 </style>
 </head>
@@ -102,12 +122,30 @@ header{
 
 <!-- البطاقات -->
 <div class="cards-container">
-  <div class="card">أخبار</div>
-  <div class="card">أعمال خيرية</div>
-  <div class="card">مفقودات</div>
-  <div class="card">نشاطات الجمعية</div>
-  <div class="card">تبرع</div>
-  <div class="card">قفة رمضان</div>
+  <div class="card">
+    <div class="news-title">أخبار</div>
+    <div class="news-datetime">02 فيفري 2026 - 10:00</div>
+  </div>
+  <div class="card">
+    <div class="news-title">أعمال خيرية</div>
+    <div class="news-datetime">02 فيفري 2026 - 11:30</div>
+  </div>
+  <div class="card">
+    <div class="news-title">مفقودات</div>
+    <div class="news-datetime">02 فيفري 2026 - 12:15</div>
+  </div>
+  <div class="card">
+    <div class="news-title">نشاطات الجمعية</div>
+    <div class="news-datetime">02 فيفري 2026 - 13:45</div>
+  </div>
+  <div class="card">
+    <div class="news-title">تبرع</div>
+    <div class="news-datetime">02 فيفري 2026 - 14:30</div>
+  </div>
+  <div class="card">
+    <div class="news-title">قفة رمضان</div>
+    <div class="news-datetime">02 فيفري 2026 - 15:00</div>
+  </div>
 </div>
 
 <!-- محتوى إضافي لاحقًا -->
