@@ -85,8 +85,8 @@ header{
   font-weight:700;
   font-size:12px;
   text-align:center;
-  width:90px; /* صغيرة جدًا */
-  flex-shrink:0; /* لمنع التصغير على الشاشات الصغيرة */
+  width:90px; 
+  flex-shrink:0; 
   cursor:pointer;
   transition: transform 0.3s, box-shadow 0.3s;
   display:flex;
@@ -111,16 +111,12 @@ header{
   background:white;
   border-radius:12px;
   box-shadow:0 0 10px rgba(0,0,0,0.2);
-  display:none;
   opacity:0;
   transform: translateY(20px);
   transition: opacity 0.5s ease, transform 0.5s ease;
-  position:relative;
-  z-index:10;
 }
 
 .news-display.show{
-  display:block;
   opacity:1;
   transform: translateY(0);
 }
@@ -155,18 +151,6 @@ header{
   font-size:14px;
   font-weight:400;
   color:black;
-}
-
-/* ===== غطاء للتعتيم خارج الصندوق ===== */
-.overlay-bg{
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.2);
-  z-index:5;
 }
 
 /* ===== تجاوب ===== */
@@ -227,9 +211,6 @@ header{
   </div>
 </div>
 
-<!-- غطاء لتعتيم الخلفية عند عرض الخبر -->
-<div class="overlay-bg" id="overlayBg" onclick="closeNews()"></div>
-
 <!-- عرض الخبر -->
 <div class="news-display" id="newsDisplay">
   <div class="title-bar">
@@ -243,23 +224,11 @@ header{
 <script>
 function showNews(title, datetime, content){
   const display = document.getElementById('newsDisplay');
-  const overlay = document.getElementById('overlayBg');
   document.getElementById('newsTitle').innerText = title;
   document.getElementById('newsDateTime').innerText = datetime;
   document.getElementById('newsContent').innerText = content;
-
-  overlay.style.display = 'block';
-  display.classList.remove('show');
-  display.offsetWidth; // إعادة تفعيل التحريك
   display.classList.add('show');
   window.scrollTo({top: display.offsetTop - 100, behavior:'smooth'});
-}
-
-function closeNews(){
-  const display = document.getElementById('newsDisplay');
-  const overlay = document.getElementById('overlayBg');
-  display.classList.remove('show');
-  overlay.style.display = 'none';
 }
 </script>
 
