@@ -25,6 +25,16 @@ header{
   padding-bottom:2px;
 }
 
+/* اللوجو على اليسار */
+header img{
+  position:absolute;
+  top:15px;
+  left:10px;
+  width:60px; /* حجم متوسط */
+  height:auto;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.7)); /* لمعة خفيفة */
+}
+
 /* عنوان كبير على أقصى اليمين */
 .header-main-title{
   position:absolute;
@@ -193,6 +203,7 @@ header{
 <body>
 
 <header>
+  <img src="logo.webp" alt="Logo">
   <h1 class="header-main-title">أخبار مسك الختام</h1>
   <div class="header-separator"></div>
   <span class="header-subtitle">misk-elkhithem</span>
