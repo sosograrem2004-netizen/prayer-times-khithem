@@ -18,8 +18,8 @@ body{
 header{
   background-color:black;
   color:white;
-  padding:8px 10px;
-  min-height:130px;
+  padding:10px 12px;
+  min-height:140px; /* ارتفاع مناسب للهيدر */
   width:100%;
   display:flex;
   flex-direction:column;
@@ -32,18 +32,18 @@ header{
   display:flex;
   justify-content:flex-end;
   align-items:center;
-  gap:10px;
+  gap:15px;
   flex-wrap:wrap;
 }
 
 .header-right h1{
-  font-size:18px; /* تصغير العنوان */
+  font-size:20px; /* حجم العنوان */
   font-weight:900;
   margin:0;
 }
 
 .header-right span{
-  font-size:18px; /* تصغير misk-elkhithem */
+  font-size:20px; /* حجم misk-elkhithem */
   font-weight:900;
   display:flex;
   align-items:center;
@@ -51,7 +51,7 @@ header{
 
 .header-right .separator{
   width:1px;
-  height:20px;
+  height:22px;
   background-color:white;
   display:inline-block;
 }
@@ -72,38 +72,39 @@ header{
 .cards-container{
   display:flex;
   justify-content:center;
-  gap:3px;
-  padding:5px 5px;
+  gap:6px;
+  padding:6px 5px;
   overflow-x:hidden; /* منع التمرير الأفقي */
-  flex-wrap:wrap; /* لتتناسب البطاقات في سطر واحد على الهواتف */
+  flex-wrap:wrap;
 }
 
 .card{
   background-color:black;
-  border:1px solid gold;
-  border-radius:8px;
-  padding:2px 3px;
+  border:2px solid gold;
+  border-radius:10px;
+  padding:4px 5px;
   color:white;
   font-weight:700;
-  font-size:9px; /* تصغير النص */
+  font-size:10px; /* نص مقروء قليلا */
   text-align:center;
-  width:40px; /* تصغير أكبر */
+  width:50px; /* زيادة الحجم */
   flex-shrink:0;
   cursor:pointer;
   display:flex;
   flex-direction:column;
   align-items:center;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card .news-title{
   font-weight:900;
-  font-size:9px;
+  font-size:10px;
 }
 
 /* ===== عرض الخبر ===== */
 .news-display{
-  margin:5px 5px 10px 5px;
-  padding:5px 8px;
+  margin:6px 6px 12px 6px;
+  padding:6px 8px;
   background:white;
   border-radius:8px;
   box-shadow:0 0 6px rgba(0,0,0,0.2);
@@ -152,36 +153,36 @@ header{
 /* ===== تجاوب ===== */
 @media (max-width:600px){
   header{
-    min-height:130px;
-    padding:6px 8px;
+    min-height:150px;
+    padding:8px 10px;
   }
 
   .header-right h1, .header-right span{
-    font-size:16px;
+    font-size:18px;
   }
 
   .header-right .separator{
-    height:18px;
+    height:20px;
   }
 
   .cards-container{
-    gap:2px;
-    padding:4px 4px;
+    gap:5px;
+    padding:5px 4px;
   }
 
   .card{
-    width:35px; /* أصغر حجم للهواتف */
-    font-size:8px;
-    padding:1px 2px;
+    width:45px; /* أكبر قليلا من قبل */
+    font-size:10px;
+    padding:3px 4px;
   }
 
   .news-display{
-    margin:4px 4px 8px 4px;
-    padding:4px 6px;
+    margin:5px 5px 10px 5px;
+    padding:5px 6px;
   }
 
   .news-display .title-bar h2{
-    font-size:12px;
+    font-size:13px;
   }
 
   .news-display .title-bar .datetime{
@@ -189,7 +190,7 @@ header{
   }
 
   .news-display .content{
-    font-size:10px;
+    font-size:11px;
   }
 }
 </style>
@@ -207,7 +208,7 @@ header{
   </div>
 </header>
 
-<!-- البطاقات الصغيرة جدًا -->
+<!-- البطاقات -->
 <div class="cards-container">
   <div class="card" onclick="showNews('أخبار', '02/02/2026 10:00', 'هذا نص الخبر الخاص بالأخبار.')">
     <div class="news-title">أخبار</div>
