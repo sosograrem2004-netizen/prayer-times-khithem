@@ -32,7 +32,30 @@ body{
   display:none; /* لا يوجد صور */
 }
 
-/* 🔽 تم تقريب السطور هنا فقط */
+/* 🔽 زر الأخبار النابض كرابط */
+#newsButton{
+  display:block;
+  text-decoration:none;
+  width:100%;
+  padding:10px 0;
+  font-size:16px;
+  font-weight:700;
+  color:white;
+  background-color:black;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  animation:pulse 1s infinite;
+  margin-bottom:8px;
+  text-align:center;
+}
+
+@keyframes pulse{
+  0%,100%{ transform: scale(1); box-shadow: 0 0 10px white; }
+  50%{ transform: scale(1.05); box-shadow: 0 0 20px gold; }
+}
+
+/* 🔽 باقي التنسيقات */
 .title{
   font-size:20px;
   font-weight:700;
@@ -82,31 +105,6 @@ body{
   display:none; /* لا صور */
 }
 
-/* ===== شريط الأخبار ===== */
-#newsTicker{
-  width:100%;
-  overflow:hidden;
-  white-space:nowrap;
-  border-radius:8px;
-  margin:5px 0 10px 0;
-  background:rgba(255,215,0,0.1);
-  padding:5px 0;
-  font-weight:700;
-  font-size:16px;
-  position:relative;
-  color:gold;
-}
-#newsTicker span{
-  display:inline-block;
-  position:relative;
-  left:-100%;
-  animation:scrollLeft 20s linear infinite;
-}
-@keyframes scrollLeft{
-  0%{left:-100%;}
-  100%{left:100%;}
-}
-
 .footer{
   margin-top:10px;
   font-size:14px;
@@ -121,11 +119,8 @@ body{
 
 <div class="overlay">
 
-  <div id="newsTicker">
-    <span>
-🌙تذكير بصيام أيام البيض التي تبدأ من يوم غد الاحد 01 فيفري الى غاية يوم الثلاثاء 03 فيفري 2026🌙الجمعية الخيرية مسك الختام القرارم قوقة
-    </span>
-  </div>
+  <!-- زر الأخبار كرابط لصفحة مستقبلية -->
+  <a href="news.html" id="newsButton">آخر أخبار مسك الختام</a>
 
   <div class="title">الجمعية الخيرية مسك الختام القرارم قوقة</div>
 
