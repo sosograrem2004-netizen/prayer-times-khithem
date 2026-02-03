@@ -29,7 +29,7 @@ header{
 header img{
   position:absolute;
   top:50%; 
-  left:10px; /* الجهة المقابلة للعناوين */
+  left:10px; 
   transform: translateY(-50%);
   width:120px;   /* أكبر من المتوسط */
   height:auto;
@@ -57,13 +57,15 @@ header img{
   background:white;
 }
 
-/* misk-elkhithem */
+/* misk-elkhithem أكبر وقريب من اللوغو */
 .header-subtitle{
   position:absolute;
-  top:60px;
-  right:10px;
-  font-size:20px;
+  top:50%;
+  left:140px; /* قريب من اللوغو */
+  transform: translateY(-50%);
+  font-size:28px; /* أكبر حجم */
   font-weight:900;
+  color:white;
 }
 
 /* الجملة الذهبية أسفل الهيدر */
@@ -172,12 +174,12 @@ header img{
     right:8px;
   }
   .header-subtitle{
-    font-size:18px;
-    top:55px;
-    right:8px;
+    font-size:22px;
+    left:130px; /* أصغر على الهاتف */
+    top:50%;
   }
   header img{
-    width:90px; /* أصغر قليلاً على الهاتف */
+    width:90px; 
     left:8px;
   }
   .cards-container{
@@ -234,6 +236,10 @@ header img{
   </div>
   <div class="card" onclick="showNews('قفة رمضان', '02/02/2026 15:00', 'هذا نص الخبر الخاص بقفة رمضان.')">
     <div class="news-title">قفة رمضان</div>
+  </div>
+  <!-- البطاقة الجديدة -->
+  <div class="card" onclick="showNews('ذكريات', '02/02/2026 16:00', 'هذا نص الخبر الخاص بالذكريات.')">
+    <div class="news-title">ذكريات</div>
   </div>
 </div>
 
