@@ -23,17 +23,27 @@ header{
   position:relative;
   box-sizing:border-box;
   padding-bottom:2px;
+  perspective:1000px; /* ضروري للثلاثي الأبعاد */
 }
 
-/* اللوجو الجديد على أقصى اليسار */
-header img{
+/* اللوغو ثلاثي الأبعاد ويدور مع لمعان */
+.rotating-logo{
   position:absolute;
   top:50%; 
-  left:10px; 
+  left:10px;
   transform: translateY(-50%);
-  width:120px;   /* أكبر من المتوسط */
+  width:120px;
   height:auto;
-  filter: drop-shadow(0 0 10px rgba(255,255,255,0.8)); /* لمعة خفيفة */
+  transform-style: preserve-3d;
+  animation: rotateLogo 8s linear infinite;
+}
+
+@keyframes rotateLogo {
+  0% { transform: translateY(-50%) rotateY(0deg); filter: brightness(1); }
+  25% { filter: brightness(1.3); }
+  50% { transform: translateY(-50%) rotateY(180deg); filter: brightness(1); }
+  75% { filter: brightness(1.3); }
+  100% { transform: translateY(-50%) rotateY(360deg); filter: brightness(1); }
 }
 
 /* عنوان كبير على أقصى اليمين */
@@ -63,7 +73,7 @@ header img{
   top:50%;
   left:140px; /* قريب من اللوغو */
   transform: translateY(-50%);
-  font-size:28px; /* أكبر حجم */
+  font-size:28px;
   font-weight:900;
   color:white;
 }
@@ -175,10 +185,10 @@ header img{
   }
   .header-subtitle{
     font-size:22px;
-    left:130px; /* أصغر على الهاتف */
+    left:130px;
     top:50%;
   }
-  header img{
+  .rotating-logo{
     width:90px; 
     left:8px;
   }
@@ -210,7 +220,7 @@ header img{
 <body>
 
 <header>
-  <img src="logo1.png" alt="Logo">
+  <img src="logo1.png" alt="Logo" class="rotating-logo">
   <h1 class="header-main-title">أخبار مسك الختام</h1>
   <div class="header-separator"></div>
   <span class="header-subtitle">misk-elkhithem</span>
@@ -237,7 +247,6 @@ header img{
   <div class="card" onclick="showNews('قفة رمضان', '02/02/2026 15:00', 'هذا نص الخبر الخاص بقفة رمضان.')">
     <div class="news-title">قفة رمضان</div>
   </div>
-  <!-- البطاقة الجديدة -->
   <div class="card" onclick="showNews('ذكريات', '02/02/2026 16:00', 'هذا نص الخبر الخاص بالذكريات.')">
     <div class="news-title">ذكريات</div>
   </div>
