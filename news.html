@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أخبار مسك الختام</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:'Cairo',Tahoma;
+  background-color:#f5f5f5;
+}
+
+/* ===== الهيدر ===== */
+header{
+  background-color:black;
+  color:white;
+  padding:15px 20px;
+  position:relative;
+}
+
+.header-right{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:15px;
+}
+
+.header-right h1{
+  font-size:28px;
+  font-weight:900;
+  margin:0;
+}
+
+.header-right span{
+  font-size:18px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+}
+
+/* الخط الفاصل */
+.header-right .separator{
+  width:2px;
+  height:30px;
+  background-color:white;
+  display:inline-block;
+}
+
+/* الجملة الذهبية في أسفل الهيدر */
+.header-bottom{
+  text-align:center;
+  color:gold;
+  font-weight:400;
+  font-size:16px;
+  margin-top:10px;
+}
+
+/* ===== البطاقات ===== */
+.cards-container{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:15px;
+  padding:20px;
+}
+
+.card{
+  background-color:black;
+  border:2px solid gold;
+  border-radius:12px;
+  padding:20px 25px;
+  color:white;
+  font-weight:700;
+  font-size:18px;
+  text-align:center;
+  min-width:120px;
+  cursor:pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover{
+  transform: translateY(-5px);
+  box-shadow:0 0 15px gold;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-right">
+    <h1>أخبار مسك الختام</h1>
+    <span class="separator"></span>
+    <span>misk-elkhithem</span>
+  </div>
+  <div class="header-bottom">
+    الجمعية الخيرية مسك الختام القرارم قوقة
+  </div>
+</header>
+
+<!-- البطاقات -->
+<div class="cards-container">
+  <div class="card">أخبار</div>
+  <div class="card">أعمال خيرية</div>
+  <div class="card">مفقودات</div>
+  <div class="card">نشاطات الجمعية</div>
+  <div class="card">تبرع</div>
+  <div class="card">قفة رمضان</div>
+</div>
+
+<!-- محتوى إضافي لاحقًا -->
+<main style="padding:20px;">
+  <p>يمكنك إضافة الأخبار والمحتوى الخاص بكل بطاقة عند النقر عليها.</p>
+</main>
+
+</body>
+</html>
