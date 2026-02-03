@@ -18,54 +18,52 @@ body{
 header{
   background-color:black;
   color:white;
-  padding:10px 12px;
-  min-height:140px; /* ارتفاع مناسب للهيدر */
+  min-height:160px;
   width:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-start;
   position:relative;
   box-sizing:border-box;
+  padding-bottom:2px;
 }
 
-.header-right{
-  display:flex;
-  justify-content:flex-end;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
-}
-
-.header-right h1{
-  font-size:20px; /* حجم العنوان */
+/* عنوان كبير على أقصى اليمين */
+.header-main-title{
+  position:absolute;
+  top:10px;
+  right:10px;
+  font-size:30px;
   font-weight:900;
   margin:0;
+  line-height:1.2;
 }
 
-.header-right span{
-  font-size:20px; /* حجم misk-elkhithem */
+/* الفاصل الأبيض سميك وطويل */
+.header-separator{
+  position:absolute;
+  top:50px;
+  right:10px;
+  width:150px;
+  height:3px;
+  background:white;
+}
+
+/* misk-elkhithem */
+.header-subtitle{
+  position:absolute;
+  top:60px;
+  right:10px;
+  font-size:20px;
   font-weight:900;
-  display:flex;
-  align-items:center;
-}
-
-.header-right .separator{
-  width:1px;
-  height:22px;
-  background-color:white;
-  display:inline-block;
 }
 
 /* الجملة الذهبية أسفل الهيدر */
 .header-bottom{
   position:absolute;
-  bottom:0;
+  bottom:2px;
   left:50%;
   transform:translateX(-50%);
   color:gold;
   font-weight:400;
   font-size:8px;
-  padding-bottom:2px;
 }
 
 /* ===== البطاقات ===== */
@@ -74,7 +72,7 @@ header{
   justify-content:center;
   gap:6px;
   padding:6px 5px;
-  overflow-x:hidden; /* منع التمرير الأفقي */
+  overflow-x:hidden;
   flex-wrap:wrap;
 }
 
@@ -85,9 +83,9 @@ header{
   padding:4px 5px;
   color:white;
   font-weight:700;
-  font-size:10px; /* نص مقروء قليلا */
+  font-size:10px;
   text-align:center;
-  width:50px; /* زيادة الحجم */
+  width:50px;
   flex-shrink:0;
   cursor:pointer;
   display:flex;
@@ -152,43 +150,40 @@ header{
 
 /* ===== تجاوب ===== */
 @media (max-width:600px){
-  header{
-    min-height:150px;
-    padding:8px 10px;
+  .header-main-title{
+    font-size:24px;
+    top:8px;
+    right:8px;
   }
-
-  .header-right h1, .header-right span{
+  .header-separator{
+    width:120px;
+    top:45px;
+    right:8px;
+  }
+  .header-subtitle{
     font-size:18px;
+    top:55px;
+    right:8px;
   }
-
-  .header-right .separator{
-    height:20px;
-  }
-
   .cards-container{
     gap:5px;
     padding:5px 4px;
   }
-
   .card{
-    width:45px; /* أكبر قليلا من قبل */
+    width:45px;
     font-size:10px;
     padding:3px 4px;
   }
-
   .news-display{
     margin:5px 5px 10px 5px;
     padding:5px 6px;
   }
-
   .news-display .title-bar h2{
     font-size:13px;
   }
-
   .news-display .title-bar .datetime{
     font-size:9px;
   }
-
   .news-display .content{
     font-size:11px;
   }
@@ -198,14 +193,10 @@ header{
 <body>
 
 <header>
-  <div class="header-right">
-    <h1>أخبار مسك الختام</h1>
-    <span class="separator"></span>
-    <span>misk-elkhithem</span>
-  </div>
-  <div class="header-bottom">
-    الجمعية الخيرية مسك الختام القرارم قوقة
-  </div>
+  <h1 class="header-main-title">أخبار مسك الختام</h1>
+  <div class="header-separator"></div>
+  <span class="header-subtitle">misk-elkhithem</span>
+  <div class="header-bottom">الجمعية الخيرية مسك الختام القرارم قوقة</div>
 </header>
 
 <!-- البطاقات -->
