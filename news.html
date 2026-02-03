@@ -86,15 +86,19 @@ header{
   100% { background-position: -200% center; }
 }
 
-/* تكبير العنوان الذهبي في أسفل الهيدر */
+/* تكبير العنوان الذهبي أسفل الهيدر، طويل وسطر واحد مع © */
 .header-bottom{
   position:absolute;
   bottom:2px;
   left:50%;
   transform:translateX(-50%);
   color:gold;
-  font-weight:400;
-  font-size:14px; /* تكبير أكثر */
+  font-weight:700;  
+  font-size:14px;   
+  white-space:nowrap; /* يبقى في سطر واحد */
+}
+.header-bottom::after{
+  content:" ©"; /* إضافة رمز © في نهاية النص */
 }
 
 /* ===== البطاقات ===== */
