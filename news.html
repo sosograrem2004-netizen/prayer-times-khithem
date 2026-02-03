@@ -18,31 +18,31 @@ body{
 header{
   background-color:black;
   color:white;
-  padding:10px 15px;
-  position:relative;
-  min-height:100px;
+  padding:15px 20px;
+  min-height:150px; /* زيادة ارتفاع الهيدر */
   width:100%;
   display:flex;
   flex-direction:column;
   justify-content:flex-start;
+  position:relative;
 }
 
 .header-right{
   display:flex;
   justify-content:flex-end;
   align-items:center;
-  gap:15px;
+  gap:20px;
   flex-wrap:wrap;
 }
 
 .header-right h1{
-  font-size:24px;
+  font-size:28px;
   font-weight:900;
   margin:0;
 }
 
 .header-right span{
-  font-size:24px;
+  font-size:28px;
   font-weight:900;
   display:flex;
   align-items:center;
@@ -50,7 +50,7 @@ header{
 
 .header-right .separator{
   width:2px;
-  height:25px;
+  height:30px;
   background-color:white;
   display:inline-block;
 }
@@ -71,7 +71,7 @@ header{
 .cards-container{
   display:flex;
   justify-content:center;
-  gap:8px;
+  gap:5px;
   padding:10px 15px;
   overflow-x:auto;
   scroll-behavior:smooth;
@@ -81,28 +81,28 @@ header{
   background-color:black;
   border:2px solid gold;
   border-radius:10px;
-  padding:4px 6px;
+  padding:3px 5px;
   color:white;
   font-weight:700;
-  font-size:11px;
+  font-size:10px;
   text-align:center;
-  width:70px; 
-  flex-shrink:0; 
+  width:50px; /* تصغير البطاقات جدًا */
+  flex-shrink:0;
   cursor:pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
   display:flex;
   flex-direction:column;
   align-items:center;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover{
   transform: translateY(-2px);
-  box-shadow:0 0 6px gold;
+  box-shadow:0 0 5px gold;
 }
 
 .card .news-title{
   font-weight:900;
-  font-size:11px;
+  font-size:10px;
 }
 
 /* ===== عرض الخبر ===== */
@@ -157,31 +157,31 @@ header{
 /* ===== تجاوب ===== */
 @media (max-width:600px){
   header{
-    min-height:80px;
-    padding:8px 10px;
+    min-height:170px; /* زيادة أكثر للهواتف */
+    padding:10px 12px;
   }
 
   .header-right h1, .header-right span{
-    font-size:18px;
+    font-size:20px;
   }
 
   .header-right .separator{
-    height:20px;
+    height:22px;
   }
 
   .cards-container{
-    gap:6px;
-    padding:8px 10px;
+    gap:4px;
+    padding:6px 10px;
   }
 
   .card{
-    width:60px;
-    font-size:10px;
-    padding:3px 5px;
+    width:45px; /* تصغير أكبر على الهواتف */
+    font-size:9px;
+    padding:2px 4px;
   }
 
   .news-display{
-    margin:8px;
+    margin:6px 8px 12px 8px;
     padding:8px;
   }
 
