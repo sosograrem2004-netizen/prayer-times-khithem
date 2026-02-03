@@ -25,15 +25,15 @@ header{
   padding-bottom:2px;
 }
 
-/* اللوجو الجديد في منتصف ارتفاع الهيدر على اليمين */
+/* اللوجو الجديد على أقصى اليسار */
 header img{
   position:absolute;
   top:50%; 
-  right:10px;
+  left:10px; /* الجهة المقابلة للعناوين */
   transform: translateY(-50%);
-  width:100px;   /* تكبير اللوجو */
+  width:120px;   /* أكبر من المتوسط */
   height:auto;
-  filter: drop-shadow(0 0 8px rgba(255,255,255,0.8)); /* لمعة خفيفة */
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.8)); /* لمعة خفيفة */
 }
 
 /* عنوان كبير على أقصى اليمين */
@@ -177,8 +177,8 @@ header img{
     right:8px;
   }
   header img{
-    width:80px; /* أصغر قليلًا على الهاتف */
-    right:8px;
+    width:90px; /* أصغر قليلاً على الهاتف */
+    left:8px;
   }
   .cards-container{
     gap:5px;
@@ -208,7 +208,7 @@ header img{
 <body>
 
 <header>
-  <img src="logo.png" alt="Logo">
+  <img src="logo1.png" alt="Logo">
   <h1 class="header-main-title">أخبار مسك الختام</h1>
   <div class="header-separator"></div>
   <span class="header-subtitle">misk-elkhithem</span>
