@@ -26,7 +26,7 @@ header{
   perspective:1000px; /* ضروري للثلاثي الأبعاد */
 }
 
-/* اللوغو ثلاثي الأبعاد ويدور دورة كاملة + توقف */
+/* اللوغو يدور دورة واحدة ثم توقف 30 ثانية */
 .rotating-logo{
   position:absolute;
   top:50%; 
@@ -35,13 +35,13 @@ header{
   width:120px;
   height:auto;
   transform-style: preserve-3d;
-  animation: rotateOnceWithPause 5s linear infinite;
+  animation: rotateOnceWithPause 34s linear infinite; /* 4s دوران + 30s توقف */
 }
 
 @keyframes rotateOnceWithPause {
   0% { transform: translateY(-50%) rotateY(0deg); filter: brightness(1); }
-  80% { transform: translateY(-50%) rotateY(360deg); filter: brightness(1.2); } /* الدوران 4 ثواني */
-  100% { transform: translateY(-50%) rotateY(360deg); filter: brightness(1); } /* توقف 1 ثانية */
+  11.76% { transform: translateY(-50%) rotateY(360deg); filter: brightness(1.2); } /* 4 ثوانٍ من 34s ≈ 11.76% */
+  100% { transform: translateY(-50%) rotateY(360deg); filter: brightness(1); } /* توقف باقي الوقت */
 }
 
 /* عنوان كبير على أقصى اليمين */
@@ -86,7 +86,7 @@ header{
   100% { background-position: -200% center; }
 }
 
-/* الجملة الذهبية أسفل الهيدر */
+/* تكبير العنوان الذهبي في أسفل الهيدر */
 .header-bottom{
   position:absolute;
   bottom:2px;
@@ -94,7 +94,7 @@ header{
   transform:translateX(-50%);
   color:gold;
   font-weight:400;
-  font-size:8px;
+  font-size:14px; /* تكبير أكثر */
 }
 
 /* ===== البطاقات ===== */
