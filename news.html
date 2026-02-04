@@ -4,184 +4,181 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>أخبار مسك الختام</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-
 <style>
-body{
-  margin:0;
-  font-family:'Cairo',Tahoma;
-  background:#f2f2f2;
-  overflow-x:hidden;
+body {
+  margin: 0;
+  font-family: 'Cairo', Tahoma, sans-serif;
+  background: #f2f2f2;
+  overflow-x: hidden;
 }
 
-/* ================= HEADER ================= */
-header{
-  background:black;
-  min-height:210px;
-  position:relative;
-  color:white;
+/* ===== HEADER ===== */
+header {
+  background: black;
+  min-height: 210px;
+  position: relative;
+  color: white;
 }
 
 /* شريط الأخبار */
-.news-strip{
-  position:absolute;
-  top:8px;
-  left:6px;
-  right:6px;
-  height:28px;
-  background:linear-gradient(90deg,#fff,#f5d36a,#fff);
-  border-radius:20px;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
+.news-strip {
+  position: absolute;
+  top: 8px;
+  left: 6px;
+  right: 6px;
+  height: 28px;
+  background: linear-gradient(90deg,#fff,#f5d36a,#fff);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
-.news-strip-text{
-  white-space:nowrap;
-  font-size:13px;
-  font-weight:700;
-  color:#000;
-  animation:newsMove 18s linear infinite;
+.news-strip-text {
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 700;
+  color: #000;
+  animation: newsMove 18s linear infinite;
 }
-@keyframes newsMove{
-  from{transform:translateX(-100%)}
-  to{transform:translateX(100%)}
+@keyframes newsMove {
+  from { transform: translateX(-100%) }
+  to { transform: translateX(100%) }
 }
 
 /* اللوغو */
-.rotating-logo{
-  position:absolute;
-  top:58%;
-  left:12px;
-  width:110px;
-  transform:translateY(-50%);
-  animation:rotateOncePause 35s linear infinite;
+.rotating-logo {
+  position: absolute;
+  top: 58%;
+  left: 12px;
+  width: 110px;
+  transform: translateY(-50%);
+  animation: rotateOncePause 35s linear infinite;
 }
-@keyframes rotateOncePause{
-  0%{transform:translateY(-50%) rotateY(0deg)}
-  10%{transform:translateY(-50%) rotateY(360deg)}
-  100%{transform:translateY(-50%) rotateY(360deg)}
+@keyframes rotateOncePause {
+  0%, 100% { transform: translateY(-50%) rotateY(0deg) }
+  10% { transform: translateY(-50%) rotateY(360deg) }
 }
 
 /* العناوين */
-.header-main-title{
-  position:absolute;
-  top:40px;
-  right:10px;
-  font-size:26px;
-  font-weight:900;
+.header-main-title {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  font-size: 26px;
+  font-weight: 900;
 }
-.header-separator{
-  position:absolute;
-  top:78px;
-  right:10px;
-  width:180px;
-  height:3px;
-  background:white;
+.header-separator {
+  position: absolute;
+  top: 78px;
+  right: 10px;
+  width: 180px;
+  height: 3px;
+  background: white;
 }
 
 /* MISK / ELKHITHEM */
-.header-subtitle{
-  position:absolute;
-  bottom:58px;
-  left:150px;
-  line-height:1.15;
+.header-subtitle {
+  position: absolute;
+  bottom: 58px;
+  left: 150px;
+  line-height: 1.15;
 }
-.header-subtitle span{
-  display:block;
-  font-size:32px;
-  font-weight:900;
-  background:linear-gradient(120deg,white,gold,white);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-size:200%;
-  animation:shine 10s linear infinite;
+.header-subtitle span {
+  display: block;
+  font-size: 32px;
+  font-weight: 900;
+  background: linear-gradient(120deg, white, gold, white);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200%;
+  animation: shine 10s linear infinite;
 }
-@keyframes shine{
-  from{background-position:200%}
-  to{background-position:-200%}
+@keyframes shine {
+  from { background-position: 200% }
+  to { background-position: -200% }
 }
 
 /* العنوان الذهبي */
-.header-bottom{
-  position:absolute;
-  bottom:10px;
-  left:50%;
-  transform:translateX(-50%);
-  color:gold;
-  font-size:12px; /* أصغر قليلًا */
-  font-weight:700;
-  white-space:nowrap; /* سطر واحد */
+.header-bottom {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: gold;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
 }
-.header-bottom::after{content:" ©";}
+.header-bottom::after { content: " ©"; }
 
-/* ================= CARDS ================= */
-.cards-container{
-  display:flex;
-  justify-content:center;
-  gap:6px;
-  padding:10px 6px;
-  flex-wrap:wrap;
+/* ===== CARDS ===== */
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 6px;
+  flex-wrap: wrap;
 }
-.card{
-  width:80px;
-  height:40px;
-  background:black;
-  border:2px solid gold;
-  border-radius:10px;
-  color:white;
-  font-size:9px;
-  font-weight:900;
-  text-align:center;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.card {
+  width: 80px;
+  height: 40px;
+  background: black;
+  border: 2px solid gold;
+  border-radius: 10px;
+  color: white;
+  font-size: 9px;
+  font-weight: 900;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 /* زر الرجوع */
-.back-btn{
-  display:none;
-  width:92%;
-  margin:10px auto;
-  padding:10px;
-  background:black;
-  color:gold;
-  border:2px solid gold;
-  border-radius:30px;
-  font-weight:900;
-  font-size:14px;
-  cursor:pointer;
+.back-btn {
+  display: none;
+  width: 92%;
+  margin: 10px auto;
+  padding: 10px;
+  background: black;
+  color: gold;
+  border: 2px solid gold;
+  border-radius: 30px;
+  font-weight: 900;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-/* ================= NEWS BOX ================= */
-.news-display{
-  margin:8px;
-  padding:8px;
-  background:white;
-  border-radius:8px;
-  box-shadow:0 0 6px rgba(0,0,0,.25);
+/* ===== NEWS BOX ===== */
+.news-display {
+  margin: 8px;
+  padding: 8px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0,0,0,.25);
 }
-.news-item{
-  margin-bottom:12px;
+.news-item {
+  margin-bottom: 12px;
 }
-.news-item h2{
-  font-size:15px;
-  margin:0;
-  font-weight:900;
+.news-item h2 {
+  font-size: 15px;
+  margin: 0;
+  font-weight: 900;
 }
-.datetime{
-  font-size:10px;
-  color:gold;
+.datetime {
+  font-size: 10px;
+  color: gold;
 }
-.separator{
-  height:2px;
-  background:gold;
-  margin:4px 0;
+.separator {
+  height: 2px;
+  background: gold;
+  margin: 4px 0;
 }
-.news-text{
-  font-size:12px;
-  line-height:1.7;
+.news-text {
+  font-size: 12px;
+  line-height: 1.7;
 }
 </style>
 </head>
@@ -229,42 +226,30 @@ const newsData = {
   general: [
     {t:"07/02/2026 16:30", h:"انطلاق حملة قفة رمضان 2026", c:"تعلن الجمعية الخيرية مسك الختام بالقرارم قوقة عن انطلاق حملة قفة رمضان 2026، والتي تهدف إلى مساعدة العائلات المعوزة وإدخال الفرحة على قلوب المحتاجين خلال الشهر الفضيل. وتدعو الجمعية جميع المحسنين وأهل الخير إلى المساهمة والدعم حسب الاستطاعة."}
   ],
-  charity:[
-    {t:"03/02/2026 11:00", h:"عمل خيري", c:"تفاصيل عمل خيري"}
-  ],
-  missing:[
-    {t:"01/02/2026 09:00", h:"إعلان مفقود", c:"تفاصيل إعلان مفقود"}
-  ],
-  activities:[
-    {t:"04/02/2026 14:00", h:"نشاط", c:"تفاصيل نشاط الجمعية"}
-  ],
-  donate:[
-    {
-      t:"08/02/2026 09:00",
-      h:"🚨 نداء مستعجل للتبرع بالدم 🚨",
-      c:`مريض من بلديتنا في حاجة ماسة وعاجلة إلى دم من فصيلة <b>A+</b>.<br>
+  charity: [{t:"03/02/2026 11:00", h:"عمل خيري", c:"تفاصيل عمل خيري"}],
+  missing: [{t:"01/02/2026 09:00", h:"إعلان مفقود", c:"تفاصيل إعلان مفقود"}],
+  activities: [{t:"04/02/2026 14:00", h:"نشاط", c:"تفاصيل نشاط الجمعية"}],
+  donate: [{
+    t:"08/02/2026 09:00",
+    h:"🚨 نداء مستعجل للتبرع بالدم 🚨",
+    c:`مريض من بلديتنا في حاجة ماسة وعاجلة إلى دم من فصيلة <b>A+</b>.<br>
 📍 متواجد بـ <b>مستشفى الإخوة طوبال – ميلة</b><br>
 نرجو من كل من تتوفر لديه هذه الفصيلة التوجه في أقرب وقت ممكن للتبرع، فالأمر مستعجل جدًا وقد ينقذ حياة إنسان.<br>
 📞 للاستفسار والتنسيق: <b>0792844621</b><br>
 قال رسول الله ﷺ: «ومن أحياها فكأنما أحيا الناس جميعًا»<br>
 جزاكم الله خيرًا وبارك فيكم 🤍<br>
 🔁 الرجاء مشاركة المنشور على أوسع نطاق`
-    }
-  ],
-  ramadan:[
-    {t:"06/02/2026 16:00", h:"قفة رمضان", c:"تفاصيل قفة رمضان"}
-  ],
-  memory:[
-    {t:"2025", h:"ذكرى", c:"ذكريات الجمعية"}
-  ]
+  }],
+  ramadan: [{t:"06/02/2026 16:00", h:"قفة رمضان", c:"تفاصيل قفة رمضان"}],
+  memory: [{t:"2025", h:"ذكرى", c:"ذكريات الجمعية"}]
 };
 
 const box = document.getElementById("newsBox");
 const backBtn = document.getElementById("backBtn");
 
-function renderNews(list){
-  box.innerHTML="";
-  list.forEach(n=>{
+function renderNews(list) {
+  box.innerHTML = "";
+  list.forEach(n => {
     box.innerHTML += `
       <div class="news-item">
         <div class="datetime">${n.t}</div>
@@ -276,17 +261,17 @@ function renderNews(list){
   });
 }
 
-function showGeneral(){
-  backBtn.style.display="none";
+function showGeneral() {
+  backBtn.style.display = "none";
   renderNews(newsData.general);
 }
 
-function showCategory(cat){
-  backBtn.style.display="block";
+function showCategory(cat) {
+  backBtn.style.display = "block";
   renderNews(newsData[cat]);
 }
 
-/* عند فتح الصفحة */
+// عند فتح الصفحة
 showGeneral();
 </script>
 
