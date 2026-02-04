@@ -5,91 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>أخبار مسك الختام</title>
 <style>
-body {
-  margin: 0;
-  font-family: 'Cairo', Tahoma, sans-serif;
-  background: #f2f2f2;
-  color: #000;
-}
-
-/* ===== HEADER ===== */
-header {
-  background: black;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-header h1 {
-  margin: 0;
-  font-size: 28px;
-}
-header .subtitle {
-  font-size: 20px;
-  color: gold;
-}
-
-/* ===== CARDS ===== */
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px;
-}
-.card {
-  background: black;
-  color: gold;
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  text-align: center;
-}
-
-/* زر العودة */
-.back-btn {
-  display: none;
-  margin: 10px auto;
-  padding: 8px 12px;
-  background: black;
-  color: gold;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  display: block;
-  width: 200px;
-  text-align: center;
-}
-
-/* ===== NEWS BOX ===== */
-.news-display {
-  max-width: 600px;
-  margin: 10px auto;
-  padding: 10px;
-  background: white;
-  border-radius: 8px;
-}
-.news-item {
-  margin-bottom: 12px;
-}
-.news-item h2 {
-  font-size: 18px;
-  margin: 4px 0;
-  color: black;
-}
-.datetime {
-  font-size: 12px;
-  color: gray;
-}
-.separator {
-  height: 1px;
-  background: gold;
-  margin: 4px 0;
-}
-.news-text {
-  font-size: 14px;
-  line-height: 1.5;
-}
+body{margin:0;font-family:'Cairo',Tahoma;background:#f2f2f2;color:#000;}
+header{background:black;color:white;padding:20px;text-align:center;}
+header h1{margin:0;font-size:28px;}
+header .subtitle{font-size:20px;color:gold;}
+.cards-container{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;padding:10px;}
+.card{background:black;color:gold;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:bold;text-align:center;}
+.back-btn{display:none;margin:10px auto;padding:8px 12px;background:black;color:gold;border-radius:8px;cursor:pointer;font-weight:bold;width:200px;text-align:center;}
+.news-display{max-width:600px;margin:10px auto;padding:10px;background:white;border-radius:8px;}
+.news-item{margin-bottom:12px;}
+.news-item h2{font-size:18px;margin:4px 0;color:black;}
+.datetime{font-size:12px;color:gray;}
+.separator{height:1px;background:gold;margin:4px 0;}
+.news-text{font-size:14px;line-height:1.5;}
 </style>
 </head>
 <body>
@@ -110,35 +38,19 @@ header .subtitle {
 </div>
 
 <button class="back-btn" id="backBtn" onclick="showGeneral()">⬅ الرجوع إلى الأخبار العامة</button>
-
 <div class="news-display" id="newsBox"></div>
 
 <script>
-// ===== أخبار الأقسام =====
-const newsData = {
-  charity: [
-    {t:"03/02/2026 11:00", h:"عمل خيري", c:"تفاصيل عمل خيري"}
-  ],
-  missing: [
-    {t:"01/02/2026 09:00", h:"إعلان مفقود", c:"تفاصيل إعلان مفقود"}
-  ],
-  activities: [
-    {t:"04/02/2026 14:00", h:"نشاط", c:"تفاصيل نشاط الجمعية"}
-  ],
-  donate: [
-    {t:"08/02/2026 09:00", h:"🚨 نداء مستعجل للتبرع بالدم 🚨", c:`مريض من بلديتنا في حاجة ماسة وعاجلة إلى دم من فصيلة <b>A+</b>.<br>📍 مستشفى الإخوة طوبال – ميلة<br>📞 للاستفسار: <b>0792844621</b>` }
-  ],
-  ramadan: [
-    {t:"06/02/2026 16:00", h:"قفة رمضان", c:"تفاصيل قفة رمضان"}
-  ],
-  memory: [
-    {t:"2025", h:"ذكرى", c:"ذكريات الجمعية"}
-  ]
+const newsData={
+  charity:[{t:"03/02/2026 11:00",h:"عمل خيري",c:"تفاصيل عمل خيري"}],
+  missing:[{t:"01/02/2026 09:00",h:"إعلان مفقود",c:"تفاصيل إعلان مفقود"}],
+  activities:[{t:"04/02/2026 14:00",h:"نشاط",c:"تفاصيل نشاط الجمعية"}],
+  donate:[{t:"08/02/2026 09:00",h:"🚨 نداء مستعجل للتبرع بالدم 🚨",c:`مريض من بلديتنا في حاجة ماسة وعاجلة إلى دم من فصيلة <b>A+</b>.<br>📍 مستشفى الإخوة طوبال – ميلة<br>📞 للاستفسار: <b>0792844621</b>`}],
+  ramadan:[{t:"06/02/2026 16:00",h:"قفة رمضان",c:"تفاصيل قفة رمضان"}],
+  memory:[{t:"2025",h:"ذكرى",c:"ذكريات الجمعية"}]
 };
-
-// ===== دمج كل الأخبار في general تلقائيًا =====
-newsData.general = [
-  {t:"07/02/2026 16:30", h:"انطلاق حملة قفة رمضان 2026", c:"تعلن الجمعية الخيرية مسك الختام عن انطلاق حملة قفة رمضان 2026..."},
+newsData.general=[
+  {t:"07/02/2026 16:30",h:"انطلاق حملة قفة رمضان 2026",c:"تعلن الجمعية الخيرية مسك الختام عن انطلاق حملة قفة رمضان 2026..."},
   ...newsData.charity,
   ...newsData.missing,
   ...newsData.activities,
@@ -147,37 +59,12 @@ newsData.general = [
   ...newsData.memory
 ];
 
-// ===== عناصر الصفحة =====
-const box = document.getElementById("newsBox");
-const backBtn = document.getElementById("backBtn");
+const box=document.getElementById("newsBox");
+const backBtn=document.getElementById("backBtn");
 
-// ===== دالة عرض الأخبار =====
-function renderNews(list) {
-  box.innerHTML = "";
-  list.forEach(n => {
-    box.innerHTML += `
-      <div class="news-item">
-        <div class="datetime">${n.t}</div>
-        <h2>${n.h}</h2>
-        <div class="separator"></div>
-        <div class="news-text">${n.c}</div>
-      </div>
-    `;
-  });
-}
-
-// ===== عرض حسب القسم =====
-function showGeneral() {
-  backBtn.style.display = "none";
-  renderNews(newsData.general);
-}
-
-function showCategory(cat) {
-  backBtn.style.display = "block";
-  renderNews(newsData[cat]);
-}
-
-// ===== عند فتح الصفحة =====
+function renderNews(list){box.innerHTML="";list.forEach(n=>{box.innerHTML+=`<div class="news-item"><div class="datetime">${n.t}</div><h2>${n.h}</h2><div class="separator"></div><div class="news-text">${n.c}</div></div>`;});}
+function showGeneral(){backBtn.style.display="none";renderNews(newsData.general);}
+function showCategory(cat){backBtn.style.display="block";renderNews(newsData[cat]);}
 showGeneral();
 </script>
 
