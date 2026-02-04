@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>أخبار مسك الختام</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-
 <style>
 body{
   margin:0;
@@ -14,81 +13,64 @@ body{
   overflow-x:hidden;
 }
 
-/* ================= HEADER ================= */
 header{
   background:black;
-  min-height:180px;
-  position:relative;
   color:white;
+  padding:20px;
   text-align:center;
-  padding-top:20px;
+  position:relative;
 }
 
-header img{
-  width:100px;
-  margin-bottom:10px;
-}
-
-.header-title{
-  font-size:28px;
+header h1{
+  margin:0;
+  font-size:26px;
   font-weight:900;
-  color:gold;
-  margin-bottom:6px;
 }
 
-.header-subtitle{
-  font-size:20px;
+header .subtitle{
+  font-size:18px;
   font-weight:700;
-  color:white;
+  color:gold;
+  margin-top:4px;
 }
 
-/* ================= CARDS ================= */
 .cards-container{
   display:flex;
   justify-content:center;
-  gap:8px;
+  gap:6px;
   flex-wrap:wrap;
-  margin:12px 0;
+  margin:10px 0;
 }
 
 .card{
-  width:100px;
-  height:40px;
+  width:90px;
   background:black;
   border:2px solid gold;
   border-radius:10px;
   color:white;
   font-size:12px;
   font-weight:900;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  text-align:center;
+  padding:6px 4px;
   cursor:pointer;
-  transition: transform 0.2s;
 }
 
-.card:hover{
-  transform: scale(1.1);
-}
-
-/* ===== NEWS BOX ===== */
 .news-display{
-  margin:10px;
-  padding:12px;
+  margin:8px;
+  padding:8px;
   background:white;
   border-radius:10px;
   box-shadow:0 0 8px rgba(0,0,0,.25);
 }
 
 .news-item{
-  margin-bottom:16px;
+  margin-bottom:12px;
 }
 
 .news-item h2{
-  font-size:18px;
+  font-size:16px;
   font-weight:900;
-  margin:0 0 4px 0;
-  color:black;
+  margin:0;
 }
 
 .datetime{
@@ -100,82 +82,50 @@ header img{
 .separator{
   height:2px;
   background:gold;
-  margin:4px 0 8px 0;
+  margin:4px 0;
 }
 
 .news-text{
   font-size:14px;
   line-height:1.6;
-  color:#333;
-}
-
-/* ===== زر العودة ===== */
-.back-btn{
-  display:none;
-  width:90%;
-  margin:12px auto;
-  padding:10px;
-  background:black;
-  color:gold;
-  border:2px solid gold;
-  border-radius:30px;
-  font-weight:900;
-  font-size:14px;
-  cursor:pointer;
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <img src="logo1.png" alt="لوغو الجمعية">
-  <div class="header-title">أخبار مسك الختام</div>
-  <div class="header-subtitle">الجمعية الخيرية مسك الختام</div>
+  <h1>أخبار مسك الختام</h1>
+  <div class="subtitle">آخر الأخبار من الجمعية</div>
 </header>
-
-<div class="cards-container">
-  <div class="card" onclick="showCategory('general')">أخبار</div>
-  <div class="card" onclick="showCategory('charity')">أعمال خيرية</div>
-  <div class="card" onclick="showCategory('missing')">مفقودات</div>
-  <div class="card" onclick="showCategory('activities')">نشاطات</div>
-  <div class="card" onclick="showCategory('donate')">تبرع</div>
-  <div class="card" onclick="showCategory('ramadan')">قفة</div>
-  <div class="card" onclick="showCategory('memory')">ذكريات</div>
-</div>
-
-<button class="back-btn" id="backBtn" onclick="showGeneral()">⬅ الرجوع إلى الأخبار العامة</button>
 
 <div class="news-display" id="newsBox"></div>
 
 <script>
-// بيانات الأخبار
-const newsData = {
-  general:[
-    {t:"07/02/2026 16:30", h:"انطلاق حملة قفة رمضان 2026", c:"تعلن الجمعية الخيرية مسك الختام عن انطلاق حملة قفة رمضان 2026 لمساعدة العائلات المعوزة."}
-  ],
-  charity:[
-    {t:"03/02/2026 11:00", h:"عمل خيري", c:"تفاصيل العمل الخيري الخاص بالجمعية."}
-  ],
-  missing:[
-    {t:"01/02/2026 09:00", h:"إعلان مفقود", c:"تفاصيل إعلان المفقودين."}
-  ],
-  activities:[
-    {t:"04/02/2026 14:00", h:"نشاط", c:"تفاصيل النشاطات المختلفة للجمعية."}
-  ],
-  donate:[
-    {t:"05/02/2026 15:30", h:"تبرعات", c:"كيفية التبرع ودعم الجمعية."}
-  ],
-  ramadan:[
-    {t:"06/02/2026 16:00", h:"قفة رمضان", c:"تفاصيل توزيع قفة رمضان على المحتاجين."}
-  ],
-  memory:[
-    {t:"2025", h:"ذكرى", c:"ذكريات الجمعية والفعاليات السابقة."}
-  ]
-};
+const newsData = [
+  {
+    t:"05/02/2026 15:30",
+    h:"🚨 نداء مستعجل للتبرع بالدم 🚨",
+    c:`مريض من بلديتنا في حاجة ماسة وعاجلة إلى دم من فصيلة A+.<br>
+📍 متواجد بـ مستشفى الإخوة طوبال – ميلة<br>
+نرجو من كل من تتوفر لديه هذه الفصيلة التوجه في أقرب وقت ممكن للتبرع، فالأمر مستعجل جدًا وقد ينقذ حياة إنسان.<br>
+📞 للاستفسار والتنسيق: 0792844621<br>
+قال رسول الله ﷺ: «ومن أحياها فكأنما أحيا الناس جميعًا»<br>
+جزاكم الله خيرًا وبارك فيكم 🤍<br>
+🔁 الرجاء مشاركة المنشور على أوسع نطاق`
+  },
+  {
+    t:"02/02/2026 10:00",
+    h:"انطلاق حملة قفة رمضان 2026",
+    c:"تعلن الجمعية الخيرية مسك الختام عن انطلاق حملة قفة رمضان لفائدة العائلات المعوزة."
+  },
+  {
+    t:"01/02/2026 09:00",
+    h:"نشاط الجمعية",
+    c:"تفاصيل نشاط الجمعية الخيرية خلال الأسبوع الماضي."
+  }
+];
 
 const box = document.getElementById("newsBox");
-const backBtn = document.getElementById("backBtn");
 
 function renderNews(list){
   box.innerHTML="";
@@ -191,18 +141,8 @@ function renderNews(list){
   });
 }
 
-function showGeneral(){
-  backBtn.style.display="none";
-  renderNews(newsData.general);
-}
-
-function showCategory(cat){
-  backBtn.style.display="block";
-  renderNews(newsData[cat]);
-}
-
-// عرض الأخبار عند فتح الصفحة
-showGeneral();
+/* عند فتح الصفحة */
+renderNews(newsData);
 </script>
 
 </body>
