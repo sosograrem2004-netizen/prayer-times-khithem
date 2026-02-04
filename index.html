@@ -36,8 +36,8 @@ body{
 .title{
   font-size:20px;
   font-weight:700;
-  text-shadow:0 0 10px gold;
   margin-bottom:2px;
+  text-shadow:none; /* إزالة الظل */
 }
 .date{
   margin:2px 0;
@@ -45,6 +45,7 @@ body{
   font-weight:700;
 }
 
+/* جدول المواقيت */
 .table{margin-top:10px}
 .row{
   display:flex;
@@ -132,7 +133,7 @@ body{
   <!-- شريط الأخبار -->
   <div id="newsTicker">
     <span>
-      <a href="news1.html" target="_blank">🌙  صيام ايام البيض</a> 
+      <a href="news1.html" target="_blank">🌙 صيام ايام البيض</a> 
       | 
       <a href="news2.html" target="_blank">📖 خبر كتابي 2</a> 
       | 
@@ -140,7 +141,8 @@ body{
     </span>
   </div>
 
-  <div class="title">(ٱلْجَمْعِيَّةُ ٱلْخَيْرِيَّةُ مِسْكُ ٱلْخِتَامِ ٱلْقَرَارِمِ قُوقَة)</div>
+  <!-- العنوان بدون تشكيل أو أقواس -->
+  <div class="title">الجمعية الخيرية مسك الختام القرارم قوقة</div>
 
   <div class="date" id="gregorian">--</div>
   <div class="date" id="hijri">--</div>
@@ -261,9 +263,9 @@ function updateCountdown(){
 function updateBackground(){
   const now = new Date();
   const hour = now.getHours();
-  if(hour >= 19 || hour < 7){ // 7 مساءً → 7 صباحًا
+  if(hour >= 19 || hour < 7){ 
     document.body.style.backgroundImage = 'url("background1.png")';
-  } else { // 7 صباحًا → 7 مساءً
+  } else { 
     document.body.style.backgroundImage = 'url("background3.png")';
   }
 }
