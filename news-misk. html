@@ -7,46 +7,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 body{margin:0;font-family:'Cairo',Tahoma;background:#f2f2f2;}
-header{
-  background:black;color:white;padding:20px;text-align:center;
-}
-header h1{margin:0;font-size:26px;font-weight:900;}
-header .subtitle{font-size:18px;font-weight:700;color:gold;margin-top:4px;}
-.news-display{margin:10px;padding:10px;background:white;border-radius:10px;box-shadow:0 0 8px rgba(0,0,0,.25);}
-.news-item{margin-bottom:12px;}
-.news-item h2{font-size:16px;font-weight:900;margin:0;}
-.datetime{font-size:12px;color:gold;margin-bottom:4px;}
+header{background:black;min-height:150px;position:relative;color:white;text-align:center;padding:10px;}
+header h1{font-size:26px;font-weight:900;margin:10px 0;color:gold;}
+.cards-container{display:flex;justify-content:center;gap:6px;padding:10px;flex-wrap:wrap;}
+.card{width:120px;height:60px;background:black;color:white;font-weight:900;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.news-display{margin:8px;padding:8px;background:white;border-radius:8px;box-shadow:0 0 6px rgba(0,0,0,.25);}
+.news-item{margin-bottom:10px;}
+.news-item h2{font-size:18px;margin:0;}
+.datetime{font-size:12px;color:gold;}
 .separator{height:2px;background:gold;margin:4px 0;}
 .news-text{font-size:14px;line-height:1.6;}
 </style>
 </head>
 <body>
-
 <header>
-<h1>أخبار مسك الختام</h1>
-<div class="subtitle">آخر الأخبار من الجمعية</div>
+  <h1>أخبار مسك الختام</h1>
 </header>
-
-<div class="news-display" id="newsBox"></div>
-
-<script>
-const newsData=[
-{t:"05/02/2026 15:30",h:"🚨 نداء مستعجل للتبرع بالدم 🚨",c:`مريض من بلديتنا في حاجة ماسة وعاجلة إلى دم من فصيلة A+.<br>📍 متواجد بـ مستشفى الإخوة طوبال – ميلة<br>نرجو من كل من تتوفر لديه هذه الفصيلة التوجه في أقرب وقت للتبرع.<br>📞 للاستفسار والتنسيق: 0792844621<br>قال رسول الله ﷺ: «ومن أحياها فكأنما أحيا الناس جميعًا»<br>جزاكم الله خيرًا وبارك فيكم 🤍<br>🔁 الرجاء مشاركة المنشور على أوسع نطاق`},
-{t:"02/02/2026 10:00",h:"انطلاق حملة قفة رمضان 2026",c:"تعلن الجمعية الخيرية مسك الختام عن انطلاق حملة قفة رمضان لفائدة العائلات المعوزة."},
-{t:"01/02/2026 09:00",h:"نشاط الجمعية",c:"تفاصيل نشاط الجمعية الخيرية خلال الأسبوع الماضي."}
-];
-
-const box=document.getElementById("newsBox");
-newsData.forEach(n=>{
-box.innerHTML+=`
-<div class="news-item">
-<div class="datetime">${n.t}</div>
-<h2>${n.h}</h2>
-<div class="separator"></div>
-<div class="news-text">${n.c}</div>
-</div>`;
-});
-</script>
-
+<div class="news-display">
+  <div class="news-item">
+    <div class="datetime">07/02/2026 16:30</div>
+    <h2>انطلاق حملة قفة رمضان 2026</h2>
+    <div class="separator"></div>
+    <div class="news-text">
+      تعلن الجمعية الخيرية مسك الختام بالقرارم قوقة عن انطلاق حملة قفة رمضان 2026، والتي تهدف إلى مساعدة العائلات المعوزة وإدخال الفرحة على قلوب المحتاجين خلال الشهر الفضيل.
+    </div>
+  </div>
+  <div class="news-item">
+    <div class="datetime">05/02/2026 15:30</div>
+    <h2>نداء مستعجل للتبرع بالدم</h2>
+    <div class="separator"></div>
+    <div class="news-text">
+      🚨 مريض من بلديتنا في حاجة ماسة وعاجلة إلى دم من فصيلة A+ 📍 متواجد بـ مستشفى الإخوة طوبال – ميلة
+      نرجو من كل من تتوفر لديه هذه الفصيلة التوجه في أقرب وقت ممكن للتبرع. 📞 للاستفسار: 0792844621
+    </div>
+  </div>
+</div>
 </body>
 </html>
