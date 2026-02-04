@@ -109,8 +109,9 @@ header{
   left:50%;
   transform:translateX(-50%);
   color:gold;
-  font-size:15px; /* أصغر قليلًا */
+  font-size:13px; /* تم تصغيره */
   font-weight:700;
+  white-space:nowrap; /* يجعله في سطر واحد */
 }
 .header-bottom::after{content:" ©";}
 
@@ -124,7 +125,8 @@ header{
 }
 
 .card{
-  width:56px;
+  width:80px;        /* زيادة العرض أفقياً */
+  height:56px;       /* الطول العمودي كما هو */
   background:black;
   border:2px solid gold;
   border-radius:10px;
@@ -134,6 +136,9 @@ header{
   text-align:center;
   padding:6px 4px;
   cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
 /* ===== زر الرجوع ===== */
