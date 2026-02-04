@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مواقيت الصلاة - ميلة</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',Tahoma;}
 body{
@@ -30,31 +28,29 @@ body{
   transform-origin: center top;
 }
 
-.logo{width:80px;margin-bottom:6px;}
+.logo{width:80px;margin-bottom:10px;}
 
-/* زر آخر الأخبار */
-#latestNewsBtnContainer{
-  position:relative;
-  width:100%;
-  margin-bottom:10px;
+/* زر آخر أخبار */
+#newsBtnContainer{
   background:rgba(0,0,0,0.25);
-  border-radius:12px;
   padding:6px 0;
+  border-radius:10px;
+  margin-bottom:10px;
 }
-#latestNewsBtn{
+#newsBtn{
   background:white;
   color:black;
   font-weight:900;
   font-size:16px;
-  padding:10px 15px;
+  padding:10px 12px;
   border:none;
-  border-radius:10px;
+  border-radius:8px;
   cursor:pointer;
-  animation:pulse 2s infinite;
+  animation:blink 2s infinite;
 }
-@keyframes pulse{
+@keyframes blink{
   0%,100%{transform:scale(1);}
-  50%{transform:scale(1.2);}
+  50%{transform:scale(1.1);}
 }
 
 /* 🔽 العناوين */
@@ -70,7 +66,6 @@ body{
   font-weight:700;
 }
 
-/* جدول المواقيت */
 .table{margin-top:10px}
 .row{
   display:flex;
@@ -108,26 +103,17 @@ body{
   width:35px;
   height:35px;
 }
-
-.footer{
-  margin-top:10px;
-  font-size:14px;
-  display:flex;
-  justify-content:center;
-  gap:6px;
-}
 </style>
 </head>
 
 <body>
-
 <div class="overlay">
 
   <img src="logo.png" class="logo" alt="لوغو الجمعية">
 
-  <!-- زر آخر الأخبار مع خلفية أسود شفاف -->
-  <div id="latestNewsBtnContainer">
-    <button id="latestNewsBtn" onclick="window.location.href='grarem-news.html'">
+  <!-- زر آخر أخبار -->
+  <div id="newsBtnContainer">
+    <button id="newsBtn" onclick="window.open('grarem-news.html','_blank')">
       آخر أخبار مسك الختام
     </button>
   </div>
@@ -144,10 +130,6 @@ body{
   </div>
 
   <div class="table" id="prayerTable"></div>
-
-  <div class="footer">
-    <span>misk elkhithem ©</span>
-  </div>
 
 </div>
 
@@ -222,7 +204,7 @@ function updateCountdown(){
   let target = null, index = -1;
 
   for(let i = 0; i < todayTimes.length; i++){
-    if(i === 1) continue;
+    if(i === 1) continue; // تخطي الإمساك
     const [h,m] = todayTimes[i].split(":").map(Number);
     const t = new Date(); t.setHours(h,m,0,0);
     if(t > now){target=t; index=i; break;}
@@ -253,9 +235,9 @@ function updateCountdown(){
 function updateBackground(){
   const now = new Date();
   const hour = now.getHours();
-  if(hour >= 19 || hour < 7){ 
+  if(hour >= 19 || hour < 7){
     document.body.style.backgroundImage = 'url("background1.png")';
-  } else { 
+  } else {
     document.body.style.backgroundImage = 'url("background3.png")';
   }
 }
@@ -270,6 +252,5 @@ setInterval(updateCountdown,1000);
 setInterval(updateDateAndTimes,60000);
 setInterval(updateBackground,60000);
 </script>
-
 </body>
 </html>
