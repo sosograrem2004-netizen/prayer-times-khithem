@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>أخبار مسك الختام</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+
 <style>
 body{
   margin:0;
@@ -12,6 +14,7 @@ body{
   background:#f2f2f2;
   overflow-x:hidden;
 }
+
 /* ================= HEADER ================= */
 header{
   background:black;
@@ -19,6 +22,7 @@ header{
   position:relative;
   color:white;
 }
+
 /* شريط الأخبار */
 .news-strip{
   position:absolute;
@@ -43,6 +47,7 @@ header{
   from{transform:translateX(-100%)}
   to{transform:translateX(100%)}
 }
+
 /* اللوغو */
 .rotating-logo{
   position:absolute;
@@ -57,32 +62,34 @@ header{
   10%{transform:translateY(-50%) rotateY(360deg)}
   100%{transform:translateY(-50%) rotateY(360deg)}
 }
+
 /* العناوين */
 .header-main-title{
   position:absolute;
   top:40px;
   right:10px;
-  font-size:26px;
+  font-size:26px; /* تم تصغيره */
   font-weight:900;
 }
 .header-separator{
   position:absolute;
-  top:78px;
+  top:78px; /* تعديل لإضافة فراغ */
   right:10px;
   width:180px;
   height:3px;
   background:white;
 }
+
 /* MISK / ELKHITHEM */
 .header-subtitle{
   position:absolute;
-  bottom:58px;
+  bottom:58px; /* رفعه قليلًا لخلق فراغ */
   left:150px;
-  line-height:1.15;
+  line-height:1.15; /* فراغ بين MISK و ELKHITHEM */
 }
 .header-subtitle span{
   display:block;
-  font-size:32px;
+  font-size:32px; /* تم تصغيره */
   font-weight:900;
   background:linear-gradient(120deg,white,gold,white);
   -webkit-background-clip:text;
@@ -94,6 +101,7 @@ header{
   from{background-position:200%}
   to{background-position:-200%}
 }
+
 /* العنوان الذهبي */
 .header-bottom{
   position:absolute;
@@ -101,9 +109,8 @@ header{
   left:50%;
   transform:translateX(-50%);
   color:gold;
-  font-size:12px;
+  font-size:15px; /* أصغر قليلًا */
   font-weight:700;
-  white-space:nowrap;
 }
 .header-bottom::after{content:" ©";}
 
@@ -115,23 +122,21 @@ header{
   padding:10px 6px;
   flex-wrap:wrap;
 }
+
 .card{
-  width:80px;
-  height:40px;
+  width:56px;
   background:black;
   border:2px solid gold;
   border-radius:10px;
   color:white;
-  font-size:9px;
+  font-size:10px;
   font-weight:900;
   text-align:center;
+  padding:6px 4px;
   cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
 }
 
-/* زر الرجوع */
+/* ===== زر الرجوع ===== */
 .back-btn{
   display:none;
   width:92%;
@@ -154,35 +159,40 @@ header{
   border-radius:8px;
   box-shadow:0 0 6px rgba(0,0,0,.25);
 }
+
 .news-item{
-  margin-bottom:12px;
+  margin-bottom:10px;
 }
+
 .news-item h2{
   font-size:15px;
   margin:0;
-  font-weight:900;
 }
+
 .datetime{
   font-size:10px;
   color:gold;
 }
+
 .separator{
   height:2px;
   background:gold;
   margin:4px 0;
 }
+
 .news-text{
   font-size:12px;
-  line-height:1.7;
 }
 </style>
 </head>
+
 <body>
 
 <header>
+
   <div class="news-strip">
     <div class="news-strip-text">
-      🔔 خبر: انطلاق حملة قفة رمضان 2026 لفائدة العائلات المعوزة – الجمعية الخيرية مسك الختام
+      🔔 خبر: انطلاق حملة قفة رمضان لفائدة العائلات المعوزة – الجمعية الخيرية مسك الختام
     </div>
   </div>
 
@@ -199,14 +209,15 @@ header{
   <div class="header-bottom">
     الجمعية الخيرية مسك الختام القرارم قوقة
   </div>
+
 </header>
 
 <div class="cards-container">
   <div class="card" onclick="showCategory('general')">أخبار</div>
-  <div class="card" onclick="showCategory('charity')">أعمال خيرية</div>
+  <div class="card" onclick="showCategory('charity')">أعمال</div>
   <div class="card" onclick="showCategory('missing')">مفقودات</div>
   <div class="card" onclick="showCategory('activities')">نشاطات</div>
-  <div class="card" onclick="showCategory('donate')">تبرعات</div>
+  <div class="card" onclick="showCategory('donate')">تبرع</div>
   <div class="card" onclick="showCategory('ramadan')">قفة</div>
   <div class="card" onclick="showCategory('memory')">ذكريات</div>
 </div>
@@ -217,25 +228,25 @@ header{
 
 <script>
 const newsData = {
-  general:[
+  general: [
     {t:"02/02/2026 10:00", h:"خبر عام", c:"هذا مثال لخبر عام يظهر مباشرة عند فتح الصفحة"}
   ],
-  charity:[
+  charity: [
     {t:"03/02/2026 11:00", h:"عمل خيري", c:"تفاصيل عمل خيري"}
   ],
-  missing:[
+  missing: [
     {t:"01/02/2026 09:00", h:"إعلان مفقود", c:"تفاصيل إعلان مفقود"}
   ],
-  activities:[
+  activities: [
     {t:"04/02/2026 14:00", h:"نشاط", c:"تفاصيل نشاط الجمعية"}
   ],
-  donate:[
-    {t:"05/02/2026 15:30", h:"نداء مستعجل للتبرع بالدم 🚨", c:"🚨 نداء مستعجل للتبرع بالدم 🚨\nمريض من بلديتنا في حاجة ماسة وعاجلة إلى دم من فصيلة A+\n📍 متواجد بـ مستشفى الإخوة طوبال – ميلة\nنرجو من كل من تتوفر لديه هذه الفصيلة التوجه في أقرب وقت ممكن للتبرع، فالأمر مستعجل جدًا وقد ينقذ حياة إنسان.\n📞 للاستفسار والتنسيق: 0792844621\nقال رسول الله ﷺ: «ومن أحياها فكأنما أحيا الناس جميعًا»\nجزاكم الله خيرًا وبارك فيكم 🤍\n🔁 الرجاء مشاركة المنشور على أوسع نطاق"}
-  ,
-  ramadan:[
+  donate: [
+    {t:"05/02/2026 15:30", h:"تبرعات", c:"كيفية التبرع"}
+  ],
+  ramadan: [
     {t:"06/02/2026 16:00", h:"قفة رمضان", c:"تفاصيل قفة رمضان"}
   ],
-  memory:[
+  memory: [
     {t:"2025", h:"ذكرى", c:"ذكريات الجمعية"}
   ]
 };
@@ -251,7 +262,7 @@ function renderNews(list){
         <div class="datetime">${n.t}</div>
         <h2>${n.h}</h2>
         <div class="separator"></div>
-        <div class="news-text">${n.c.replace(/\n/g,'<br>')}</div>
+        <div class="news-text">${n.c}</div>
       </div>
     `;
   });
@@ -267,7 +278,9 @@ function showCategory(cat){
   renderNews(newsData[cat]);
 }
 
+/* عند فتح الصفحة */
 showGeneral();
 </script>
+
 </body>
 </html>
