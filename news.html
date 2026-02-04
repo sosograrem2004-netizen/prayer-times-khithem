@@ -11,14 +11,14 @@
 body{
   margin:0;
   font-family:'Cairo',Tahoma;
-  background:#f5f5f5;
+  background:#f2f2f2;
   overflow-x:hidden;
 }
 
 /* ================= HEADER ================= */
 header{
   background:black;
-  min-height:170px;
+  min-height:190px;
   position:relative;
   color:white;
   perspective:1000px;
@@ -42,7 +42,6 @@ header{
   display:flex;
   align-items:center;
   box-shadow:0 0 6px rgba(255,215,0,0.4);
-  z-index:5;
 }
 
 .news-strip-text{
@@ -50,58 +49,65 @@ header{
   font-size:13px;
   font-weight:700;
   color:#000;
-  padding-right:100%;
-  animation:newsMove 22s linear infinite;
+  padding-left:-100%;
+  animation:newsMove 18s linear infinite;
 }
 
-/* من اليمين إلى اليسار وبطيء */
+/* من اليسار إلى اليمين + توقف 1 ثانية */
 @keyframes newsMove{
-  0%{transform:translateX(0)}
-  100%{transform:translateX(-100%)}
+  0%{transform:translateX(-100%)}
+  90%{transform:translateX(100%)}
+  100%{transform:translateX(100%)}
 }
 
 /* ===== اللوغو ===== */
 .rotating-logo{
   position:absolute;
-  top:50%;
+  top:55%;
   left:10px;
   width:120px;
   transform:translateY(-50%);
-  animation:rotateOnceWithPause 34s linear infinite;
-  filter:drop-shadow(0 0 8px gold);
+  animation:rotateOncePause 35s linear infinite;
+  filter:drop-shadow(0 0 10px gold);
 }
 
-@keyframes rotateOnceWithPause{
+@keyframes rotateOncePause{
   0%{transform:translateY(-50%) rotateY(0deg)}
-  11.76%{transform:translateY(-50%) rotateY(360deg)}
+  10%{transform:translateY(-50%) rotateY(360deg)}
   100%{transform:translateY(-50%) rotateY(360deg)}
 }
 
 /* ===== العناوين ===== */
 .header-main-title{
   position:absolute;
-  top:42px;
+  top:44px;
   right:10px;
-  font-size:32px;
+  font-size:34px;
   font-weight:900;
 }
 
 .header-separator{
   position:absolute;
-  top:82px;
+  top:86px;
   right:10px;
-  width:160px;
+  width:180px;
   height:4px;
   background:white;
 }
 
-/* إنزال العنوان قليلاً */
+/* MISK فوق ELKHITHEM */
 .header-subtitle{
   position:absolute;
   top:58%;
-  left:145px;
+  left:150px;
   transform:translateY(-50%);
-  font-size:42px;
+  text-align:left;
+  line-height:1.05;
+}
+
+.header-subtitle span{
+  display:block;
+  font-size:40px;
   font-weight:900;
   background:linear-gradient(120deg,white 30%,gold 50%,white 70%);
   background-size:200% auto;
@@ -122,7 +128,7 @@ header{
   left:50%;
   transform:translateX(-50%);
   color:gold;
-  font-size:14px;
+  font-size:15px;
   font-weight:700;
   white-space:nowrap;
 }
@@ -135,12 +141,12 @@ header{
   display:flex;
   justify-content:center;
   gap:6px;
-  padding:8px 5px;
+  padding:8px 6px;
   flex-wrap:wrap;
 }
 
 .card{
-  width:52px;
+  width:54px;
   background:black;
   border:2px solid gold;
   border-radius:10px;
@@ -148,7 +154,7 @@ header{
   font-size:10px;
   font-weight:900;
   text-align:center;
-  padding:5px 4px;
+  padding:6px 4px;
   cursor:pointer;
 }
 
@@ -158,14 +164,14 @@ header{
   padding:8px;
   background:white;
   border-radius:8px;
-  box-shadow:0 0 6px rgba(0,0,0,.2);
+  box-shadow:0 0 6px rgba(0,0,0,.25);
   display:none;
 }
 
 .news-display.show{display:block}
 
 .news-display h2{
-  font-size:14px;
+  font-size:15px;
   margin:0;
 }
 
@@ -187,7 +193,7 @@ header{
 /* ===== MOBILE ===== */
 @media(max-width:600px){
   .rotating-logo{width:90px}
-  .header-subtitle{font-size:30px;left:130px}
+  .header-subtitle span{font-size:30px}
   .header-main-title{font-size:24px}
 }
 </style>
@@ -197,28 +203,39 @@ header{
 
 <header>
 
+  <!-- شريط الأخبار -->
   <div class="news-strip">
     <div class="news-strip-text">
-      🔔 خبر عاجل: انطلاق حملة قفة رمضان – الجمعية الخيرية مسك الختام
+      🔔 خبر: انطلاق حملة قفة رمضان لفائدة العائلات المعوزة – الجمعية الخيرية مسك الختام
     </div>
   </div>
 
+  <!-- اللوغو -->
   <img src="logo1.png" class="rotating-logo">
+
+  <!-- العناوين -->
   <div class="header-main-title">أخبار مسك الختام</div>
   <div class="header-separator"></div>
-  <div class="header-subtitle">MISK-ELKHITHEM</div>
-  <div class="header-bottom">الجمعية الخيرية مسك الختام القرارم قوقة</div>
+
+  <div class="header-subtitle">
+    <span>MISK</span>
+    <span>ELKHITHEM</span>
+  </div>
+
+  <div class="header-bottom">
+    الجمعية الخيرية مسك الختام القرارم قوقة
+  </div>
 
 </header>
 
 <div class="cards-container">
-  <div class="card" onclick="showNews('أخبار','02/02/2026 10:00','نص الخبر')">أخبار</div>
-  <div class="card" onclick="showNews('أعمال خيرية','02/02/2026 11:00','نص الخبر')">أعمال</div>
-  <div class="card" onclick="showNews('مفقودات','02/02/2026 12:00','نص الخبر')">مفقودات</div>
-  <div class="card" onclick="showNews('نشاطات','02/02/2026 13:00','نص الخبر')">نشاطات</div>
-  <div class="card" onclick="showNews('تبرع','02/02/2026 14:00','نص الخبر')">تبرع</div>
-  <div class="card" onclick="showNews('قفة رمضان','02/02/2026 15:00','نص الخبر')">قفة</div>
-  <div class="card" onclick="showNews('ذكريات','02/02/2026 16:00','نص الخبر')">ذكريات</div>
+  <div class="card" onclick="showNews('أخبار','02/02/2026 10:00','هذا مثال لنص خبر تجريبي')">أخبار</div>
+  <div class="card" onclick="showNews('أعمال خيرية','02/02/2026 11:00','نص خبر')">أعمال</div>
+  <div class="card" onclick="showNews('مفقودات','02/02/2026 12:00','نص خبر')">مفقودات</div>
+  <div class="card" onclick="showNews('نشاطات','02/02/2026 13:00','نص خبر')">نشاطات</div>
+  <div class="card" onclick="showNews('تبرع','02/02/2026 14:00','نص خبر')">تبرع</div>
+  <div class="card" onclick="showNews('قفة رمضان','02/02/2026 15:00','نص خبر')">قفة</div>
+  <div class="card" onclick="showNews('ذكريات','02/02/2026 16:00','نص خبر')">ذكريات</div>
 </div>
 
 <div class="news-display" id="newsBox">
