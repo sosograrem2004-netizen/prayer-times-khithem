@@ -17,6 +17,7 @@ body{
   align-items:center;
   background:no-repeat center center fixed;
   background-size:cover;
+  transition: background-image 1.5s ease-in-out;
 }
 
 .overlay{
@@ -29,44 +30,38 @@ body{
   color:white;
 }
 
-/* اللوغو */
 .logo{
   width:80px;
   margin-bottom:8px;
 }
 
-/* شريط أسود خفيف */
-.news-bar{
-  width:100%;
-  height:6px;
+/* ===== زر الأخبار ===== */
+.news-btn-wrapper{
   background:rgba(0,0,0,0.6);
-  border-radius:10px;
+  padding:8px;
+  border-radius:14px;
   margin-bottom:8px;
 }
 
-/* زر الأخبار */
 .news-btn{
   display:block;
-  width:100%;
-  padding:12px;
   background:white;
   color:black;
-  font-size:16px;
   font-weight:900;
-  border-radius:14px;
+  font-size:15px;
+  padding:10px;
+  border-radius:12px;
   text-decoration:none;
   animation:pulse 2s infinite;
-  box-shadow:0 0 20px rgba(255,255,255,0.9);
-  margin-bottom:10px;
 }
 
 @keyframes pulse{
-  0%{transform:scale(1); box-shadow:0 0 15px rgba(255,255,255,.8);}
-  50%{transform:scale(1.08); box-shadow:0 0 35px rgba(255,255,255,1);}
-  100%{transform:scale(1); box-shadow:0 0 15px rgba(255,255,255,.8);}
+  0%{box-shadow:0 0 0 0 rgba(255,255,255,.9);}
+  70%{box-shadow:0 0 25px 12px rgba(255,255,255,0);}
+  100%{box-shadow:0 0 0 0 rgba(255,255,255,0);}
 }
 
-/* العنوان */
+/* ===== العناوين ===== */
 .title{
   font-size:20px;
   font-weight:700;
@@ -74,12 +69,13 @@ body{
 }
 
 .date{
+  margin:2px 0;
   font-size:14px;
   font-weight:700;
 }
 
-/* جدول المواقيت */
 .table{margin-top:10px}
+
 .row{
   display:flex;
   justify-content:space-between;
@@ -87,22 +83,38 @@ body{
   border-bottom:1px solid rgba(255,255,255,.25);
   font-weight:700;
 }
+
 .row.nextPrayer{
   background:gold;
   color:black;
   border-radius:12px;
 }
 
-/* العد التنازلي */
+/* ===== العد التنازلي ===== */
 #countdownText{
   font-size:22px;
   font-weight:700;
   margin:6px 0;
   color:gold;
 }
+
+#nextPrayerClockContainer{
+  border:2px solid gold;
+  border-radius:10px;
+  padding:6px 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+
 #nextPrayerClock{
   font-size:28px;
-  font-weight:700;
+}
+
+.footer{
+  margin-top:10px;
+  font-size:14px;
 }
 </style>
 </head>
@@ -113,59 +125,114 @@ body{
 
   <img src="logo.png" class="logo" alt="لوغو الجمعية">
 
-  <!-- الشريط الأسود -->
-  <div class="news-bar"></div>
-
   <!-- زر الأخبار -->
-  <a href="news-grarem.html" class="news-btn">
-    آخر أخبار مسك الختام
-  </a>
+  <div class="news-btn-wrapper">
+    <a href="news-grarem.html" class="news-btn">
+      آخر أخبار مسك الختام
+    </a>
+  </div>
 
   <div class="title">الجمعية الخيرية مسك الختام القرارم قوقة</div>
+
   <div class="date" id="gregorian">--</div>
+  <div class="date" id="hijri">--</div>
 
   <div id="countdownText">-- بعد:</div>
-  <div id="nextPrayerClock">--:--:--</div>
+
+  <div id="nextPrayerClockContainer">
+    <div id="nextPrayerClock">--:--:--</div>
+  </div>
 
   <div class="table" id="prayerTable"></div>
+
+  <div class="footer">
+    misk elkhithem ©
+  </div>
 
 </div>
 
 <script>
+/* ===== بيانات المواقيت ===== */
+const TABLE_START_DATE = new Date("2026-02-01T00:00:00");
+
+const prayerSchedule = [
+  ["06:09","05:59","12:49","15:40","18:04","19:25"],
+  ["06:08","05:58","12:49","15:41","18:05","19:26"],
+  ["06:07","05:57","12:49","15:42","18:07","19:27"],
+  ["06:06","05:56","12:49","15:43","18:09","19:28"]
+];
+
 const prayerNames=["الفجر","الإمساك","الظهر","العصر","المغرب","العشاء"];
-const prayerTimes=["06:09","05:59","12:49","15:40","18:04","19:25"];
+let rows=[], todayTimes=[];
 
-const table=document.getElementById("prayerTable");
-
-prayerNames.forEach((n,i)=>{
-  table.innerHTML+=`
-    <div class="row">
-      <span>${n}</span>
-      <span>${prayerTimes[i]}</span>
-    </div>`;
-});
-
-document.getElementById("gregorian").innerText=
-  new Date().toLocaleDateString("ar-DZ",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
-
-function countdown(){
+/* ===== التاريخ ===== */
+function updateDate(){
   const now=new Date();
-  const target=new Date();
-  target.setHours(18,4,0,0);
-  const diff=target-now;
-  if(diff>0){
-    document.getElementById("nextPrayerClock").innerText=
-      `${String(Math.floor(diff/3600000)).padStart(2,"0")}:`+
-      `${String(Math.floor(diff%3600000/60000)).padStart(2,"0")}:`+
-      `${String(Math.floor(diff%60000/1000)).padStart(2,"0")}`;
-  }
+  document.getElementById("gregorian").innerText=
+    now.toLocaleDateString("ar-DZ",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
 }
-setInterval(countdown,1000);
 
-/* الخلفية */
-const hour=new Date().getHours();
-document.body.style.backgroundImage=
-  hour>=19||hour<7 ? 'url("background1.png")' : 'url("background3.png")';
+/* ===== الجدول ===== */
+function buildTable(){
+  const c=document.getElementById("prayerTable");
+  prayerNames.forEach((n,i)=>{
+    const r=document.createElement("div");
+    r.className="row";
+    r.innerHTML=`<span>${n}</span><span id="t${i}">--:--</span>`;
+    c.appendChild(r);
+    rows.push(r);
+  });
+}
+
+/* ===== تحديث المواقيت ===== */
+function updateTimes(){
+  const now=new Date();
+  const diffDays=Math.floor((now-TABLE_START_DATE)/86400000);
+  todayTimes=prayerSchedule[Math.max(0,Math.min(diffDays,prayerSchedule.length-1))];
+  todayTimes.forEach((t,i)=>document.getElementById("t"+i).innerText=t);
+}
+
+/* ===== العد التنازلي ===== */
+function updateCountdown(){
+  const now=new Date();
+  rows.forEach(r=>r.classList.remove("nextPrayer"));
+
+  let target=null,index=-1;
+  for(let i=0;i<todayTimes.length;i++){
+    if(i===1)continue;
+    const [h,m]=todayTimes[i].split(":");
+    const t=new Date();t.setHours(h,m,0,0);
+    if(t>now){target=t;index=i;break;}
+  }
+
+  if(!target)return;
+
+  rows[index].classList.add("nextPrayer");
+  const diff=target-now;
+  document.getElementById("countdownText").innerText=`${prayerNames[index]} بعد:`;
+  document.getElementById("nextPrayerClock").innerText=
+    `${String(Math.floor(diff/3600000)).padStart(2,"0")}:`+
+    `${String(Math.floor(diff%3600000/60000)).padStart(2,"0")}:`+
+    `${String(Math.floor(diff%60000/1000)).padStart(2,"0")}`;
+}
+
+/* ===== الخلفية ===== */
+function updateBackground(){
+  const h=new Date().getHours();
+  document.body.style.backgroundImage =
+    (h>=19||h<7)?'url("background1.png")':'url("background3.png")';
+}
+
+/* ===== تشغيل ===== */
+buildTable();
+updateDate();
+updateTimes();
+updateCountdown();
+updateBackground();
+
+setInterval(updateCountdown,1000);
+setInterval(updateDate,60000);
+setInterval(updateBackground,60000);
 </script>
 
 </body>
