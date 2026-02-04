@@ -21,28 +21,21 @@ header{
   min-height:210px;
   position:relative;
   color:white;
-  perspective:1000px;
 }
 
-/* ===== شريط الأخبار ===== */
+/* شريط الأخبار */
 .news-strip{
   position:absolute;
   top:8px;
   left:6px;
   right:6px;
   height:28px;
-  background:linear-gradient(
-    90deg,
-    rgba(255,255,255,0.95),
-    rgba(255,215,0,0.35),
-    rgba(255,255,255,0.95)
-  );
+  background:linear-gradient(90deg,#fff,#f5d36a,#fff);
   border-radius:20px;
   overflow:hidden;
   display:flex;
   align-items:center;
 }
-
 .news-strip-text{
   white-space:nowrap;
   font-size:13px;
@@ -50,31 +43,27 @@ header{
   color:#000;
   animation:newsMove 18s linear infinite;
 }
-
 @keyframes newsMove{
-  0%{transform:translateX(-100%)}
-  90%{transform:translateX(100%)}
-  100%{transform:translateX(100%)}
+  from{transform:translateX(-100%)}
+  to{transform:translateX(100%)}
 }
 
-/* ===== اللوغو ===== */
+/* اللوغو */
 .rotating-logo{
   position:absolute;
   top:58%;
   left:12px;
-  width:120px;
+  width:110px;
   transform:translateY(-50%);
   animation:rotateOncePause 35s linear infinite;
 }
-
-/* دورة واحدة ثم توقف */
 @keyframes rotateOncePause{
   0%{transform:translateY(-50%) rotateY(0deg)}
   10%{transform:translateY(-50%) rotateY(360deg)}
   100%{transform:translateY(-50%) rotateY(360deg)}
 }
 
-/* ===== العنوان الرئيسي ===== */
+/* العناوين */
 .header-main-title{
   position:absolute;
   top:44px;
@@ -82,7 +71,6 @@ header{
   font-size:34px;
   font-weight:900;
 }
-
 .header-separator{
   position:absolute;
   top:86px;
@@ -92,32 +80,29 @@ header{
   background:white;
 }
 
-/* ===== MISK / ELKHITHEM ===== */
+/* MISK / ELKHITHEM */
 .header-subtitle{
   position:absolute;
-  bottom:42px; /* فوق العنوان الذهبي */
+  bottom:42px;
   left:150px;
-  text-align:left;
   line-height:1.05;
 }
-
 .header-subtitle span{
   display:block;
   font-size:42px;
   font-weight:900;
-  background:linear-gradient(120deg,white 30%,gold 50%,white 70%);
-  background-size:200% auto;
+  background:linear-gradient(120deg,white,gold,white);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  background-size:200%;
   animation:shine 10s linear infinite;
 }
-
 @keyframes shine{
-  0%{background-position:200% center}
-  100%{background-position:-200% center}
+  from{background-position:200%}
+  to{background-position:-200%}
 }
 
-/* ===== العنوان الذهبي ===== */
+/* العنوان الذهبي */
 .header-bottom{
   position:absolute;
   bottom:8px;
@@ -126,18 +111,15 @@ header{
   color:gold;
   font-size:16px;
   font-weight:700;
-  white-space:nowrap;
 }
-.header-bottom::after{
-  content:" ©";
-}
+.header-bottom::after{content:" ©";}
 
 /* ================= CARDS ================= */
 .cards-container{
   display:flex;
   justify-content:center;
   gap:6px;
-  padding:8px 6px;
+  padding:10px 6px;
   flex-wrap:wrap;
 }
 
@@ -154,6 +136,21 @@ header{
   cursor:pointer;
 }
 
+/* ===== زر الرجوع ===== */
+.back-btn{
+  display:none;
+  width:92%;
+  margin:10px auto;
+  padding:10px;
+  background:black;
+  color:gold;
+  border:2px solid gold;
+  border-radius:30px;
+  font-weight:900;
+  font-size:14px;
+  cursor:pointer;
+}
+
 /* ================= NEWS BOX ================= */
 .news-display{
   margin:8px;
@@ -161,12 +158,13 @@ header{
   background:white;
   border-radius:8px;
   box-shadow:0 0 6px rgba(0,0,0,.25);
-  display:none;
 }
 
-.news-display.show{display:block}
+.news-item{
+  margin-bottom:10px;
+}
 
-.news-display h2{
+.news-item h2{
   font-size:15px;
   margin:0;
 }
@@ -185,13 +183,6 @@ header{
 .news-text{
   font-size:12px;
 }
-
-/* ===== MOBILE ===== */
-@media(max-width:600px){
-  .rotating-logo{width:90px}
-  .header-subtitle span{font-size:32px}
-  .header-main-title{font-size:24px}
-}
 </style>
 </head>
 
@@ -199,27 +190,22 @@ header{
 
 <header>
 
-  <!-- شريط الأخبار -->
   <div class="news-strip">
     <div class="news-strip-text">
       🔔 خبر: انطلاق حملة قفة رمضان لفائدة العائلات المعوزة – الجمعية الخيرية مسك الختام
     </div>
   </div>
 
-  <!-- اللوغو -->
   <img src="logo1.png" class="rotating-logo">
 
-  <!-- العناوين -->
   <div class="header-main-title">أخبار مسك الختام</div>
   <div class="header-separator"></div>
 
-  <!-- MISK / ELKHITHEM -->
   <div class="header-subtitle">
     <span>MISK</span>
     <span>ELKHITHEM</span>
   </div>
 
-  <!-- العنوان الذهبي -->
   <div class="header-bottom">
     الجمعية الخيرية مسك الختام القرارم قوقة
   </div>
@@ -227,29 +213,73 @@ header{
 </header>
 
 <div class="cards-container">
-  <div class="card" onclick="showNews('أخبار','02/02/2026 10:00','هذا مثال لنص خبر تجريبي')">أخبار</div>
-  <div class="card" onclick="showNews('أعمال خيرية','02/02/2026 11:00','نص خبر')">أعمال</div>
-  <div class="card" onclick="showNews('مفقودات','02/02/2026 12:00','نص خبر')">مفقودات</div>
-  <div class="card" onclick="showNews('نشاطات','02/02/2026 13:00','نص خبر')">نشاطات</div>
-  <div class="card" onclick="showNews('تبرع','02/02/2026 14:00','نص خبر')">تبرع</div>
-  <div class="card" onclick="showNews('قفة رمضان','02/02/2026 15:00','نص خبر')">قفة</div>
-  <div class="card" onclick="showNews('ذكريات','02/02/2026 16:00','نص خبر')">ذكريات</div>
+  <div class="card" onclick="showCategory('general')">أخبار</div>
+  <div class="card" onclick="showCategory('charity')">أعمال</div>
+  <div class="card" onclick="showCategory('missing')">مفقودات</div>
+  <div class="card" onclick="showCategory('activities')">نشاطات</div>
+  <div class="card" onclick="showCategory('donate')">تبرع</div>
+  <div class="card" onclick="showCategory('ramadan')">قفة</div>
+  <div class="card" onclick="showCategory('memory')">ذكريات</div>
 </div>
 
-<div class="news-display" id="newsBox">
-  <h2 id="newsTitle"></h2>
-  <div class="datetime" id="newsTime"></div>
-  <div class="separator"></div>
-  <div class="news-text" id="newsText"></div>
-</div>
+<button class="back-btn" id="backBtn" onclick="showGeneral()">⬅ الرجوع إلى الأخبار العامة</button>
+
+<div class="news-display" id="newsBox"></div>
 
 <script>
-function showNews(t,d,c){
-  document.getElementById('newsTitle').innerText=t;
-  document.getElementById('newsTime').innerText=d;
-  document.getElementById('newsText').innerText=c;
-  document.getElementById('newsBox').classList.add('show');
+const newsData = {
+  general: [
+    {t:"02/02/2026 10:00", h:"خبر عام", c:"هذا مثال لخبر عام يظهر مباشرة عند فتح الصفحة"}
+  ],
+  charity: [
+    {t:"03/02/2026 11:00", h:"عمل خيري", c:"تفاصيل عمل خيري"}
+  ],
+  missing: [
+    {t:"01/02/2026 09:00", h:"إعلان مفقود", c:"تفاصيل إعلان مفقود"}
+  ],
+  activities: [
+    {t:"04/02/2026 14:00", h:"نشاط", c:"تفاصيل نشاط الجمعية"}
+  ],
+  donate: [
+    {t:"05/02/2026 15:30", h:"تبرعات", c:"كيفية التبرع"}
+  ],
+  ramadan: [
+    {t:"06/02/2026 16:00", h:"قفة رمضان", c:"تفاصيل قفة رمضان"}
+  ],
+  memory: [
+    {t:"2025", h:"ذكرى", c:"ذكريات الجمعية"}
+  ]
+};
+
+const box = document.getElementById("newsBox");
+const backBtn = document.getElementById("backBtn");
+
+function renderNews(list){
+  box.innerHTML="";
+  list.forEach(n=>{
+    box.innerHTML += `
+      <div class="news-item">
+        <div class="datetime">${n.t}</div>
+        <h2>${n.h}</h2>
+        <div class="separator"></div>
+        <div class="news-text">${n.c}</div>
+      </div>
+    `;
+  });
 }
+
+function showGeneral(){
+  backBtn.style.display="none";
+  renderNews(newsData.general);
+}
+
+function showCategory(cat){
+  backBtn.style.display="block";
+  renderNews(newsData[cat]);
+}
+
+/* عند فتح الصفحة */
+showGeneral();
 </script>
 
 </body>
