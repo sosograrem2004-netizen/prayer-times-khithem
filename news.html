@@ -15,27 +15,34 @@ body{
   overflow-x:hidden;
 }
 
-/* ===== HEADER ===== */
+/* ================= HEADER ================= */
 header{
   background:black;
   min-height:210px;
   position:relative;
   color:white;
+  perspective:1000px;
 }
 
-/* شريط الأخبار */
+/* ===== شريط الأخبار ===== */
 .news-strip{
   position:absolute;
   top:8px;
   left:6px;
   right:6px;
   height:28px;
-  background:linear-gradient(90deg,#fff,#f5d36a,#fff);
+  background:linear-gradient(
+    90deg,
+    rgba(255,255,255,0.95),
+    rgba(255,215,0,0.35),
+    rgba(255,255,255,0.95)
+  );
   border-radius:20px;
   overflow:hidden;
   display:flex;
   align-items:center;
 }
+
 .news-strip-text{
   white-space:nowrap;
   font-size:13px;
@@ -43,27 +50,31 @@ header{
   color:#000;
   animation:newsMove 18s linear infinite;
 }
+
 @keyframes newsMove{
-  from{transform:translateX(-100%)}
-  to{transform:translateX(100%)}
+  0%{transform:translateX(-100%)}
+  90%{transform:translateX(100%)}
+  100%{transform:translateX(100%)}
 }
 
-/* اللوغو */
+/* ===== اللوغو ===== */
 .rotating-logo{
   position:absolute;
   top:58%;
   left:12px;
-  width:110px;
+  width:120px;
   transform:translateY(-50%);
   animation:rotateOncePause 35s linear infinite;
 }
+
+/* دورة واحدة ثم توقف */
 @keyframes rotateOncePause{
   0%{transform:translateY(-50%) rotateY(0deg)}
   10%{transform:translateY(-50%) rotateY(360deg)}
   100%{transform:translateY(-50%) rotateY(360deg)}
 }
 
-/* العناوين */
+/* ===== العنوان الرئيسي ===== */
 .header-main-title{
   position:absolute;
   top:44px;
@@ -71,6 +82,7 @@ header{
   font-size:34px;
   font-weight:900;
 }
+
 .header-separator{
   position:absolute;
   top:86px;
@@ -80,29 +92,32 @@ header{
   background:white;
 }
 
-/* MISK ELKHITHEM */
+/* ===== MISK / ELKHITHEM ===== */
 .header-subtitle{
   position:absolute;
-  bottom:42px;
+  bottom:42px; /* فوق العنوان الذهبي */
   left:150px;
+  text-align:left;
   line-height:1.05;
 }
+
 .header-subtitle span{
   display:block;
-  font-size:40px;
+  font-size:42px;
   font-weight:900;
-  background:linear-gradient(120deg,white,gold,white);
+  background:linear-gradient(120deg,white 30%,gold 50%,white 70%);
+  background-size:200% auto;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  background-size:200%;
   animation:shine 10s linear infinite;
 }
+
 @keyframes shine{
-  from{background-position:200%}
-  to{background-position:-200%}
+  0%{background-position:200% center}
+  100%{background-position:-200% center}
 }
 
-/* العنوان الذهبي */
+/* ===== العنوان الذهبي ===== */
 .header-bottom{
   position:absolute;
   bottom:8px;
@@ -111,17 +126,21 @@ header{
   color:gold;
   font-size:16px;
   font-weight:700;
+  white-space:nowrap;
 }
-.header-bottom::after{content:" ©";}
+.header-bottom::after{
+  content:" ©";
+}
 
-/* ===== CARDS ===== */
+/* ================= CARDS ================= */
 .cards-container{
   display:flex;
   justify-content:center;
   gap:6px;
-  padding:10px 6px 6px;
+  padding:8px 6px;
   flex-wrap:wrap;
 }
+
 .card{
   width:56px;
   background:black;
@@ -135,53 +154,43 @@ header{
   cursor:pointer;
 }
 
-/* خط فاصل */
-.section-divider{
-  width:90%;
-  height:2px;
-  background:gold;
-  margin:8px auto;
-}
-
-/* ===== الأخبار ===== */
-.news-section{
-  padding:10px;
-}
-
-.news-item{
+/* ================= NEWS BOX ================= */
+.news-display{
+  margin:8px;
+  padding:8px;
   background:white;
   border-radius:8px;
-  padding:8px;
-  margin-bottom:8px;
-  box-shadow:0 0 5px rgba(0,0,0,.2);
+  box-shadow:0 0 6px rgba(0,0,0,.25);
+  display:none;
 }
 
-.news-date{
-  font-size:11px;
-  color:#c9a400;
+.news-display.show{display:block}
+
+.news-display h2{
+  font-size:15px;
+  margin:0;
 }
 
-.news-title{
-  font-weight:900;
-  font-size:14px;
-  margin:2px 0;
+.datetime{
+  font-size:10px;
+  color:gold;
+}
+
+.separator{
+  height:2px;
+  background:gold;
+  margin:4px 0;
 }
 
 .news-text{
   font-size:12px;
 }
 
-/* زر الرجوع */
-.back-btn{
-  display:none;
-  margin:10px auto;
-  padding:6px 16px;
-  background:black;
-  color:gold;
-  border:2px solid gold;
-  border-radius:20px;
-  font-weight:900;
-  cursor:pointer;
+/* ===== MOBILE ===== */
+@media(max-width:600px){
+  .rotating-logo{width:90px}
+  .header-subtitle span{font-size:32px}
+  .header-main-title{font-size:24px}
 }
 </style>
 </head>
@@ -189,82 +198,58 @@ header{
 <body>
 
 <header>
+
+  <!-- شريط الأخبار -->
   <div class="news-strip">
     <div class="news-strip-text">
-      🔔 خبر: انطلاق حملة قفة رمضان لفائدة العائلات المعوزة
+      🔔 خبر: انطلاق حملة قفة رمضان لفائدة العائلات المعوزة – الجمعية الخيرية مسك الختام
     </div>
   </div>
 
+  <!-- اللوغو -->
   <img src="logo1.png" class="rotating-logo">
 
+  <!-- العناوين -->
   <div class="header-main-title">أخبار مسك الختام</div>
   <div class="header-separator"></div>
 
+  <!-- MISK / ELKHITHEM -->
   <div class="header-subtitle">
     <span>MISK</span>
     <span>ELKHITHEM</span>
   </div>
 
+  <!-- العنوان الذهبي -->
   <div class="header-bottom">
     الجمعية الخيرية مسك الختام القرارم قوقة
   </div>
+
 </header>
 
-<!-- البطاقات -->
 <div class="cards-container">
-  <div class="card" onclick="showCategory('أخبار')">أخبار</div>
-  <div class="card" onclick="showCategory('أعمال خيرية')">أعمال</div>
-  <div class="card" onclick="showCategory('مفقودات')">مفقودات</div>
-  <div class="card" onclick="showCategory('نشاطات')">نشاطات</div>
-  <div class="card" onclick="showCategory('تبرع')">تبرع</div>
-  <div class="card" onclick="showCategory('قفة رمضان')">قفة</div>
-  <div class="card" onclick="showCategory('ذكريات')">ذكريات</div>
+  <div class="card" onclick="showNews('أخبار','02/02/2026 10:00','هذا مثال لنص خبر تجريبي')">أخبار</div>
+  <div class="card" onclick="showNews('أعمال خيرية','02/02/2026 11:00','نص خبر')">أعمال</div>
+  <div class="card" onclick="showNews('مفقودات','02/02/2026 12:00','نص خبر')">مفقودات</div>
+  <div class="card" onclick="showNews('نشاطات','02/02/2026 13:00','نص خبر')">نشاطات</div>
+  <div class="card" onclick="showNews('تبرع','02/02/2026 14:00','نص خبر')">تبرع</div>
+  <div class="card" onclick="showNews('قفة رمضان','02/02/2026 15:00','نص خبر')">قفة</div>
+  <div class="card" onclick="showNews('ذكريات','02/02/2026 16:00','نص خبر')">ذكريات</div>
 </div>
 
-<div class="section-divider"></div>
-
-<button class="back-btn" id="backBtn" onclick="showGeneral()">⬅ الرجوع للأخبار العامة</button>
-
-<div class="news-section" id="newsContainer"></div>
+<div class="news-display" id="newsBox">
+  <h2 id="newsTitle"></h2>
+  <div class="datetime" id="newsTime"></div>
+  <div class="separator"></div>
+  <div class="news-text" id="newsText"></div>
+</div>
 
 <script>
-const generalNews=[
- {t:"02/02/2026 10:00",h:"خبر عام 1",c:"هذا مثال لخبر عام يظهر مباشرة"},
- {t:"02/02/2026 12:30",h:"خبر عام 2",c:"خبر آخر خاص بالأخبار العامة"}
-];
-
-const categoryNews={
- "أعمال خيرية":[{t:"03/02/2026 11:00",h:"قافلة خيرية",c:"تفاصيل العمل الخيري"}],
- "مفقودات":[{t:"01/02/2026 09:00",h:"إعلان مفقود",c:"تفاصيل المفقود"}],
- "ذكريات":[{t:"2025",h:"ذكرى",c:"ذكريات الجمعية"}]
-};
-
-const box=document.getElementById("newsContainer");
-const back=document.getElementById("backBtn");
-
-function render(list){
- box.innerHTML="";
- list.forEach(n=>{
-  box.innerHTML+=`
-   <div class="news-item">
-    <div class="news-date">${n.t}</div>
-    <div class="news-title">${n.h}</div>
-    <div class="news-text">${n.c}</div>
-   </div>`;
- });
+function showNews(t,d,c){
+  document.getElementById('newsTitle').innerText=t;
+  document.getElementById('newsTime').innerText=d;
+  document.getElementById('newsText').innerText=c;
+  document.getElementById('newsBox').classList.add('show');
 }
-
-function showGeneral(){
- back.style.display="none";
- render(generalNews);
-}
-
-function showCategory(cat){
- back.style.display="block";
- render(categoryNews[cat]||[]);
-}
-
-showGeneral();
 </script>
 
 </body>
