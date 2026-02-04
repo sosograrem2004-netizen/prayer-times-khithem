@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>أخبار مسك الختام</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-
 <style>
 body{
   margin:0;
@@ -14,7 +12,6 @@ body{
   background:#f2f2f2;
   overflow-x:hidden;
 }
-
 /* ================= HEADER ================= */
 header{
   background:black;
@@ -22,7 +19,6 @@ header{
   position:relative;
   color:white;
 }
-
 /* شريط الأخبار */
 .news-strip{
   position:absolute;
@@ -47,7 +43,6 @@ header{
   from{transform:translateX(-100%)}
   to{transform:translateX(100%)}
 }
-
 /* ================= CARDS ================= */
 .cards-container{
   display:flex;
@@ -70,7 +65,6 @@ header{
   align-items:center;
   justify-content:center;
 }
-
 /* زر الرجوع */
 .back-btn{
   display:none;
@@ -85,7 +79,6 @@ header{
   font-size:14px;
   cursor:pointer;
 }
-
 /* ================= NEWS BOX ================= */
 .news-display{
   margin:8px;
@@ -113,11 +106,10 @@ header{
 }
 .news-text{
   font-size:12px;
-  line-height:1.9;
+  line-height:1.7;
 }
 </style>
 </head>
-
 <body>
 
 <header>
@@ -129,7 +121,10 @@ header{
 </header>
 
 <div class="cards-container">
-  <div class="card" onclick="showGeneral()">أخبار</div>
+  <div class="card" onclick="showCategory('general')">أخبار</div>
+  <div class="card" onclick="showCategory('charity')">أعمال خيرية</div>
+  <div class="card" onclick="showCategory('missing')">مفقودات</div>
+  <div class="card" onclick="showCategory('activities')">نشاطات</div>
   <div class="card" onclick="showCategory('donate')">تبرع</div>
 </div>
 
@@ -139,34 +134,28 @@ header{
 
 <script>
 const newsData = {
-
-  general: [
-    {
-      t:"07/02/2026 16:30",
-      h:"أخبار الجمعية",
-      c:"مرحبا بكم في صفحة الأخبار العامة للجمعية الخيرية مسك الختام."
-    }
+  general:[
+    {t:"07/02/2026 16:30", h:"أخبار الجمعية", c:"مرحبا بكم في صفحة الأخبار العامة للجمعية الخيرية مسك الختام."}
   ],
-
-  donate: [
-    {
-      t:"08/02/2026 09:00",
-      h:"🚨 نداء مستعجل للتبرع بالدم 🚨",
-      c:`
+  charity:[
+    {t:"03/02/2026 11:00", h:"عمل خيري", c:"تفاصيل عمل خيري"}
+  ],
+  missing:[
+    {t:"01/02/2026 09:00", h:"إعلان مفقود", c:"تفاصيل إعلان مفقود"}
+  ],
+  activities:[
+    {t:"04/02/2026 14:00", h:"نشاط", c:"تفاصيل نشاط الجمعية"}
+  ],
+  donate:[
+    {t:"08/02/2026 09:00", h:"🚨 نداء مستعجل للتبرع بالدم 🚨", c:`
       مريض من بلديتنا في حاجة ماسة وعاجلة إلى دم من فصيلة <b>A+</b>.<br><br>
-
       📍 متواجد بـ <b>مستشفى الإخوة طوبال – ميلة</b><br><br>
-
       نرجو من كل من تتوفر لديه هذه الفصيلة التوجه في أقرب وقت ممكن للتبرع، فالأمر مستعجل جدًا وقد ينقذ حياة إنسان.<br><br>
-
       📞 للاستفسار والتنسيق: <b>0792844621</b><br><br>
-
       قال رسول الله ﷺ: «ومن أحياها فكأنما أحيا الناس جميعًا»<br><br>
-
       جزاكم الله خيرًا وبارك فيكم 🤍<br>
       🔁 الرجاء مشاركة المنشور على أوسع نطاق
-      `
-    }
+    `}
   ]
 };
 
@@ -174,13 +163,13 @@ const box = document.getElementById("newsBox");
 const backBtn = document.getElementById("backBtn");
 
 function renderNews(list){
-  box.innerHTML = "";
-  if(!list || list.length === 0){
-    box.innerHTML = "<p>لا توجد أخبار حالياً</p>";
+  box.innerHTML="";
+  if(!list || list.length===0){
+    box.innerHTML="<p>لا توجد أخبار حالياً</p>";
     return;
   }
   list.forEach(n=>{
-    box.innerHTML += `
+    box.innerHTML+=`
       <div class="news-item">
         <div class="datetime">${n.t}</div>
         <h2>${n.h}</h2>
@@ -192,16 +181,16 @@ function renderNews(list){
 }
 
 function showGeneral(){
-  backBtn.style.display = "none";
+  backBtn.style.display="none";
   renderNews(newsData.general);
 }
 
 function showCategory(cat){
-  backBtn.style.display = "block";
+  backBtn.style.display="block";
   renderNews(newsData[cat]);
 }
 
-/* عرض الأخبار العامة عند فتح الصفحة */
+/* عند فتح الصفحة */
 showGeneral();
 </script>
 
