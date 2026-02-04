@@ -222,7 +222,7 @@ header {
 <div class="news-display" id="newsBox"></div>
 
 <script>
-// الأخبار حسب الأقسام
+// ===== أخبار الأقسام =====
 const newsData = {
   charity: [
     {t:"03/02/2026 11:00", h:"عمل خيري", c:"تفاصيل عمل خيري"}
@@ -239,7 +239,6 @@ const newsData = {
       h:"🚨 نداء مستعجل للتبرع بالدم 🚨",
       c:`مريض من بلديتنا في حاجة ماسة وعاجلة إلى دم من فصيلة <b>A+</b>.<br>
 📍 متواجد بـ <b>مستشفى الإخوة طوبال – ميلة</b><br>
-نرجو من كل من تتوفر لديه هذه الفصيلة التوجه في أقرب وقت ممكن للتبرع، فالأمر مستعجل جدًا وقد ينقذ حياة إنسان.<br>
 📞 للاستفسار والتنسيق: <b>0792844621</b><br>
 قال رسول الله ﷺ: «ومن أحياها فكأنما أحيا الناس جميعًا»<br>
 جزاكم الله خيرًا وبارك فيكم 🤍<br>
@@ -257,12 +256,19 @@ const newsData = {
 // ===== دمج كل الأخبار في general تلقائيًا =====
 newsData.general = [
   {t:"07/02/2026 16:30", h:"انطلاق حملة قفة رمضان 2026", c:"تعلن الجمعية الخيرية مسك الختام بالقرارم قوقة عن انطلاق حملة قفة رمضان 2026، والتي تهدف إلى مساعدة العائلات المعوزة وإدخال الفرحة على قلوب المحتاجين خلال الشهر الفضيل. وتدعو الجمعية جميع المحسنين وأهل الخير إلى المساهمة والدعم حسب الاستطاعة."},
-  ...Object.values(newsData).flat()
+  ...newsData.charity,
+  ...newsData.missing,
+  ...newsData.activities,
+  ...newsData.donate,
+  ...newsData.ramadan,
+  ...newsData.memory
 ];
 
+// ===== تحديد عناصر الصفحة =====
 const box = document.getElementById("newsBox");
 const backBtn = document.getElementById("backBtn");
 
+// ===== دالة عرض الأخبار =====
 function renderNews(list) {
   box.innerHTML = "";
   list.forEach(n => {
@@ -277,6 +283,7 @@ function renderNews(list) {
   });
 }
 
+// ===== دوال عرض حسب القسم =====
 function showGeneral() {
   backBtn.style.display = "none";
   renderNews(newsData.general);
@@ -287,7 +294,7 @@ function showCategory(cat) {
   renderNews(newsData[cat]);
 }
 
-// عند فتح الصفحة
+// ===== عند فتح الصفحة =====
 showGeneral();
 </script>
 
