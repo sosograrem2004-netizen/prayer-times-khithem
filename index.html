@@ -32,6 +32,31 @@ body{
 
 .logo{width:80px;margin-bottom:6px;}
 
+/* زر آخر الأخبار */
+#latestNewsBtnContainer{
+  position:relative;
+  width:100%;
+  margin-bottom:10px;
+  background:rgba(0,0,0,0.25);
+  border-radius:12px;
+  padding:6px 0;
+}
+#latestNewsBtn{
+  background:white;
+  color:black;
+  font-weight:900;
+  font-size:16px;
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.2);}
+}
+
 /* 🔽 العناوين */
 .title{
   font-size:20px;
@@ -84,25 +109,6 @@ body{
   height:35px;
 }
 
-/* ===== زر آخر الأخبار ===== */
-#latestNewsBtn{
-  margin-top:12px;
-  padding:10px 15px;
-  background:black;
-  color:gold;
-  font-weight:900;
-  font-size:16px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  display:inline-block;
-  animation:pulse 2s infinite;
-}
-@keyframes pulse{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.1);}
-}
-
 .footer{
   margin-top:10px;
   font-size:14px;
@@ -119,6 +125,13 @@ body{
 
   <img src="logo.png" class="logo" alt="لوغو الجمعية">
 
+  <!-- زر آخر الأخبار مع خلفية أسود شفاف -->
+  <div id="latestNewsBtnContainer">
+    <button id="latestNewsBtn" onclick="window.location.href='grarem-news.html'">
+      آخر أخبار مسك الختام
+    </button>
+  </div>
+
   <div class="title">الجمعية الخيرية مسك الختام القرارم قوقة</div>
 
   <div class="date" id="gregorian">--</div>
@@ -131,11 +144,6 @@ body{
   </div>
 
   <div class="table" id="prayerTable"></div>
-
-  <!-- زر آخر الأخبار -->
-  <button id="latestNewsBtn" onclick="window.location.href='grarem-news.html'">
-    آخر أخبار مسك الختام
-  </button>
 
   <div class="footer">
     <span>misk elkhithem ©</span>
