@@ -84,36 +84,6 @@ body{
   height:35px;
 }
 
-/* ===== شريط الأخبار مع روابط ===== */
-#newsTicker{
-  width:100%;
-  overflow:hidden;
-  white-space:nowrap;
-  border-radius:8px;
-  margin:5px 0 10px 0;
-  background:rgba(255,215,0,0.1);
-  padding:5px 0;
-  font-weight:700;
-  font-size:16px;
-  position:relative;
-  color:gold;
-}
-#newsTicker span{
-  display:inline-block;
-  position:relative;
-  left:-100%;
-  animation:scrollLeft 20s linear infinite;
-}
-#newsTicker a{
-  color:gold;
-  text-decoration:none;
-  margin:0 10px;
-}
-@keyframes scrollLeft{
-  0%{left:-100%;}
-  100%{left:100%;}
-}
-
 .footer{
   margin-top:10px;
   font-size:14px;
@@ -129,17 +99,6 @@ body{
 <div class="overlay">
 
   <img src="logo.png" class="logo" alt="لوغو الجمعية">
-
-  <!-- شريط الأخبار -->
-  <div id="newsTicker">
-    <span>
-      <a href="news1.html" target="_blank">🌙 صيام ايام البيض</a> 
-      | 
-      <a href="news2.html" target="_blank">📖 خبر كتابي 2</a> 
-      | 
-      <a href="news3.html" target="_blank">📰 خبر كتابي 3</a>
-    </span>
-  </div>
 
   <!-- العنوان بدون تشكيل أو أقواس -->
   <div class="title">الجمعية الخيرية مسك الختام القرارم قوقة</div>
