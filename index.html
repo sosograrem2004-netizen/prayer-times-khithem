@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مواقيت الصلاة - ميلة</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',Tahoma;}
 body{
@@ -32,40 +30,11 @@ body{
 
 .logo{width:80px;margin-bottom:6px;}
 
-/* 🔽 زر آخر الأخبار */
-.latest-news-btn{
-  display:block;
-  width:90%;
-  margin:10px auto;
-  padding:12px;
-  background:black;
-  border-radius:12px;
-  font-size:16px;
-  font-weight:900;
-  color:white;
-  cursor:pointer;
-  border:2px solid gold;
-  position:relative;
-  overflow:hidden;
-  z-index:1;
-  animation:btnPulse 2s infinite;
-}
-
-.latest-news-btn:hover{
-  transform: scale(1.05);
-}
-
-@keyframes btnPulse{
-  0%{box-shadow:0 0 5px gold;}
-  50%{box-shadow:0 0 20px gold;}
-  100%{box-shadow:0 0 5px gold;}
-}
-
 /* 🔽 العناوين */
 .title{
   font-size:20px;
   font-weight:700;
-  margin:6px 0;
+  margin-bottom:2px;
 }
 .date{
   margin:2px 0;
@@ -73,7 +42,6 @@ body{
   font-weight:700;
 }
 
-/* جدول الصلاة */
 .table{margin-top:10px}
 .row{
   display:flex;
@@ -88,13 +56,12 @@ body{
   border-radius:12px;
 }
 
-/* العد التنازلي */
+/* ===== العد التنازلي ===== */
 #countdownText{
   font-size:24px;
   font-weight:700;
   margin:6px 0;
   color:gold;
-  text-shadow:0 0 8px rgba(255,215,0,.8);
 }
 #nextPrayerClockContainer{
   border:2px solid gold;
@@ -112,7 +79,49 @@ body{
   height:35px;
 }
 
-/* Footer */
+/* ===== زر الأخبار ===== */
+#newsBtn{
+  margin:10px 0;
+  padding:10px 12px;
+  background:white;
+  color:black;
+  font-weight:900;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:14px;
+  box-shadow:0 0 10px gold;
+  animation:blink 2s infinite;
+}
+@keyframes blink{
+  0%,50%,100%{box-shadow:0 0 10px gold,0 0 20px gold,0 0 30px gold;}
+  25%,75%{box-shadow:0 0 20px gold,0 0 30px gold,0 0 40px gold;}
+}
+
+/* ===== شريط الأخبار ===== */
+#newsTicker{
+  width:100%;
+  overflow:hidden;
+  white-space:nowrap;
+  border-radius:8px;
+  margin:5px 0 10px 0;
+  background:rgba(0,0,0,0.2);
+  padding:5px 0;
+  font-weight:700;
+  font-size:16px;
+  position:relative;
+  color:gold;
+}
+#newsTicker span{
+  display:inline-block;
+  position:relative;
+  left:-100%;
+  animation:scrollLeft 20s linear infinite;
+}
+@keyframes scrollLeft{
+  0%{left:-100%;}
+  100%{left:100%;}
+}
+
 .footer{
   margin-top:10px;
   font-size:14px;
@@ -129,13 +138,19 @@ body{
 
   <img src="logo.png" class="logo" alt="لوغو الجمعية">
 
-  <!-- زر آخر الأخبار -->
-  <div class="latest-news-btn" onclick="window.location.href='news-misk.html'">
+  <!-- زر الأخبار -->
+  <div id="newsBtn" onclick="window.location.href='news-misk.html'">
     آخر أخبار مسك الختام
   </div>
 
-  <div class="title">(الجمعية الخيرية مسك الختام القرارم قوقة)</div>
+  <!-- شريط الأخبار -->
+  <div id="newsTicker">
+    <span>
+      🌙 صيام أيام البيض | 📖 خبر كتابي 2 | 📰 خبر كتابي 3
+    </span>
+  </div>
 
+  <div class="title">الجمعية الخيرية مسك الختام القرارم قوقة</div>
   <div class="date" id="gregorian">--</div>
   <div class="date" id="hijri">--</div>
 
@@ -158,22 +173,7 @@ body{
 const TABLE_START_DATE = new Date("2026-02-01T00:00:00");
 const prayerSchedule = [
   ["06:09","05:59","12:49","15:40","18:04","19:25"],
-  ["06:08","05:58","12:49","15:41","18:05","19:26"],
-  ["06:07","05:57","12:49","15:42","18:07","19:27"],
-  ["06:07","05:57","12:49","15:42","18:08","19:27"],
-  ["06:06","05:56","12:49","15:43","18:09","19:28"],
-  ["06:05","05:55","12:49","15:44","18:10","19:29"],
-  ["06:04","05:54","12:50","15:45","18:11","19:30"],
-  ["06:03","05:53","12:50","15:46","18:12","19:31"],
-  ["06:03","05:53","12:50","15:47","18:13","19:32"],
-  ["06:02","05:52","12:50","15:47","18:14","19:33"],
-  ["06:01","05:51","12:50","15:48","18:15","19:34"],
-  ["06:00","05:50","12:50","15:49","18:16","19:35"],
-  ["05:59","05:49","12:50","15:50","18:17","19:36"],
-  ["05:58","05:48","12:50","15:51","18:18","19:37"],
-  ["05:57","05:47","12:50","15:51","18:19","19:38"],
-  ["05:56","05:46","12:49","15:52","18:20","19:39"],
-  ["05:55","05:45","12:49","15:53","18:21","19:40"]
+  ["06:08","05:58","12:49","15:41","18:05","19:26"]
 ];
 const prayerNames=["الفجر","الإمساك","الظهر","العصر","المغرب","العشاء"];
 let rows=[], todayTimes=[];
@@ -222,28 +222,16 @@ function updateCountdown(){
   const now = new Date();
   rows.forEach(r => r.classList.remove("nextPrayer"));
   let target = null, index = -1;
-
   for(let i = 0; i < todayTimes.length; i++){
-    if(i === 1) continue; // تخطي الإمساك
+    if(i === 1) continue; 
     const [h,m] = todayTimes[i].split(":").map(Number);
     const t = new Date(); t.setHours(h,m,0,0);
     if(t > now){target=t; index=i; break;}
   }
-
-  if(!target){
-    const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1);
-    const diffDays = Math.floor((tomorrow-TABLE_START_DATE)/86400000);
-    const tableIndex = Math.min(Math.max(diffDays,0),prayerSchedule.length-1);
-    const tomorrowTimes = prayerSchedule[tableIndex];
-    const [h,m] = tomorrowTimes[0].split(":").map(Number);
-    target = new Date(); target.setDate(target.getDate()+1); target.setHours(h,m,0,0);
-    index=0;
-  }
-
+  if(!target){index=0;}
   rows[index].classList.add("nextPrayer");
   const diff = target-now;
   if(diff <= 0) return;
-
   document.getElementById("countdownText").innerText = `${prayerNames[index]} بعد:`;
   document.getElementById("nextPrayerClock").innerText =
     `${String(Math.floor(diff/3600000)).padStart(2,"0")}:`+
@@ -267,7 +255,6 @@ buildTable();
 updateDateAndTimes();
 updateCountdown();
 updateBackground();
-
 setInterval(updateCountdown,1000);
 setInterval(updateDateAndTimes,60000);
 setInterval(updateBackground,60000);
