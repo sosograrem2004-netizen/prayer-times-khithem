@@ -95,7 +95,7 @@ header{
   box-shadow:0 0 6px rgba(0,0,0,.25);
 }
 .news-item{
-  margin-bottom:12px;
+  margin-bottom:14px;
 }
 .news-item h2{
   font-size:15px;
@@ -109,11 +109,11 @@ header{
 .separator{
   height:2px;
   background:gold;
-  margin:4px 0;
+  margin:6px 0;
 }
 .news-text{
   font-size:12px;
-  line-height:1.8;
+  line-height:1.9;
 }
 </style>
 </head>
@@ -129,21 +129,22 @@ header{
 </header>
 
 <div class="cards-container">
-  <div class="card" onclick="showCategory('general')">أخبار</div>
+  <div class="card" onclick="showGeneral()">أخبار</div>
   <div class="card" onclick="showCategory('donate')">تبرع</div>
 </div>
 
-<button class="back-btn" id="backBtn" onclick="showGeneral()">⬅ الرجوع</button>
+<button class="back-btn" id="backBtn" onclick="showGeneral()">⬅ الرجوع إلى الأخبار العامة</button>
 
 <div class="news-display" id="newsBox"></div>
 
 <script>
 const newsData = {
+
   general: [
     {
       t:"07/02/2026 16:30",
-      h:"خبر عام",
-      c:"مرحبا بكم في صفحة أخبار الجمعية الخيرية مسك الختام."
+      h:"أخبار الجمعية",
+      c:"مرحبا بكم في صفحة الأخبار العامة للجمعية الخيرية مسك الختام."
     }
   ],
 
@@ -151,13 +152,20 @@ const newsData = {
     {
       t:"08/02/2026 09:00",
       h:"🚨 نداء مستعجل للتبرع بالدم 🚨",
-      c:`مريض من بلديتنا في حاجة ماسة وعاجلة إلى دم من فصيلة <b>A+</b>.<br><br>
+      c:`
+      مريض من بلديتنا في حاجة ماسة وعاجلة إلى دم من فصيلة <b>A+</b>.<br><br>
+
       📍 متواجد بـ <b>مستشفى الإخوة طوبال – ميلة</b><br><br>
+
       نرجو من كل من تتوفر لديه هذه الفصيلة التوجه في أقرب وقت ممكن للتبرع، فالأمر مستعجل جدًا وقد ينقذ حياة إنسان.<br><br>
+
       📞 للاستفسار والتنسيق: <b>0792844621</b><br><br>
+
       قال رسول الله ﷺ: «ومن أحياها فكأنما أحيا الناس جميعًا»<br><br>
+
       جزاكم الله خيرًا وبارك فيكم 🤍<br>
-      🔁 الرجاء مشاركة المنشور على أوسع نطاق`
+      🔁 الرجاء مشاركة المنشور على أوسع نطاق
+      `
     }
   ]
 };
@@ -167,6 +175,10 @@ const backBtn = document.getElementById("backBtn");
 
 function renderNews(list){
   box.innerHTML = "";
+  if(!list || list.length === 0){
+    box.innerHTML = "<p>لا توجد أخبار حالياً</p>";
+    return;
+  }
   list.forEach(n=>{
     box.innerHTML += `
       <div class="news-item">
@@ -180,16 +192,16 @@ function renderNews(list){
 }
 
 function showGeneral(){
-  backBtn.style.display="none";
+  backBtn.style.display = "none";
   renderNews(newsData.general);
 }
 
 function showCategory(cat){
-  backBtn.style.display="block";
+  backBtn.style.display = "block";
   renderNews(newsData[cat]);
 }
 
-/* عرض الأخبار العامة عند الدخول */
+/* عرض الأخبار العامة عند فتح الصفحة */
 showGeneral();
 </script>
 
