@@ -24,18 +24,18 @@ header{
   perspective:1000px;
 }
 
-/* ===== شريط الأخبار المتدرج ===== */
+/* ===== شريط الأخبار ===== */
 .news-strip{
   position:absolute;
-  top:6px;
+  top:8px;
   left:6px;
-  right:170px;
-  height:26px;
+  right:6px;
+  height:28px;
   background:linear-gradient(
     90deg,
-    rgba(255,255,255,0.9),
+    rgba(255,255,255,0.95),
     rgba(255,215,0,0.35),
-    rgba(255,255,255,0.9)
+    rgba(255,255,255,0.95)
   );
   border-radius:20px;
   overflow:hidden;
@@ -50,13 +50,13 @@ header{
   font-size:13px;
   font-weight:700;
   color:#000;
-  padding-left:100%;
-  animation:newsMove 12s linear infinite;
+  padding-right:100%;
+  animation:newsMove 22s linear infinite;
 }
 
+/* من اليمين إلى اليسار وبطيء */
 @keyframes newsMove{
   0%{transform:translateX(0)}
-  80%{transform:translateX(-100%)}
   100%{transform:translateX(-100%)}
 }
 
@@ -80,7 +80,7 @@ header{
 /* ===== العناوين ===== */
 .header-main-title{
   position:absolute;
-  top:38px;
+  top:42px;
   right:10px;
   font-size:32px;
   font-weight:900;
@@ -88,16 +88,17 @@ header{
 
 .header-separator{
   position:absolute;
-  top:78px;
+  top:82px;
   right:10px;
   width:160px;
   height:4px;
   background:white;
 }
 
+/* إنزال العنوان قليلاً */
 .header-subtitle{
   position:absolute;
-  top:50%;
+  top:58%;
   left:145px;
   transform:translateY(-50%);
   font-size:42px;
@@ -117,7 +118,7 @@ header{
 /* ===== العنوان الذهبي ===== */
 .header-bottom{
   position:absolute;
-  bottom:4px;
+  bottom:6px;
   left:50%;
   transform:translateX(-50%);
   color:gold;
@@ -185,7 +186,6 @@ header{
 
 /* ===== MOBILE ===== */
 @media(max-width:600px){
-  .news-strip{right:140px}
   .rotating-logo{width:90px}
   .header-subtitle{font-size:30px;left:130px}
   .header-main-title{font-size:24px}
@@ -206,7 +206,7 @@ header{
   <img src="logo1.png" class="rotating-logo">
   <div class="header-main-title">أخبار مسك الختام</div>
   <div class="header-separator"></div>
-  <div class="header-subtitle">misk-elkhithem</div>
+  <div class="header-subtitle">MISK-ELKHITHEM</div>
   <div class="header-bottom">الجمعية الخيرية مسك الختام القرارم قوقة</div>
 
 </header>
