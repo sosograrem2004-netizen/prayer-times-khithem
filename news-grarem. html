@@ -1,431 +1,273 @@
 <!DOCTYPE html>
-
 <html lang="ar" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
-
-<title>الأخبار</title>
-
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أخبار مسك الختام</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-
-
 <style>
-
-*{
-
-  box-sizing:border-box;
-
-  font-family:'Cairo',Tahoma;
-
-}
-
-
 body{
-
-  margin:0;
-
-  background:#f2f2f2;
-
+  margin:0;
+  font-family:'Cairo',Tahoma;
+  background:#f2f2f2;
+  overflow-x:hidden;
 }
-
-
-/* ===== رأس الصفحة ===== */
-
-.header{
-
-  background:#111;
-
-  color:white;
-
-  padding:20px 30px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-  box-shadow:0 6px 18px rgba(0,0,0,0.5);
-
-  flex-wrap:wrap;
-
+/* ================= HEADER ================= */
+header{
+  background:black;
+  min-height:210px;
+  position:relative;
+  color:white;
 }
-
-
-.header-left{
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:flex-end;
-
+/* شريط الأخبار */
+.news-strip{
+  position:absolute;
+  top:8px;
+  left:6px;
+  right:6px;
+  height:28px;
+  background:linear-gradient(90deg,#fff,#f5d36a,#fff);
+  border-radius:20px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
 }
-
-
-.header-title{
-
-  font-size:70px;
-
-  font-weight:900;
-
+.news-strip-text{
+  white-space:nowrap;
+  font-size:13px;
+  font-weight:700;
+  color:#000;
+  animation:newsMove 18s linear infinite;
 }
-
-
+@keyframes newsMove{
+  from{transform:translateX(-100%)}
+  to{transform:translateX(100%)}
+}
+/* اللوغو */
+.rotating-logo{
+  position:absolute;
+  top:58%;
+  left:12px;
+  width:110px;
+  transform:translateY(-50%);
+  animation:rotateOncePause 35s linear infinite;
+}
+@keyframes rotateOncePause{
+  0%{transform:translateY(-50%) rotateY(0deg)}
+  10%{transform:translateY(-50%) rotateY(360deg)}
+  100%{transform:translateY(-50%) rotateY(360deg)}
+}
+/* العناوين */
+.header-main-title{
+  position:absolute;
+  top:40px;
+  right:10px;
+  font-size:26px;
+  font-weight:900;
+}
+.header-separator{
+  position:absolute;
+  top:78px;
+  right:10px;
+  width:180px;
+  height:3px;
+  background:white;
+}
+/* MISK / ELKHITHEM */
 .header-subtitle{
+  position:absolute;
+  bottom:58px;
+  left:150px;
+  line-height:1.15;
+}
+.header-subtitle span{
+  display:block;
+  font-size:32px;
+  font-weight:900;
+  background:linear-gradient(120deg,white,gold,white);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-size:200%;
+  animation:shine 10s linear infinite;
+}
+@keyframes shine{
+  from{background-position:200%}
+  to{background-position:-200%}
+}
+/* العنوان الذهبي */
+.header-bottom{
+  position:absolute;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  color:gold;
+  font-size:12px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.header-bottom::after{content:" ©";}
 
-  font-size:28px;
-
-  font-weight:700;
-
-  margin-top:6px;
-
-  color:#ffd700;
-
+/* ================= CARDS ================= */
+.cards-container{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  padding:10px 6px;
+  flex-wrap:wrap;
+}
+.card{
+  width:80px;
+  height:40px;
+  background:black;
+  border:2px solid gold;
+  border-radius:10px;
+  color:white;
+  font-size:9px;
+  font-weight:900;
+  text-align:center;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-
-/* ===== ساعة وتاريخ ===== */
-
-.clock{
-
-  font-size:28px;
-
-  font-weight:700;
-
-  color:white;
-
-  margin-top:10px;
-
-  text-align:right;
-
+/* زر الرجوع */
+.back-btn{
+  display:none;
+  width:92%;
+  margin:10px auto;
+  padding:10px;
+  background:black;
+  color:gold;
+  border:2px solid gold;
+  border-radius:30px;
+  font-weight:900;
+  font-size:14px;
+  cursor:pointer;
 }
 
-
-/* ===== الحاوية ===== */
-
-.container{
-
-  max-width:1000px;
-
-  margin:40px auto;
-
-  padding:0 15px;
-
+/* ================= NEWS BOX ================= */
+.news-display{
+  margin:8px;
+  padding:8px;
+  background:white;
+  border-radius:8px;
+  box-shadow:0 0 6px rgba(0,0,0,.25);
 }
-
-
-/* ===== بطاقة خبر ===== */
-
-.news-card{
-
-  background:white;
-
-  border-radius:16px;
-
-  overflow:hidden;
-
-  box-shadow:0 6px 20px rgba(0,0,0,0.15);
-
-  margin-bottom:40px;
-
+.news-item{
+  margin-bottom:12px;
 }
-
-
-.news-card img{
-
-  width:100%;
-
-  height:500px;
-
-  object-fit:cover;
-
+.news-item h2{
+  font-size:15px;
+  margin:0;
+  font-weight:900;
 }
-
-
-/* ===== شريط الخانات ===== */
-
-.categories{
-
-  background:#fff;
-
-  display:flex;
-
-  flex-wrap:wrap;
-
-  gap:8px;
-
-  padding:10px;
-
+.datetime{
+  font-size:10px;
+  color:gold;
 }
-
-
-.category{
-
-  flex:1;
-
-  min-width:150px;
-
-  text-align:center;
-
-  padding:16px 10px;
-
-  color:#000;
-
-  font-size:26px;
-
-  font-weight:800;
-
-  text-decoration:none;
-
-  background:#fff;
-
-  border:2px solid #333;
-
-  border-radius:14px;
-
-  transition:0.3s;
-
+.separator{
+  height:2px;
+  background:gold;
+  margin:4px 0;
 }
-
-
-.category:hover{
-
-  background:#f0f0f0;
-
-  color:#ffd700;
-
-  transform:translateY(-2px);
-
-}
-
-
-/* ===== آخر الأخبار ===== */
-
-.latest-news{
-
-  font-size:28px;
-
-  font-weight:700;
-
-  margin:20px 0 10px;
-
-  color:#111;
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
-  border-bottom:2px solid #333; /* سطر تحت آخر الأخبار */
-
-  padding-bottom:5px;
-
-}
-
-
-/* محتوى الخبر */
-
-.news-content{
-
-  padding:30px;
-
-}
-
-
-.news-title{
-
-  font-size:45px;
-
-  font-weight:900;
-
-  margin-bottom:15px;
-
-  color:#000;
-
-}
-
-
-.news-date{
-
-  font-size:21px;
-
-  color:#777;
-
-  margin-bottom:25px;
-
-}
-
-
 .news-text{
-
-  font-size:35px;
-
-  line-height:2;
-
-  color:#333;
-
-  font-weight:700;
-
+  font-size:12px;
+  line-height:1.7;
 }
-
-
-/* ===== ذيل الصفحة ===== */
-
-.footer{
-
-  background:#111;
-
-  color:#ccc;
-
-  text-align:center;
-
-  padding:20px;
-
-  font-size:18px;
-
-}
-
-
-.header-logo{
-
-  width:180px;
-
-  height:auto;
-
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
-
-}
-
 </style>
-
 </head>
-
-
 <body>
 
+<header>
+  <div class="news-strip">
+    <div class="news-strip-text">
+      🔔 خبر: انطلاق حملة قفة رمضان 2026 لفائدة العائلات المعوزة – الجمعية الخيرية مسك الختام
+    </div>
+  </div>
 
-<!-- ===== رأس الصفحة ===== -->
+  <img src="logo1.png" class="rotating-logo">
 
-<div class="header">
+  <div class="header-main-title">أخبار مسك الختام</div>
+  <div class="header-separator"></div>
 
-  <div class="header-left">
+  <div class="header-subtitle">
+    <span>MISK</span>
+    <span>ELKHITHEM</span>
+  </div>
 
-    <div class="header-title">أخبار مسك الختام</div>
+  <div class="header-bottom">
+    الجمعية الخيرية مسك الختام القرارم قوقة
+  </div>
+</header>
 
-    <div class="header-subtitle">الجمعية الخيرية مسك الختام - القرارم قوقة ولاية ميلة</div>
-
-    <div class="clock" id="clock">--:--:-- -- --/--/----</div>
-
-  </div>
-
-  <img src="logo1.png" class="header-logo" alt="لوغو الجمعية">
-
+<div class="cards-container">
+  <div class="card" onclick="showCategory('general')">أخبار</div>
+  <div class="card" onclick="showCategory('charity')">أعمال خيرية</div>
+  <div class="card" onclick="showCategory('missing')">مفقودات</div>
+  <div class="card" onclick="showCategory('activities')">نشاطات</div>
+  <div class="card" onclick="showCategory('donate')">تبرعات</div>
+  <div class="card" onclick="showCategory('ramadan')">قفة</div>
+  <div class="card" onclick="showCategory('memory')">ذكريات</div>
 </div>
 
+<button class="back-btn" id="backBtn" onclick="showGeneral()">⬅ الرجوع إلى الأخبار العامة</button>
 
-<div class="container">
-
-
-  <!-- ===== خبر 1 ===== -->
-
-  <div class="news-card">
-
-    <img src="background1.png" alt="خبر">
-
-
-    <!-- شريط الخانات -->
-
-    <div class="categories">
-
-      <a href="ramadan-basket.html" class="category">قفة رمضان</a>
-
-      <a href="donate.html" class="category">تبرع</a>
-
-      <a href="https://prayertime-misk.vercel.app/activities.html" class="category">نشاطات الجمعية</a>
-
-      <a href="local.html" class="category">أخبار وطنية</a>
-
-      <a href="missing.html" class="category">مفقودات</a>
-
-      <a href="charity.html" class="category">أعمال خيرية</a>
-
-    </div>
-
-
-    <!-- ===== جملة آخر الأخبار ===== -->
-
-    <div class="latest-news">⏰ آخر الأخبار</div>
-
-
-    <div class="news-content">
-
-      <div class="news-title">🌙 تذكير بصيام أيام البيض</div>
-
-      <div class="news-date">الأحد 01 فيفري 2026</div>
-
-
-      <div class="news-text">
-
-        تبدأ أيام البيض من يوم غد الأحد 01 فيفري 2026 إلى غاية يوم الثلاثاء 03 فيفري 2026.
-
-        يُستحب صيام هذه الأيام لما فيها من أجر عظيم وفضل كبير.
-
-        نسأل الله أن يتقبل من الجميع صالح الأعمال.
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-</div>
-
-
-<div class="footer">
-
-  © الجمعية الخيرية مسك الختام
-
-</div>
-
+<div class="news-display" id="newsBox"></div>
 
 <script>
+const newsData = {
+  general:[
+    {t:"02/02/2026 10:00", h:"خبر عام", c:"هذا مثال لخبر عام يظهر مباشرة عند فتح الصفحة"}
+  ],
+  charity:[
+    {t:"03/02/2026 11:00", h:"عمل خيري", c:"تفاصيل عمل خيري"}
+  ],
+  missing:[
+    {t:"01/02/2026 09:00", h:"إعلان مفقود", c:"تفاصيل إعلان مفقود"}
+  ],
+  activities:[
+    {t:"04/02/2026 14:00", h:"نشاط", c:"تفاصيل نشاط الجمعية"}
+  ],
+  donate:[
+    {t:"05/02/2026 15:30", h:"نداء مستعجل للتبرع بالدم 🚨", c:"🚨 نداء مستعجل للتبرع بالدم 🚨\nمريض من بلديتنا في حاجة ماسة وعاجلة إلى دم من فصيلة A+\n📍 متواجد بـ مستشفى الإخوة طوبال – ميلة\nنرجو من كل من تتوفر لديه هذه الفصيلة التوجه في أقرب وقت ممكن للتبرع، فالأمر مستعجل جدًا وقد ينقذ حياة إنسان.\n📞 للاستفسار والتنسيق: 0792844621\nقال رسول الله ﷺ: «ومن أحياها فكأنما أحيا الناس جميعًا»\nجزاكم الله خيرًا وبارك فيكم 🤍\n🔁 الرجاء مشاركة المنشور على أوسع نطاق"}
+  ,
+  ramadan:[
+    {t:"06/02/2026 16:00", h:"قفة رمضان", c:"تفاصيل قفة رمضان"}
+  ],
+  memory:[
+    {t:"2025", h:"ذكرى", c:"ذكريات الجمعية"}
+  ]
+};
 
-// ===== تحديث الساعة والتاريخ =====
+const box = document.getElementById("newsBox");
+const backBtn = document.getElementById("backBtn");
 
-function updateClock(){
-
-  const now = new Date();
-
-  const hours = String(now.getHours()).padStart(2,'0');
-
-  const minutes = String(now.getMinutes()).padStart(2,'0');
-
-  const seconds = String(now.getSeconds()).padStart(2,'0');
-
-  const day = String(now.getDate()).padStart(2,'0');
-
-  const month = String(now.getMonth()+1).padStart(2,'0');
-
-  const year = now.getFullYear();
-
-  document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds} - ${day}/${month}/${year}`;
-
+function renderNews(list){
+  box.innerHTML="";
+  list.forEach(n=>{
+    box.innerHTML += `
+      <div class="news-item">
+        <div class="datetime">${n.t}</div>
+        <h2>${n.h}</h2>
+        <div class="separator"></div>
+        <div class="news-text">${n.c.replace(/\n/g,'<br>')}</div>
+      </div>
+    `;
+  });
 }
 
-setInterval(updateClock, 1000);
+function showGeneral(){
+  backBtn.style.display="none";
+  renderNews(newsData.general);
+}
 
-updateClock();
+function showCategory(cat){
+  backBtn.style.display="block";
+  renderNews(newsData[cat]);
+}
 
+showGeneral();
 </script>
-
-
 </body>
-
 </html>
-
