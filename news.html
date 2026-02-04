@@ -18,7 +18,7 @@ body{
 /* ================= HEADER ================= */
 header{
   background:black;
-  min-height:190px;
+  min-height:210px;
   position:relative;
   color:white;
   perspective:1000px;
@@ -41,7 +41,6 @@ header{
   overflow:hidden;
   display:flex;
   align-items:center;
-  box-shadow:0 0 6px rgba(255,215,0,0.4);
 }
 
 .news-strip-text{
@@ -49,11 +48,9 @@ header{
   font-size:13px;
   font-weight:700;
   color:#000;
-  padding-left:-100%;
   animation:newsMove 18s linear infinite;
 }
 
-/* من اليسار إلى اليمين + توقف 1 ثانية */
 @keyframes newsMove{
   0%{transform:translateX(-100%)}
   90%{transform:translateX(100%)}
@@ -63,21 +60,21 @@ header{
 /* ===== اللوغو ===== */
 .rotating-logo{
   position:absolute;
-  top:55%;
-  left:10px;
+  top:58%;
+  left:12px;
   width:120px;
   transform:translateY(-50%);
   animation:rotateOncePause 35s linear infinite;
-  filter:drop-shadow(0 0 10px gold);
 }
 
+/* دورة واحدة ثم توقف */
 @keyframes rotateOncePause{
   0%{transform:translateY(-50%) rotateY(0deg)}
   10%{transform:translateY(-50%) rotateY(360deg)}
   100%{transform:translateY(-50%) rotateY(360deg)}
 }
 
-/* ===== العناوين ===== */
+/* ===== العنوان الرئيسي ===== */
 .header-main-title{
   position:absolute;
   top:44px;
@@ -90,24 +87,23 @@ header{
   position:absolute;
   top:86px;
   right:10px;
-  width:180px;
+  width:200px;
   height:4px;
   background:white;
 }
 
-/* MISK فوق ELKHITHEM */
+/* ===== MISK / ELKHITHEM ===== */
 .header-subtitle{
   position:absolute;
-  top:58%;
+  bottom:42px; /* فوق العنوان الذهبي */
   left:150px;
-  transform:translateY(-50%);
   text-align:left;
   line-height:1.05;
 }
 
 .header-subtitle span{
   display:block;
-  font-size:40px;
+  font-size:42px;
   font-weight:900;
   background:linear-gradient(120deg,white 30%,gold 50%,white 70%);
   background-size:200% auto;
@@ -124,11 +120,11 @@ header{
 /* ===== العنوان الذهبي ===== */
 .header-bottom{
   position:absolute;
-  bottom:6px;
+  bottom:8px;
   left:50%;
   transform:translateX(-50%);
   color:gold;
-  font-size:15px;
+  font-size:16px;
   font-weight:700;
   white-space:nowrap;
 }
@@ -146,7 +142,7 @@ header{
 }
 
 .card{
-  width:54px;
+  width:56px;
   background:black;
   border:2px solid gold;
   border-radius:10px;
@@ -193,7 +189,7 @@ header{
 /* ===== MOBILE ===== */
 @media(max-width:600px){
   .rotating-logo{width:90px}
-  .header-subtitle span{font-size:30px}
+  .header-subtitle span{font-size:32px}
   .header-main-title{font-size:24px}
 }
 </style>
@@ -217,11 +213,13 @@ header{
   <div class="header-main-title">أخبار مسك الختام</div>
   <div class="header-separator"></div>
 
+  <!-- MISK / ELKHITHEM -->
   <div class="header-subtitle">
     <span>MISK</span>
     <span>ELKHITHEM</span>
   </div>
 
+  <!-- العنوان الذهبي -->
   <div class="header-bottom">
     الجمعية الخيرية مسك الختام القرارم قوقة
   </div>
