@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مواقيت الصلاة - ميلة</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',Tahoma;}
 body{
@@ -28,29 +30,24 @@ body{
   transform-origin: center top;
 }
 
-.logo{width:80px;margin-bottom:10px;}
+.logo{width:80px;margin-bottom:6px;}
 
-/* زر آخر أخبار */
-#newsBtnContainer{
-  background:rgba(0,0,0,0.25);
-  padding:6px 0;
-  border-radius:10px;
-  margin-bottom:10px;
-}
+/* 🔽 زر آخر أخبار */
 #newsBtn{
-  background:white;
-  color:black;
-  font-weight:900;
-  font-size:16px;
-  padding:10px 12px;
+  width:100%;
+  padding:10px;
+  background:rgba(0,0,0,0.5);
+  color:white;
   border:none;
   border-radius:8px;
+  font-weight:900;
+  margin-bottom:10px;
   cursor:pointer;
-  animation:blink 2s infinite;
+  animation:pulse 2s infinite;
 }
-@keyframes blink{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.1);}
+@keyframes pulse{
+  0%,100%{box-shadow:0 0 8px rgba(255,215,0,0.7);}
+  50%{box-shadow:0 0 20px rgba(255,215,0,1);}
 }
 
 /* 🔽 العناوين */
@@ -58,7 +55,6 @@ body{
   font-size:20px;
   font-weight:700;
   margin-bottom:2px;
-  text-shadow:none;
 }
 .date{
   margin:2px 0;
@@ -103,20 +99,28 @@ body{
   width:35px;
   height:35px;
 }
+
+/* الفوتر */
+.footer{
+  margin-top:10px;
+  font-size:14px;
+  display:flex;
+  justify-content:center;
+  gap:6px;
+}
 </style>
 </head>
 
 <body>
+
 <div class="overlay">
 
   <img src="logo.png" class="logo" alt="لوغو الجمعية">
 
-  <!-- زر آخر أخبار -->
-  <div id="newsBtnContainer">
-    <button id="newsBtn" onclick="window.open('grarem-news.html','_blank')">
-      آخر أخبار مسك الختام
-    </button>
-  </div>
+  <!-- 🔽 زر آخر أخبار -->
+  <button id="newsBtn" onclick="window.open('grarem-news.html','_blank')">
+    آخر أخبار مسك الختام
+  </button>
 
   <div class="title">الجمعية الخيرية مسك الختام القرارم قوقة</div>
 
@@ -130,6 +134,10 @@ body{
   </div>
 
   <div class="table" id="prayerTable"></div>
+
+  <div class="footer">
+    <span>misk elkhithem ©</span>
+  </div>
 
 </div>
 
@@ -235,9 +243,9 @@ function updateCountdown(){
 function updateBackground(){
   const now = new Date();
   const hour = now.getHours();
-  if(hour >= 19 || hour < 7){
+  if(hour >= 19 || hour < 7){ 
     document.body.style.backgroundImage = 'url("background1.png")';
-  } else {
+  } else { 
     document.body.style.backgroundImage = 'url("background3.png")';
   }
 }
@@ -252,5 +260,6 @@ setInterval(updateCountdown,1000);
 setInterval(updateDateAndTimes,60000);
 setInterval(updateBackground,60000);
 </script>
+
 </body>
 </html>
