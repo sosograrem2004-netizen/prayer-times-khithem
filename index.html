@@ -32,6 +32,35 @@ body{
 
 .logo{width:80px;margin-bottom:6px;}
 
+/* 🔽 زر آخر الأخبار */
+.latest-news-btn{
+  display:block;
+  width:90%;
+  margin:10px auto;
+  padding:12px;
+  background:black;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:900;
+  color:white;
+  cursor:pointer;
+  border:2px solid gold;
+  position:relative;
+  overflow:hidden;
+  z-index:1;
+  animation:btnPulse 2s infinite;
+}
+
+.latest-news-btn:hover{
+  transform: scale(1.05);
+}
+
+@keyframes btnPulse{
+  0%{box-shadow:0 0 5px gold;}
+  50%{box-shadow:0 0 20px gold;}
+  100%{box-shadow:0 0 5px gold;}
+}
+
 /* 🔽 العناوين */
 .title{
   font-size:20px;
@@ -141,10 +170,103 @@ const prayerSchedule = [
   ["05:56","05:46","12:49","15:52","18:20","19:39"],
   ["05:55","05:45","12:49","15:53","18:21","19:40"]
 ];
+
 const prayerNames=["الفجر","الإمساك","الظهر","العصر","المغرب","العشاء"];
 let rows=[], todayTimes=[];
 
-/* بقية الجافاسكريبت بدون أي تغيير */
+// ===== التاريخ الهجري =====
+const HIJRI_START_DATE=new Date("2026-02-01T00:00:00");
+const hijriMonths=["محرم","صفر","ربيع الأول","ربيع الثاني","جمادى الأولى","جمادى الآخرة","رجب","شعبان","رمضان","شوال","ذو القعدة","ذو الحجة"];
+
+function updateHijri(){
+  const today=new Date(); today.setHours(0,0,0,0);
+  const diff=Math.floor((today-HIJRI_START_DATE)/86400000);
+  let d=13+diff,m=7,y=1447;
+  while(d>30){d-=30;m++;if(m>11){m=0;y++;}}
+  document.getElementById("hijri").innerText=`${d} ${hijriMonths[m]} ${y} هـ`;
+}
+
+// ===== بناء جدول المواقيت =====
+function buildTable(){
+  const c=document.getElementById("prayerTable");
+  c.innerHTML="";
+  rows=[];
+  prayerNames.forEach((n,i)=>{
+    const r=document.createElement("div");
+    r.className="row";
+    r.innerHTML=`<span>${n}</span><span id="t${i}">--:--</span>`;
+    c.appendChild(r);
+    rows.push(r);
+  });
+}
+
+// ===== تحديث التاريخ والوقت =====
+function updateDateAndTimes(){
+  const now=new Date();
+  document.getElementById("gregorian").innerText=
+    now.toLocaleDateString("ar-DZ",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+  updateHijri();
+  const diffDays=Math.floor((now-TABLE_START_DATE)/86400000);
+  const index=Math.min(Math.max(diffDays,0),prayerSchedule.length-1);
+  todayTimes=prayerSchedule[index];
+  todayTimes.forEach((t,i)=>document.getElementById("t"+i).innerText=t);
+}
+
+// ===== العد التنازلي =====
+function updateCountdown(){
+  if(!todayTimes.length) return;
+  const now = new Date();
+  rows.forEach(r => r.classList.remove("nextPrayer"));
+  let target = null, index = -1;
+
+  for(let i = 0; i < todayTimes.length; i++){
+    if(i === 1) continue;
+    const [h,m] = todayTimes[i].split(":").map(Number);
+    const t = new Date(); t.setHours(h,m,0,0);
+    if(t > now){target=t; index=i; break;}
+  }
+
+  if(!target){
+    const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1);
+    const diffDays = Math.floor((tomorrow-TABLE_START_DATE)/86400000);
+    const tableIndex = Math.min(Math.max(diffDays,0),prayerSchedule.length-1);
+    const tomorrowTimes = prayerSchedule[tableIndex];
+    const [h,m] = tomorrowTimes[0].split(":").map(Number);
+    target = new Date(); target.setDate(target.getDate()+1); target.setHours(h,m,0,0);
+    index=0;
+  }
+
+  rows[index].classList.add("nextPrayer");
+  const diff = target-now;
+  if(diff <= 0) return;
+
+  document.getElementById("countdownText").innerText = `${prayerNames[index]} بعد:`;
+  document.getElementById("nextPrayerClock").innerText =
+    `${String(Math.floor(diff/3600000)).padStart(2,"0")}:`+
+    `${String(Math.floor(diff%3600000/60000)).padStart(2,"0")}:`+
+    `${String(Math.floor(diff%60000/1000)).padStart(2,"0")}`;
+}
+
+// ===== الخلفية =====
+function updateBackground(){
+  const now = new Date();
+  const hour = now.getHours();
+  if(hour >= 19 || hour < 7){
+    document.body.style.backgroundImage = 'url("background1.png")';
+  } else {
+    document.body.style.backgroundImage = 'url("background3.png")';
+  }
+}
+
+// ===== التشغيل =====
+buildTable();
+updateDateAndTimes();
+updateCountdown();
+updateBackground();
+
+setInterval(updateCountdown,1000);
+setInterval(updateDateAndTimes,60000);
+setInterval(updateBackground,60000);
 </script>
 
 </body>
