@@ -85,7 +85,6 @@ body{
   <!-- الشريط الإخباري -->
   <div class="news-bar" id="newsBar">
     <div class="news-text" id="newsText">
-      <!-- نص الخبر يمكن تغييره هنا مباشرة -->
       تعلن الجمعية الخيرية مسك الختام عن إنطلاق عملية قفة رمضان لفائدة العائلات المعوزة بالتنسيق مع إمام مسجد عبد الحميد ابن باديس الرجاء الإتصال بالأرقام التالية: 0773708353 - 0699839929 - 0772 67 7 91
     </div>
   </div>
@@ -103,21 +102,14 @@ body{
 </div>
 
 <script>
-// ===== إظهار الشريط وبداية حركة النص مباشرة =====
+// ===== ظهور الشريط والنص مباشرة بعد تحميل الصفحة =====
 window.addEventListener("load", function(){
   const newsBar = document.getElementById("newsBar");
   const newsText = document.getElementById("newsText");
 
-  setTimeout(() => {
-    newsBar.classList.add("show");
-    // بدء حركة النص مباشرة
-    newsText.style.animation = "scrollNews 40s linear infinite";
-  }, 1000);
+  newsBar.classList.add("show");
+  newsText.style.animation = "scrollNews 40s linear infinite";
 });
-
-// ===== لتغيير النص ديناميكيًا (اختياري) =====
-// مثال: يمكنك تغيير النص في أي وقت هكذا:
-// document.getElementById("newsText").textContent = "نص خبر جديد يظهر فورًا";
 
 // ===== بيانات مواقيت الصلاة =====
 const TABLE_START_DATE = new Date("2026-02-01T00:00:00");
