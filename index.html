@@ -45,10 +45,9 @@ body{
 .news-text{
   display:inline-block;
   white-space:nowrap;
-  animation:scrollNews 18s linear infinite;
+  animation:scrollNews 40s linear infinite; /* 🔵 تم إبطاء الحركة هنا */
 }
 
-/* 🔁 تم عكس الاتجاه هنا فقط */
 @keyframes scrollNews{
   from{transform:translateX(-100%);}
   to{transform:translateX(100%);}
@@ -118,7 +117,6 @@ body{
 
   <img src="logo.png" class="logo" alt="لوغو الجمعية">
 
-  <!-- 🔔 الشريط الإخباري -->
   <div class="news-bar">
     <div class="news-text" id="newsText">
       تعلن الجمعية الخيرية مسك الختام عن إنطلاق عملية قفة رمضان لفائدة العائلات المعوزة بالتنسيق مع إمام مسجد عبد الحميد ابن باديس الرجاء الإتصال بالأرقام التالية:
