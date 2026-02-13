@@ -43,7 +43,6 @@ body{
   overflow:hidden;
   position:relative;
 
-  /* مخفي عند البداية */
   opacity:0;
   transform:translateY(100%);
   transition:opacity 0.8s ease, transform 0.8s ease;
@@ -56,9 +55,9 @@ body{
 .news-text{
   display:inline-block;
   white-space:nowrap;
-  /* لا تبدأ الحركة إلا بعد ظهور الشريط */
 }
 
+/* حركة النص */
 @keyframes scrollNews{
   from{transform:translateX(-100%);}
   to{transform:translateX(100%);}
@@ -157,18 +156,17 @@ body{
 </div>
 
 <script>
-// ===== إظهار الشريط بعد ثانية واحدة وبداية حركة النص مباشرة بعد ظهوره =====
+// ===== إظهار الشريط بعد ثانية واحدة وبداية حركة النص مباشرة =====
 window.addEventListener("load", function(){
   const newsBar = document.getElementById("newsBar");
   const newsText = document.getElementById("newsText");
 
   setTimeout(function(){
-    // إظهار الشريط
     newsBar.classList.add("show");
 
-    // بدء حركة النص مباشرة بعد ظهور الشريط
+    // بدء حركة النص مباشرة بعد ظهور الشريط بدون أي تأخير
     newsText.style.animation = "scrollNews 40s linear infinite";
-  }, 1000); // <-- الشريط يظهر بعد ثانية واحدة
+  }, 1000); // الشريط يظهر بعد ثانية واحدة
 });
 
 // ===== بيانات مواقيت الصلاة =====
