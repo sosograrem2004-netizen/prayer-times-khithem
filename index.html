@@ -14,9 +14,8 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:no-repeat center center fixed;
+  background: url("background1.png") no-repeat center center fixed;
   background-size:cover;
-  transition: background-image 1.5s ease-in-out;
 }
 .overlay{
   width:95%;
@@ -32,7 +31,6 @@ body{
 
 .logo{width:80px;margin-bottom:6px;}
 
-/* 🔽 زر آخر الأخبار (باقي في CSS دون تأثير) */
 .latest-news-btn{
   display:block;
   width:90%;
@@ -61,7 +59,6 @@ body{
   100%{box-shadow:0 0 5px gold;}
 }
 
-/* 🔽 العناوين */
 .title{
   font-size:20px;
   font-weight:700;
@@ -73,7 +70,6 @@ body{
   font-weight:700;
 }
 
-/* جدول الصلاة */
 .table{margin-top:10px}
 .row{
   display:flex;
@@ -88,7 +84,6 @@ body{
   border-radius:12px;
 }
 
-/* العد التنازلي */
 #countdownText{
   font-size:24px;
   font-weight:700;
@@ -112,7 +107,6 @@ body{
   height:35px;
 }
 
-/* Footer */
 .footer{
   margin-top:10px;
   font-size:14px;
@@ -150,7 +144,6 @@ body{
 
 <script>
 
-// ===== بيانات مواقيت الصلاة =====
 const TABLE_START_DATE = new Date("2026-02-01T00:00:00");
 const prayerSchedule = [
   ["06:09","05:59","12:49","15:40","18:04","19:25"],
@@ -175,7 +168,6 @@ const prayerSchedule = [
 const prayerNames=["الفجر","الإمساك","الظهر","العصر","المغرب","العشاء"];
 let rows=[], todayTimes=[];
 
-// ===== التاريخ الهجري =====
 const HIJRI_START_DATE=new Date("2026-02-01T00:00:00");
 const hijriMonths=["محرم","صفر","ربيع الأول","ربيع الثاني","جمادى الأولى","جمادى الآخرة","رجب","شعبان","رمضان","شوال","ذو القعدة","ذو الحجة"];
 
@@ -187,7 +179,6 @@ function updateHijri(){
   document.getElementById("hijri").innerText=`${d} ${hijriMonths[m]} ${y} هـ`;
 }
 
-// ===== بناء الجدول =====
 function buildTable(){
   const c=document.getElementById("prayerTable");
   c.innerHTML="";
@@ -201,7 +192,6 @@ function buildTable(){
   });
 }
 
-// ===== تحديث التاريخ =====
 function updateDateAndTimes(){
   const now=new Date();
   document.getElementById("gregorian").innerText=
@@ -213,7 +203,6 @@ function updateDateAndTimes(){
   todayTimes.forEach((t,i)=>document.getElementById("t"+i).innerText=t);
 }
 
-// ===== العد التنازلي =====
 function updateCountdown(){
   if(!todayTimes.length) return;
   const now = new Date();
@@ -248,25 +237,12 @@ function updateCountdown(){
     `${String(Math.floor(diff%60000/1000)).padStart(2,"0")}`;
 }
 
-// ===== تبديل الخلفية =====
-function updateBackground(){
-  const hour = new Date().getHours();
-  if(hour >= 19 || hour < 7){
-    document.body.style.backgroundImage = 'url("background1.png")';
-  } else {
-    document.body.style.backgroundImage = 'url("background.png.jpg")';
-  }
-}
-
-// ===== التشغيل =====
 buildTable();
 updateDateAndTimes();
 updateCountdown();
-updateBackground();
 
 setInterval(updateCountdown,1000);
 setInterval(updateDateAndTimes,60000);
-setInterval(updateBackground,60000);
 
 </script>
 
