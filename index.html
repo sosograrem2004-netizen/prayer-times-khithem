@@ -45,11 +45,12 @@ body{
 .news-text{
   display:inline-block;
   white-space:nowrap;
-  animation:scrollNews 40s linear infinite; /* 🔵 تم إبطاء الحركة هنا */
+  animation:scrollNews 40s linear infinite;
 }
 
+/* 🔵 يبدأ من مكانه الطبيعي ثم يتحرك */
 @keyframes scrollNews{
-  from{transform:translateX(-100%);}
+  from{transform:translateX(0);}
   to{transform:translateX(100%);}
 }
 
