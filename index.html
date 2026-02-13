@@ -40,12 +40,7 @@ body{
   margin-bottom:10px;
   overflow:hidden;
   position:relative;
-  opacity:0;
-  transform:translateY(100%);
-  transition:opacity 0.8s ease, transform 0.8s ease;
-}
-.news-bar.show{
-  opacity:1;
+  opacity:1; /* يظهر فوراً */
   transform:translateY(0);
 }
 .news-text{
@@ -97,17 +92,14 @@ body{
 </div>
 
 <script>
-// ظهور الشريط ونص الخبر يبدأ الحركة مباشرة
+// نص الخبر يبدأ الحركة مباشرة بعد تحميل الصفحة
 window.addEventListener("load", function(){
-  const newsBar = document.getElementById("newsBar");
   const newsText = document.getElementById("newsText");
 
-  // إظهار الشريط
-  newsBar.classList.add("show");
-
-  // إعادة تعيين التحريك لضمان بدء النص
+  // أوقف أي animation حالية لإعادة تشغيلها
   newsText.style.animation = "none";
-  void newsText.offsetWidth; // إعادة تدفق لإعادة تشغيل الـanimation
+  void newsText.offsetWidth; // إعادة تدفق لتفعيل إعادة التحريك
+  // أضف الحركة مباشرة
   newsText.style.animation = "scrollNews 40s linear infinite";
 });
 
