@@ -18,6 +18,7 @@ body{
   background-size:cover;
 }
 
+/* ===== اللوحة ===== */
 .overlay{
   width:95%;
   max-width:420px;
@@ -42,7 +43,6 @@ body{
   margin-bottom:10px;
   overflow:hidden;
   position:relative;
-
   opacity:0;
   transform:translateY(100%);
   transition:opacity 0.8s ease, transform 0.8s ease;
@@ -64,66 +64,20 @@ body{
 }
 
 /* ===== بقية اللوحة ===== */
-.title{
-  font-size:20px;
-  font-weight:700;
-  margin:6px 0;
-}
-.date{
-  margin:2px 0;
-  font-size:14px;
-  font-weight:700;
-}
-
+.title{font-size:20px;font-weight:700;margin:6px 0;}
+.date{margin:2px 0;font-size:14px;font-weight:700;}
 .table{margin-top:10px}
-.row{
-  display:flex;
-  justify-content:space-between;
-  padding:6px 8px;
-  border-bottom:1px solid rgba(255,255,255,.25);
-  font-weight:700;
-}
-.row.nextPrayer{
-  background:gold;
-  color:black;
-  border-radius:12px;
-}
-
-#countdownText{
-  font-size:24px;
-  font-weight:700;
-  margin:6px 0;
-  color:gold;
-  text-shadow:0 0 8px rgba(255,215,0,.8);
-}
-#nextPrayerClockContainer{
-  border:2px solid gold;
-  border-radius:10px;
-  padding:6px 12px;
-  box-shadow:0 0 15px rgba(255,215,0,.7);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-}
+.row{display:flex;justify-content:space-between;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.25);font-weight:700;}
+.row.nextPrayer{background:gold;color:black;border-radius:12px;}
+#countdownText{font-size:24px;font-weight:700;margin:6px 0;color:gold;text-shadow:0 0 8px rgba(255,215,0,.8);}
+#nextPrayerClockContainer{border:2px solid gold;border-radius:10px;padding:6px 12px;box-shadow:0 0 15px rgba(255,215,0,.7);display:flex;align-items:center;justify-content:center;gap:8px;}
 #nextPrayerClock{font-size:30px;}
-#nextPrayerClockContainer img{
-  width:35px;
-  height:35px;
-}
-
-.footer{
-  margin-top:10px;
-  font-size:14px;
-  display:flex;
-  justify-content:center;
-  gap:6px;
-}
+#nextPrayerClockContainer img{width:35px;height:35px;}
+.footer{margin-top:10px;font-size:14px;display:flex;justify-content:center;gap:6px;}
 </style>
 </head>
 
 <body>
-
 <div class="overlay">
 
   <img src="logo.png" class="logo" alt="لوغو الجمعية">
@@ -131,43 +85,39 @@ body{
   <!-- الشريط الإخباري -->
   <div class="news-bar" id="newsBar">
     <div class="news-text" id="newsText">
-      تعلن الجمعية الخيرية مسك الختام عن إنطلاق عملية قفة رمضان لفائدة العائلات المعوزة بالتنسيق مع إمام مسجد عبد الحميد ابن باديس الرجاء الإتصال بالأرقام التالية:
-      0773708353 - 0699839929 - 0772677691
+      <!-- نص الخبر يمكن تغييره هنا مباشرة -->
+      تعلن الجمعية الخيرية مسك الختام عن إنطلاق عملية قفة رمضان لفائدة العائلات المعوزة بالتنسيق مع إمام مسجد عبد الحميد ابن باديس الرجاء الإتصال بالأرقام التالية: 0773708353 - 0699839929 - 0772 67 7 91
     </div>
   </div>
 
   <div class="title">(الجمعية الخيرية مسك الختام القرارم قوقة)</div>
-
   <div class="date" id="gregorian">--</div>
   <div class="date" id="hijri">--</div>
-
   <div id="countdownText">-- بعد:</div>
   <div id="nextPrayerClockContainer">
     <img src="logo.webp" alt="جرس">
     <div id="nextPrayerClock">--:--:--</div>
   </div>
-
   <div class="table" id="prayerTable"></div>
-
-  <div class="footer">
-    <span>misk elkhithem ©</span>
-  </div>
-
+  <div class="footer"><span>misk elkhithem ©</span></div>
 </div>
 
 <script>
-// ===== إظهار الشريط بعد ثانية واحدة وبداية حركة النص مباشرة =====
+// ===== إظهار الشريط وبداية حركة النص مباشرة =====
 window.addEventListener("load", function(){
   const newsBar = document.getElementById("newsBar");
   const newsText = document.getElementById("newsText");
 
-  setTimeout(function(){
+  setTimeout(() => {
     newsBar.classList.add("show");
-
-    // بدء حركة النص مباشرة بعد ظهور الشريط بدون أي تأخير
+    // بدء حركة النص مباشرة
     newsText.style.animation = "scrollNews 40s linear infinite";
-  }, 1000); // الشريط يظهر بعد ثانية واحدة
+  }, 1000);
 });
+
+// ===== لتغيير النص ديناميكيًا (اختياري) =====
+// مثال: يمكنك تغيير النص في أي وقت هكذا:
+// document.getElementById("newsText").textContent = "نص خبر جديد يظهر فورًا";
 
 // ===== بيانات مواقيت الصلاة =====
 const TABLE_START_DATE = new Date("2026-02-01T00:00:00");
@@ -266,11 +216,9 @@ function updateCountdown(){
 buildTable();
 updateDateAndTimes();
 updateCountdown();
-
 setInterval(updateCountdown,1000);
 setInterval(updateDateAndTimes,60000);
 
 </script>
-
 </body>
 </html>
