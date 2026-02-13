@@ -46,6 +46,7 @@ body{
 .news-text{
   display:inline-block;
   white-space:nowrap;
+  animation:scrollNews 15s linear infinite; /* أسرع */
 }
 
 /* الحركة */
@@ -92,15 +93,12 @@ body{
 </div>
 
 <script>
-// نص الخبر يبدأ الحركة مباشرة بعد تحميل الصفحة
+// نص الخبر يبدأ التحرك مباشرة بعد تحميل الصفحة
 window.addEventListener("load", function(){
   const newsText = document.getElementById("newsText");
-
-  // أوقف أي animation حالية لإعادة تشغيلها
-  newsText.style.animation = "none";
-  void newsText.offsetWidth; // إعادة تدفق لتفعيل إعادة التحريك
-  // أضف الحركة مباشرة
-  newsText.style.animation = "scrollNews 40s linear infinite";
+  newsText.style.animation = "none"; // إعادة ضبط
+  void newsText.offsetWidth; // إعادة تدفق لإعادة التحريك
+  newsText.style.animation = "scrollNews 15s linear infinite"; // الحركة الأسرع
 });
 
 // ===== بيانات مواقيت الصلاة =====
