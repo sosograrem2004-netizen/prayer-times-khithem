@@ -8,8 +8,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',Tahoma;}
-body{
+/* ===== أساسيات ===== */
+* {
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Cairo',Tahoma;
+}
+body {
   height:110vh;
   display:flex;
   justify-content:center;
@@ -19,7 +25,7 @@ body{
 }
 
 /* ===== اللوحة ===== */
-.overlay{
+.overlay {
   width:95%;
   max-width:420px;
   background:rgba(0,0,0,0.50);
@@ -31,10 +37,13 @@ body{
   transform-origin: center top;
 }
 
-.logo{width:80px;margin-bottom:6px;}
+.logo {
+  width:80px;
+  margin-bottom:6px;
+}
 
 /* ===== الشريط الإخباري ===== */
-.news-bar{
+.news-bar {
   background:gold;
   color:black;
   font-weight:700;
@@ -43,37 +52,66 @@ body{
   margin-bottom:10px;
   overflow:hidden;
   position:relative;
+
+  /* مخفي عند البداية */
   opacity:0;
   transform:translateY(100%);
   transition:opacity 0.8s ease, transform 0.8s ease;
 }
-.news-bar.show{
+
+.news-bar.show {
   opacity:1;
   transform:translateY(0);
 }
 
-.news-text{
+.news-text {
   display:inline-block;
   white-space:nowrap;
 }
 
 /* حركة النص */
-@keyframes scrollNews{
-  from{transform:translateX(-100%);}
-  to{transform:translateX(100%);}
+@keyframes scrollNews {
+  from {transform: translateX(-100%);}
+  to {transform: translateX(100%);}
 }
 
 /* ===== بقية اللوحة ===== */
-.title{font-size:20px;font-weight:700;margin:6px 0;}
-.date{margin:2px 0;font-size:14px;font-weight:700;}
-.table{margin-top:10px}
-.row{display:flex;justify-content:space-between;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.25);font-weight:700;}
-.row.nextPrayer{background:gold;color:black;border-radius:12px;}
-#countdownText{font-size:24px;font-weight:700;margin:6px 0;color:gold;text-shadow:0 0 8px rgba(255,215,0,.8);}
-#nextPrayerClockContainer{border:2px solid gold;border-radius:10px;padding:6px 12px;box-shadow:0 0 15px rgba(255,215,0,.7);display:flex;align-items:center;justify-content:center;gap:8px;}
-#nextPrayerClock{font-size:30px;}
-#nextPrayerClockContainer img{width:35px;height:35px;}
-.footer{margin-top:10px;font-size:14px;display:flex;justify-content:center;gap:6px;}
+.title {font-size:20px;font-weight:700;margin:6px 0;}
+.date {margin:2px 0;font-size:14px;font-weight:700;}
+.table {margin-top:10px;}
+.row {
+  display:flex;
+  justify-content:space-between;
+  padding:6px 8px;
+  border-bottom:1px solid rgba(255,255,255,.25);
+  font-weight:700;
+}
+.row.nextPrayer {
+  background:gold;
+  color:black;
+  border-radius:12px;
+}
+
+#countdownText {
+  font-size:24px;
+  font-weight:700;
+  margin:6px 0;
+  color:gold;
+  text-shadow:0 0 8px rgba(255,215,0,.8);
+}
+#nextPrayerClockContainer {
+  border:2px solid gold;
+  border-radius:10px;
+  padding:6px 12px;
+  box-shadow:0 0 15px rgba(255,215,0,.7);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+#nextPrayerClock {font-size:30px;}
+#nextPrayerClockContainer img {width:35px;height:35px;}
+.footer {margin-top:10px;font-size:14px;display:flex;justify-content:center;gap:6px;}
 </style>
 </head>
 
@@ -102,12 +140,15 @@ body{
 </div>
 
 <script>
-// ===== ظهور الشريط والنص مباشرة بعد تحميل الصفحة =====
+// ===== ظهور الشريط والنص مباشرة مع تحريك النص =====
 window.addEventListener("load", function(){
   const newsBar = document.getElementById("newsBar");
   const newsText = document.getElementById("newsText");
 
+  // ظهور الشريط
   newsBar.classList.add("show");
+
+  // بدء تحريك النص فور ظهور الشريط
   newsText.style.animation = "scrollNews 40s linear infinite";
 });
 
@@ -210,7 +251,7 @@ updateDateAndTimes();
 updateCountdown();
 setInterval(updateCountdown,1000);
 setInterval(updateDateAndTimes,60000);
-
 </script>
+
 </body>
 </html>
