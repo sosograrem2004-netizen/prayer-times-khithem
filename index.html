@@ -67,9 +67,16 @@ body {
 .news-text {
   display:inline-block;
   white-space:nowrap;
+
+  /* لا تتحرك حتى يظهر الشريط */
+  animation: none;
 }
 
-/* حركة النص */
+/* تفعيل الحركة عند ظهور الشريط */
+.news-bar.show .news-text {
+  animation: scrollNews 40s linear infinite;
+}
+
 @keyframes scrollNews {
   from {transform: translateX(-100%);}
   to {transform: translateX(100%);}
@@ -140,16 +147,9 @@ body {
 </div>
 
 <script>
-// ===== ظهور الشريط والنص مباشرة مع تحريك النص =====
+// ===== ظهور الشريط مباشرة ونص الخبر يبدأ التحرك تلقائياً =====
 window.addEventListener("load", function(){
-  const newsBar = document.getElementById("newsBar");
-  const newsText = document.getElementById("newsText");
-
-  // ظهور الشريط
-  newsBar.classList.add("show");
-
-  // بدء تحريك النص فور ظهور الشريط
-  newsText.style.animation = "scrollNews 40s linear infinite";
+  document.getElementById("newsBar").classList.add("show");
 });
 
 // ===== بيانات مواقيت الصلاة =====
