@@ -17,6 +17,8 @@ body{
   background: url("background1.png") no-repeat center center fixed;
   background-size:cover;
 }
+
+/* ===== اللوحة ===== */
 .overlay{
   width:95%;
   max-width:420px;
@@ -41,19 +43,29 @@ body{
   margin-bottom:10px;
   overflow:hidden;
   position:relative;
+
+  /* مخفي عند البداية */
+  opacity:0;
+  transform:translateY(100%);
+  transition:opacity 0.8s ease, transform 0.8s ease;
 }
+.news-bar.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
 .news-text{
   display:inline-block;
   white-space:nowrap;
-  animation:scrollNews 40s linear infinite;
+  animation:scrollNews 40s linear infinite; /* أبطأ */
 }
 
-/* 🔵 يبدأ من مكانه الطبيعي ثم يتحرك */
 @keyframes scrollNews{
-  from{transform:translateX(0);}
+  from{transform:translateX(-100%);}
   to{transform:translateX(100%);}
 }
 
+/* ===== بقية اللوحة ===== */
 .title{
   font-size:20px;
   font-weight:700;
@@ -118,7 +130,8 @@ body{
 
   <img src="logo.png" class="logo" alt="لوغو الجمعية">
 
-  <div class="news-bar">
+  <!-- الشريط الإخباري -->
+  <div class="news-bar" id="newsBar">
     <div class="news-text" id="newsText">
       تعلن الجمعية الخيرية مسك الختام عن إنطلاق عملية قفة رمضان لفائدة العائلات المعوزة بالتنسيق مع إمام مسجد عبد الحميد ابن باديس الرجاء الإتصال بالأرقام التالية:
       0773708353 - 0699839929 - 0772 67 7 91
@@ -146,9 +159,14 @@ body{
 
 <script>
 
-document.getElementById("newsText").innerText =
-"تعلن الجمعية الخيرية مسك الختام عن إنطلاق عملية قفة رمضان لفائدة العائلات المعوزة بالتنسيق مع إمام مسجد عبد الحميد ابن باديس الرجاء الإتصال بالأرقام التالية: 0773708353 - 0699839929 - 0772 67 7 91";
+// ===== إظهار الشريط بعد ثانية واحدة =====
+window.addEventListener("load", function(){
+  setTimeout(function(){
+    document.getElementById("newsBar").classList.add("show");
+  }, 1000);
+});
 
+// ===== بيانات مواقيت الصلاة =====
 const TABLE_START_DATE = new Date("2026-02-01T00:00:00");
 const prayerSchedule = [
   ["06:09","05:59","12:49","15:40","18:04","19:25"],
