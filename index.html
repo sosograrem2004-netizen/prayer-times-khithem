@@ -47,9 +47,11 @@ body{
   white-space:nowrap;
   animation:scrollNews 18s linear infinite;
 }
+
+/* 🔁 تم عكس الاتجاه هنا فقط */
 @keyframes scrollNews{
-  from{transform:translateX(100%);}
-  to{transform:translateX(-100%);}
+  from{transform:translateX(-100%);}
+  to{transform:translateX(100%);}
 }
 
 .title{
@@ -145,7 +147,6 @@ body{
 
 <script>
 
-// 🔹 لتغيير الخبر مستقبلاً فقط عدل النص هنا:
 document.getElementById("newsText").innerText =
 "تعلن الجمعية الخيرية مسك الختام عن إنطلاق عملية قفة رمضان لفائدة العائلات المعوزة بالتنسيق مع إمام مسجد عبد الحميد ابن باديس الرجاء الإتصال بالأرقام التالية: 0773708353 - 0699839929 - 0772 67 7 91";
 
