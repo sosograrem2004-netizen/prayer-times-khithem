@@ -18,7 +18,6 @@ body{
   background-size:cover;
 }
 
-/* ===== اللوحة ===== */
 .overlay{
   width:95%;
   max-width:420px;
@@ -57,7 +56,7 @@ body{
 .news-text{
   display:inline-block;
   white-space:nowrap;
-  animation:scrollNews 40s linear infinite; /* أبطأ */
+  /* لا حركة عند البداية */
 }
 
 @keyframes scrollNews{
@@ -133,8 +132,7 @@ body{
   <!-- الشريط الإخباري -->
   <div class="news-bar" id="newsBar">
     <div class="news-text" id="newsText">
-      تعلن الجمعية الخيرية مسك الختام عن إنطلاق عملية قفة رمضان لفائدة العائلات المعوزة بالتنسيق مع إمام مسجد عبد الحميد ابن باديس الرجاء الإتصال بالأرقام التالية:
-      0773708353 - 0699839929 - 0772 67 7 91
+      تعلن الجمعية الخيرية مسك الختام عن إنطلاق عملية قفة رمضان لفائدة العائلات المعوزة بالتنسيق مع إمام مسجد عبد الحميد ابن باديس الرجاء الإتصال بالأرقام التالية: 0773708353 - 0699839929 - 0772 67 7 91
     </div>
   </div>
 
@@ -158,11 +156,20 @@ body{
 </div>
 
 <script>
-
-// ===== إظهار الشريط بعد ثانية واحدة =====
+// ===== إظهار الشريط بعد 1 ثانية وبداية حركة النص بعد 2 ثانية =====
 window.addEventListener("load", function(){
+  const newsBar = document.getElementById("newsBar");
+  const newsText = document.getElementById("newsText");
+
+  // إظهار الشريط بعد 1 ثانية
   setTimeout(function(){
-    document.getElementById("newsBar").classList.add("show");
+    newsBar.classList.add("show");
+
+    // بعد ظهور الشريط، نبدأ حركة النص بعد ثانيتين
+    setTimeout(function(){
+      newsText.style.animation = "scrollNews 40s linear infinite";
+    }, 2000);
+
   }, 1000);
 });
 
