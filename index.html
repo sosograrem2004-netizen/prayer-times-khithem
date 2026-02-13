@@ -31,32 +31,25 @@ body{
 
 .logo{width:80px;margin-bottom:6px;}
 
-.latest-news-btn{
-  display:block;
-  width:90%;
-  margin:10px auto;
-  padding:12px;
-  background:black;
+/* ===== الشريط الإخباري ===== */
+.news-bar{
+  background:gold;
+  color:black;
+  font-weight:700;
+  padding:8px 0;
   border-radius:12px;
-  font-size:16px;
-  font-weight:900;
-  color:white;
-  cursor:pointer;
-  border:2px solid gold;
-  position:relative;
+  margin-bottom:10px;
   overflow:hidden;
-  z-index:1;
-  animation:btnPulse 2s infinite;
+  position:relative;
 }
-
-.latest-news-btn:hover{
-  transform: scale(1.05);
+.news-text{
+  display:inline-block;
+  white-space:nowrap;
+  animation:scrollNews 18s linear infinite;
 }
-
-@keyframes btnPulse{
-  0%{box-shadow:0 0 5px gold;}
-  50%{box-shadow:0 0 20px gold;}
-  100%{box-shadow:0 0 5px gold;}
+@keyframes scrollNews{
+  from{transform:translateX(100%);}
+  to{transform:translateX(-100%);}
 }
 
 .title{
@@ -123,6 +116,14 @@ body{
 
   <img src="logo.png" class="logo" alt="لوغو الجمعية">
 
+  <!-- 🔔 الشريط الإخباري -->
+  <div class="news-bar">
+    <div class="news-text" id="newsText">
+      تعلن الجمعية الخيرية مسك الختام عن إنطلاق عملية قفة رمضان لفائدة العائلات المعوزة بالتنسيق مع إمام مسجد عبد الحميد ابن باديس الرجاء الإتصال بالأرقام التالية:
+      0773708353 - 0699839929 - 0772 67 7 91
+    </div>
+  </div>
+
   <div class="title">(الجمعية الخيرية مسك الختام القرارم قوقة)</div>
 
   <div class="date" id="gregorian">--</div>
@@ -143,6 +144,10 @@ body{
 </div>
 
 <script>
+
+// 🔹 لتغيير الخبر مستقبلاً فقط عدل النص هنا:
+document.getElementById("newsText").innerText =
+"تعلن الجمعية الخيرية مسك الختام عن إنطلاق عملية قفة رمضان لفائدة العائلات المعوزة بالتنسيق مع إمام مسجد عبد الحميد ابن باديس الرجاء الإتصال بالأرقام التالية: 0773708353 - 0699839929 - 0772 67 7 91";
 
 const TABLE_START_DATE = new Date("2026-02-01T00:00:00");
 const prayerSchedule = [
