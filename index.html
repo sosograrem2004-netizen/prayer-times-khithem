@@ -7,7 +7,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
-<!-- Open Graph -->
 <meta property="og:title" content="مواقيت الصلاة - الڨرارم ڨوڨة">
 <meta property="og:description" content="تابع مواقيت الصلاة والعد التنازلي مباشرة.">
 <meta property="og:image" content="https://prayer-times-khithem.vercel.app/screenshot.jpg">
@@ -17,50 +16,19 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',Tahoma}
-body{
-  height:110vh;display:flex;justify-content:center;align-items:center;
-  background:url("background3.jpg") no-repeat center/cover fixed
-}
-.overlay{
-  width:95%;max-width:420px;background:rgba(0,0,0,.3);
-  border-radius:18px;padding:15px;text-align:center;
-  color:#fff;transform:scale(.9);transform-origin:center top
-}
+body{height:110vh;display:flex;justify-content:center;align-items:center;background:url("background3.jpg") no-repeat center/cover fixed}
+.overlay{width:95%;max-width:420px;background:rgba(0,0,0,.3);border-radius:18px;padding:15px;text-align:center;color:#fff;transform:scale(.9);transform-origin:center top}
 .logo{width:80px;margin-bottom:6px}
 .title{font-size:20px;font-weight:700;margin:6px 0}
 .date{margin:2px 0;font-size:14px;font-weight:700}
-
-.news-bar{
-  background:gold;color:#000;font-weight:700;
-  padding:8px 0;border-radius:12px;margin-bottom:10px;
-  overflow:hidden;position:relative
-}
-.news-text{
-  display:inline-block;white-space:nowrap;
-  animation:scrollNews 25s linear infinite
-}
-@keyframes scrollNews{
-  from{transform:translateX(-100%)}
-  to{transform:translateX(100%)}
-}
-
+.news-bar{background:gold;color:#000;font-weight:700;padding:8px 0;border-radius:12px;margin-bottom:10px;overflow:hidden;position:relative}
+.news-text{display:inline-block;white-space:nowrap;animation:scrollNews 25s linear infinite}
+@keyframes scrollNews{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 .table{margin-top:10px}
-.row{
-  display:flex;justify-content:space-between;
-  padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.25);
-  font-weight:700
-}
+.row{display:flex;justify-content:space-between;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.25);font-weight:700}
 .row.nextPrayer{background:gold;color:#000;border-radius:12px}
-
-#countdownText{
-  font-size:24px;font-weight:700;margin:6px 0;
-  color:gold;text-shadow:0 0 8px rgba(255,215,0,.8)
-}
-#nextPrayerClockContainer{
-  border:2px solid gold;border-radius:10px;
-  padding:6px 12px;box-shadow:0 0 15px rgba(255,215,0,.7);
-  display:flex;align-items:center;justify-content:center;gap:8px
-}
+#countdownText{font-size:24px;font-weight:700;margin:6px 0;color:gold;text-shadow:0 0 8px rgba(255,215,0,.8)}
+#nextPrayerClockContainer{border:2px solid gold;border-radius:10px;padding:6px 12px;box-shadow:0 0 15px rgba(255,215,0,.7);display:flex;align-items:center;justify-content:center;gap:8px}
 #nextPrayerClock{font-size:30px}
 #nextPrayerClockContainer img{width:35px;height:35px}
 .footer{margin-top:10px;font-size:14px;display:flex;justify-content:center;gap:6px}
@@ -69,13 +37,11 @@ body{
 
 <body>
 <div class="overlay">
-
-<img src="logo.png" class="logo" alt="لوغو الجمعية">
-
+<img src="logo.png" class="logo">
 <div class="news-bar">
-  <div class="news-text">
-  تعلن الجمعية الخيرية مسك الختام بالتنسيق مع إمام مسجد عبد الحميد ابن باديس عن إنطلاق قفة رمضان لفائدة العائلات المعوزة، للتبرع والإستفسار يرجى الإتصال على الأرقام التالية: 0773708353 - 0699839929 - 0772677691
-  </div>
+<div class="news-text">
+تعلن الجمعية الخيرية مسك الختام بالتنسيق مع إمام مسجد عبد الحميد ابن باديس عن إنطلاق قفة رمضان لفائدة العائلات المعوزة، للتبرع والإستفسار يرجى الإتصال على الأرقام التالية: 0773708353 - 0699839929 - 0772677691
+</div>
 </div>
 
 <div class="title">(الجمعية الخيرية مسك الختام القرارم قوقة)</div>
@@ -84,13 +50,12 @@ body{
 
 <div id="countdownText">-- بعد:</div>
 <div id="nextPrayerClockContainer">
-  <img src="logo.webp" alt="جرس">
-  <div id="nextPrayerClock">--:--:--</div>
+<img src="logo.webp">
+<div id="nextPrayerClock">--:--:--</div>
 </div>
 
 <div class="table" id="prayerTable"></div>
 <div class="footer"><span>misk elkhithem ©</span></div>
-
 </div>
 
 <script>
@@ -98,6 +63,8 @@ const TABLE_START_DATE=new Date("2026-02-01T00:00:00");
 const HIJRI_START_DATE=new Date("2026-02-01T00:00:00");
 
 const prayerSchedule=[
+
+// الجدول القديم (17 يوم)
 ["06:09","05:59","12:49","15:40","18:04","19:25"],
 ["06:08","05:58","12:49","15:41","18:05","19:26"],
 ["06:07","05:57","12:49","15:42","18:07","19:27"],
@@ -114,73 +81,105 @@ const prayerSchedule=[
 ["05:58","05:48","12:50","15:51","18:18","19:37"],
 ["05:57","05:47","12:50","15:51","18:19","19:38"],
 ["05:56","05:46","12:49","15:52","18:20","19:39"],
-["05:55","05:45","12:49","15:53","18:21","19:40"]
+["05:55","05:45","12:49","15:53","18:21","19:40"],
+
+// رمضان 1447 (30 يوم)
+["05:54","05:44","12:49","15:54","18:22","19:41"],
+["05:53","05:43","12:49","15:54","18:23","19:41"],
+["05:52","05:42","12:49","15:55","18:24","19:42"],
+["05:50","05:40","12:49","15:56","18:25","19:43"],
+["05:49","05:39","12:49","15:56","18:26","19:44"],
+["05:48","05:38","12:49","15:57","18:27","19:45"],
+["05:47","05:37","12:49","15:58","18:28","19:46"],
+["05:46","05:36","12:48","15:58","18:29","19:47"],
+["05:44","05:34","12:48","15:59","18:30","19:48"],
+["05:43","05:33","12:48","16:00","18:31","19:49"],
+["05:42","05:32","12:48","16:00","18:32","19:50"],
+["05:41","05:31","12:48","16:01","18:33","19:51"],
+["05:39","05:29","12:48","16:01","18:34","19:52"],
+["05:38","05:28","12:47","16:02","18:35","19:52"],
+["05:36","05:26","12:47","16:02","18:36","19:53"],
+["05:35","05:25","12:47","16:03","18:37","19:54"],
+["05:34","05:24","12:47","16:04","18:38","19:55"],
+["05:32","05:22","12:46","16:04","18:39","19:56"],
+["05:31","05:21","12:46","16:05","18:39","19:57"],
+["05:30","05:20","12:46","16:05","18:40","19:58"],
+["05:28","05:18","12:46","16:06","18:41","19:59"],
+["05:27","05:17","12:45","16:06","18:42","20:00"],
+["05:25","05:15","12:45","16:06","18:43","20:01"],
+["05:24","05:14","12:45","16:07","18:44","20:02"],
+["05:22","05:12","12:45","16:07","18:45","20:03"],
+["05:21","05:11","12:44","16:08","18:46","20:04"],
+["05:19","05:09","12:44","16:08","18:47","20:05"],
+["05:18","05:08","12:44","16:09","18:48","20:05"],
+["05:16","05:06","12:43","16:09","18:48","20:06"],
+["05:15","05:05","12:43","16:09","18:49","20:07"]
+
 ];
 
 const prayerNames=["الفجر","الإمساك","الظهر","العصر","المغرب","العشاء"];
 const hijriMonths=["محرم","صفر","ربيع الأول","ربيع الثاني","جمادى الأولى","جمادى الآخرة","رجب","شعبان","رمضان","شوال","ذو القعدة","ذو الحجة"];
 
 let rows=[],todayTimes=[];
-
 const $=id=>document.getElementById(id);
 
 function updateHijri(){
-  const today=new Date();today.setHours(0,0,0,0);
-  let diff=Math.floor((today-HIJRI_START_DATE)/86400000);
-  let d=13+diff,m=7,y=1447;
-  while(d>30){d-=30;m++;if(m>11){m=0;y++;}}
-  $("hijri").innerText=`${d} ${hijriMonths[m]} ${y} هـ`;
+const today=new Date();today.setHours(0,0,0,0);
+let diff=Math.floor((today-HIJRI_START_DATE)/86400000);
+let d=13+diff,m=7,y=1447;
+while(d>30){d-=30;m++;if(m>11){m=0;y++;}}
+$("hijri").innerText=`${d} ${hijriMonths[m]} ${y} هـ`;
 }
 
 function buildTable(){
-  const c=$("prayerTable");c.innerHTML="";rows=[];
-  prayerNames.forEach((n,i)=>{
-    const r=document.createElement("div");
-    r.className="row";
-    r.innerHTML=`<span>${n}</span><span id="t${i}">--:--</span>`;
-    c.appendChild(r);rows.push(r);
-  });
+const c=$("prayerTable");c.innerHTML="";rows=[];
+prayerNames.forEach((n,i)=>{
+const r=document.createElement("div");
+r.className="row";
+r.innerHTML=`<span>${n}</span><span id="t${i}">--:--</span>`;
+c.appendChild(r);rows.push(r);
+});
 }
 
 function updateDateAndTimes(){
-  const now=new Date();
-  $("gregorian").innerText=now.toLocaleDateString("ar-DZ",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
-  updateHijri();
-  const diff=Math.floor((now-TABLE_START_DATE)/86400000);
-  const i=Math.min(Math.max(diff,0),prayerSchedule.length-1);
-  todayTimes=prayerSchedule[i];
-  todayTimes.forEach((t,i)=>$("t"+i).innerText=t);
+const now=new Date();
+$("gregorian").innerText=now.toLocaleDateString("ar-DZ",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+updateHijri();
+const diff=Math.floor((now-TABLE_START_DATE)/86400000);
+const i=Math.min(Math.max(diff,0),prayerSchedule.length-1);
+todayTimes=prayerSchedule[i];
+todayTimes.forEach((t,i)=>$("t"+i).innerText=t);
 }
 
 function updateCountdown(){
-  if(!todayTimes.length) return;
-  const now=new Date();rows.forEach(r=>r.classList.remove("nextPrayer"));
-  let target,index=-1;
+if(!todayTimes.length) return;
+const now=new Date();rows.forEach(r=>r.classList.remove("nextPrayer"));
+let target,index=-1;
 
-  for(let i=0;i<todayTimes.length;i++){
-    if(i===1) continue;
-    const [h,m]=todayTimes[i].split(":").map(Number);
-    const t=new Date();t.setHours(h,m,0,0);
-    if(t>now){target=t;index=i;break;}
-  }
+for(let i=0;i<todayTimes.length;i++){
+if(i===1) continue;
+const [h,m]=todayTimes[i].split(":").map(Number);
+const t=new Date();t.setHours(h,m,0,0);
+if(t>now){target=t;index=i;break;}
+}
 
-  if(!target){
-    const tomorrow=new Date(now);tomorrow.setDate(tomorrow.getDate()+1);
-    const diff=Math.floor((tomorrow-TABLE_START_DATE)/86400000);
-    const i=Math.min(Math.max(diff,0),prayerSchedule.length-1);
-    const [h,m]=prayerSchedule[i][0].split(":").map(Number);
-    target=new Date(now);target.setDate(target.getDate()+1);target.setHours(h,m,0,0);
-    index=0;
-  }
+if(!target){
+const tomorrow=new Date(now);tomorrow.setDate(tomorrow.getDate()+1);
+const diff=Math.floor((tomorrow-TABLE_START_DATE)/86400000);
+const i=Math.min(Math.max(diff,0),prayerSchedule.length-1);
+const [h,m]=prayerSchedule[i][0].split(":").map(Number);
+target=new Date(now);target.setDate(target.getDate()+1);target.setHours(h,m,0,0);
+index=0;
+}
 
-  rows[index].classList.add("nextPrayer");
-  const diff=target-now;if(diff<=0) return;
+rows[index].classList.add("nextPrayer");
+const diff=target-now;if(diff<=0) return;
 
-  $("countdownText").innerText=`${prayerNames[index]} بعد:`;
-  $("nextPrayerClock").innerText=
-    `${String(Math.floor(diff/3600000)).padStart(2,"0")}:`+
-    `${String(Math.floor(diff%3600000/60000)).padStart(2,"0")}:`+
-    `${String(Math.floor(diff%60000/1000)).padStart(2,"0")}`;
+$("countdownText").innerText=`${prayerNames[index]} بعد:`;
+$("nextPrayerClock").innerText=
+`${String(Math.floor(diff/3600000)).padStart(2,"0")}:`+
+`${String(Math.floor(diff%3600000/60000)).padStart(2,"0")}:`+
+`${String(Math.floor(diff%60000/1000)).padStart(2,"0")}`;
 }
 
 buildTable();
