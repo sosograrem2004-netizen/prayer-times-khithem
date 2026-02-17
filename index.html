@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',Tahoma}
-body{height:110vh;display:flex;justify-content:center;align-items:center;background:url("background.png") no-repeat center/cover fixed}
+body{height:110vh;display:flex;justify-content:center;align-items:center;background:url("background3.jpg") no-repeat center/cover fixed}
 .overlay{width:95%;max-width:420px;background:rgba(0,0,0,.3);border-radius:18px;padding:15px;text-align:center;color:#fff;transform:scale(.9);transform-origin:center top}
 .logo{width:80px;margin-bottom:6px}
 .title{font-size:20px;font-weight:700;margin:6px 0}
@@ -22,13 +22,11 @@ body{height:110vh;display:flex;justify-content:center;align-items:center;backgro
 .news-text{display:inline-block;white-space:nowrap;animation:scrollNews 25s linear infinite}
 @keyframes scrollNews{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 .table{margin-top:10px}
-.row{display:flex;justify-content:space-between;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.25);font-weight:700;transition:all 0.3s ease;}
-.row.nextPrayer{background:gold;color:#000;border-radius:12px;animation:glowPulse 2s ease-in-out infinite}
-@keyframes glowPulse{
-  0%{box-shadow:0 0 5px rgba(255,215,0,.4);}
-  50%{box-shadow:0 0 20px rgba(255,215,0,1);}
-  100%{box-shadow:0 0 5px rgba(255,215,0,.4);}
-}
+.row{display:flex;justify-content:space-between;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.25);font-weight:700}
+.row.nextPrayer{background:gold;color:#000;border-radius:12px;animation:softGlow 2.5s ease-in-out infinite}
+@keyframes softGlow{0%{box-shadow:0 0 5px rgba(255,215,0,.4);}50%{box-shadow:0 0 15px rgba(255,215,0,.8);}100%{box-shadow:0 0 5px rgba(255,215,0,.4);}}
+.row.nextPrayer.activeSoon{animation:strongGlow 1s ease-in-out infinite}
+@keyframes strongGlow{0%{box-shadow:0 0 15px rgba(255,215,0,.8);}50%{box-shadow:0 0 30px rgba(255,215,0,1);}100%{box-shadow:0 0 15px rgba(255,215,0,.8);}}
 #countdownText{font-size:24px;font-weight:700;margin:6px 0;color:gold;text-shadow:0 0 8px rgba(255,215,0,.8)}
 #nextPrayerClockContainer{border:2px solid gold;border-radius:10px;padding:6px 12px;box-shadow:0 0 15px rgba(255,215,0,.7);display:flex;align-items:center;justify-content:center;gap:8px}
 #nextPrayerClock{font-size:30px}
@@ -110,7 +108,7 @@ let prayerSchedule=[
 ["05:15","05:05","12:43","16:09","18:49","20:07"]
 ];
 
-// تبديل الإمساك مع الفجر للعرض فقط
+// تبديل الإمساك مع الفجر
 prayerSchedule = prayerSchedule.map(day => [day[1], day[0], day[2], day[3], day[4], day[5]]);
 
 const prayerNames=["الإمساك","الفجر","الظهر","العصر","المغرب","العشاء"];
@@ -149,19 +147,15 @@ function updateDateAndTimes(){
 function updateCountdown(){
   if(!todayTimes.length) return;
   const now=new Date();
-  rows.forEach(r=>r.classList.remove("nextPrayer"));
-  let target,index=-1;
-  // البحث عن الصلاة التالية مع تخطي الإمساك
+  rows.forEach(r=>{r.classList.remove("nextPrayer");r.classList.remove("activeSoon");});
+  let target,index=-1,found=false;
   for(let i=0;i<todayTimes.length;i++){
     if(i===0) continue;
     const [h,m]=todayTimes[i].split(":").map(Number);
     const t=new Date();t.setHours(h,m,0,0);
-    if(t>now){
-      target=t;index=i;break;
-    }
+    if(t>now){target=t;index=i;found=true;break;}
   }
-  // إذا انتهى اليوم ولم نجد صلاة بعد الآن، انتقل لغد (تخطي الإمساك)
-  if(index===-1){
+  if(!found){
     const tomorrow=new Date(now);tomorrow.setDate(tomorrow.getDate()+1);
     const diff=Math.floor((tomorrow-TABLE_START_DATE)/86400000);
     const i=Math.min(Math.max(diff,0),prayerSchedule.length-1);
@@ -169,9 +163,10 @@ function updateCountdown(){
     target=new Date(now);target.setDate(target.getDate()+1);target.setHours(h,m,0,0);
     index=1;
   }
-  // إضافة الصف المضيء دائمًا
   rows[index].classList.add("nextPrayer");
   const diff=target-now;
+  const diffMinutes = diff/60000;
+  if(diffMinutes<=10) rows[index].classList.add("activeSoon");
   $("countdownText").innerText=`${prayerNames[index]} بعد:`;
   $("nextPrayerClock").innerText=
     `${String(Math.floor(diff/3600000)).padStart(2,"0")}:`+
