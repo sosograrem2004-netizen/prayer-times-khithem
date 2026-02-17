@@ -118,7 +118,7 @@ let prayerSchedule=[
 
 ];
 
-/* 🔥 تبديل الإمساك مع الفجر تلقائياً */
+/* تبديل الإمساك مع الفجر للعرض فقط */
 prayerSchedule = prayerSchedule.map(day => [day[1], day[0], day[2], day[3], day[4], day[5]]);
 
 const prayerNames=["الإمساك","الفجر","الظهر","العصر","المغرب","العشاء"];
@@ -127,64 +127,71 @@ const hijriMonths=["محرم","صفر","ربيع الأول","ربيع الثا�
 let rows=[],todayTimes=[];
 const $=id=>document.getElementById(id);
 
-/* باقي الكود كما هو بدون أي تغيير */
 function updateHijri(){
-const today=new Date();today.setHours(0,0,0,0);
-let diff=Math.floor((today-HIJRI_START_DATE)/86400000);
-let d=1+diff,m=8,y=1447;
-while(d>30){d-=30;m++;if(m>11){m=0;y++;}}
-$("hijri").innerText=`${d} ${hijriMonths[m]} ${y} هـ`;
+  const today=new Date();today.setHours(0,0,0,0);
+  let diff=Math.floor((today-HIJRI_START_DATE)/86400000);
+  let d=1+diff,m=8,y=1447;
+  while(d>30){d-=30;m++;if(m>11){m=0;y++;}}
+  $("hijri").innerText=`${d} ${hijriMonths[m]} ${y} هـ`;
 }
 
 function buildTable(){
-const c=$("prayerTable");c.innerHTML="";rows=[];
-prayerNames.forEach((n,i)=>{
-const r=document.createElement("div");
-r.className="row";
-r.innerHTML=`<span>${n}</span><span id="t${i}">--:--</span>`;
-c.appendChild(r);rows.push(r);
-});
+  const c=$("prayerTable");c.innerHTML="";rows=[];
+  prayerNames.forEach((n,i)=>{
+    const r=document.createElement("div");
+    r.className="row";
+    r.innerHTML=`<span>${n}</span><span id="t${i}">--:--</span>`;
+    c.appendChild(r);rows.push(r);
+  });
 }
 
 function updateDateAndTimes(){
-const now=new Date();
-$("gregorian").innerText=now.toLocaleDateString("ar-DZ",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
-updateHijri();
-const diff=Math.floor((now-TABLE_START_DATE)/86400000);
-const i=Math.min(Math.max(diff,0),prayerSchedule.length-1);
-todayTimes=prayerSchedule[i];
-todayTimes.forEach((t,i)=>$("t"+i).innerText=t);
+  const now=new Date();
+  $("gregorian").innerText=now.toLocaleDateString("ar-DZ",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+  updateHijri();
+  const diff=Math.floor((now-TABLE_START_DATE)/86400000);
+  const i=Math.min(Math.max(diff,0),prayerSchedule.length-1);
+  todayTimes=prayerSchedule[i];
+  todayTimes.forEach((t,i)=>$("t"+i).innerText=t);
 }
 
 function updateCountdown(){
-if(!todayTimes.length) return;
-const now=new Date();rows.forEach(r=>r.classList.remove("nextPrayer"));
-let target,index=-1;
+  if(!todayTimes.length) return;
+  const now=new Date();rows.forEach(r=>r.classList.remove("nextPrayer"));
+  let target,index=-1;
+  let found=false;
 
-for(let i=0;i<todayTimes.length;i++){
-if(i===1) continue;
-const [h,m]=todayTimes[i].split(":").map(Number);
-const t=new Date();t.setHours(h,m,0,0);
-if(t>now){target=t;index=i;break;}
-}
+  // البحث عن الصلاة التالية مع تخطي الإمساك
+  for(let i=0;i<todayTimes.length;i++){
+    if(i===0) continue; // تخطي الإمساك
+    const [h,m]=todayTimes[i].split(":").map(Number);
+    const t=new Date();t.setHours(h,m,0,0);
+    if(t>now){
+      target=t;
+      index=i;
+      found=true;
+      break;
+    }
+  }
 
-if(!target){
-const tomorrow=new Date(now);tomorrow.setDate(tomorrow.getDate()+1);
-const diff=Math.floor((tomorrow-TABLE_START_DATE)/86400000);
-const i=Math.min(Math.max(diff,0),prayerSchedule.length-1);
-const [h,m]=prayerSchedule[i][1].split(":").map(Number);
-target=new Date(now);target.setDate(target.getDate()+1);target.setHours(h,m,0,0);
-index=1;
-}
+  // إذا انتهى اليوم ولم نجد صلاة بعد الآن، انتقل لغد (تخطي الإمساك)
+  if(!found){
+    const tomorrow=new Date(now);tomorrow.setDate(tomorrow.getDate()+1);
+    const diff=Math.floor((tomorrow-TABLE_START_DATE)/86400000);
+    const i=Math.min(Math.max(diff,0),prayerSchedule.length-1);
+    const [h,m]=prayerSchedule[i][1].split(":").map(Number); // فجر الغد
+    target=new Date(now);target.setDate(target.getDate()+1);target.setHours(h,m,0,0);
+    index=1;
+  }
 
-rows[index].classList.add("nextPrayer");
-const diff=target-now;if(diff<=0) return;
+  rows[index].classList.add("nextPrayer");
+  const diff=target-now;if(diff<=0) return;
 
-$("countdownText").innerText=`${prayerNames[index]} بعد:`;
-$("nextPrayerClock").innerText=
-`${String(Math.floor(diff/3600000)).padStart(2,"0")}:`+
-`${String(Math.floor(diff%3600000/60000)).padStart(2,"0")}:`+
-`${String(Math.floor(diff%60000/1000)).padStart(2,"0")}`;
+  $("countdownText").innerText=`${prayerNames[index]} بعد:`;
+  $("nextPrayerClock").innerText=
+    `${String(Math.floor(diff/3600000)).padStart(2,"0")}:`+
+    `${String(Math.floor(diff%3600000/60000)).padStart(2,"0")}:`+
+    `${String(Math.floor(diff%60000/1000)).padStart(2,"0")}`;
 }
 
 buildTable();
