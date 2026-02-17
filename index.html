@@ -7,6 +7,13 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
+<meta property="og:title" content="مواقيت الصلاة - الڨرارم ڨوڨة">
+<meta property="og:description" content="تابع مواقيت الصلاة والعد التنازلي مباشرة.">
+<meta property="og:image" content="https://prayer-times-khithem.vercel.app/screenshot.jpg">
+<meta property="og:image:alt" content="لوغو الجمعية">
+<meta property="og:url" content="https://prayer-times-khithem.vercel.app">
+<meta property="og:type" content="website">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',Tahoma}
 body{height:110vh;display:flex;justify-content:center;align-items:center;background:url("background3.jpg") no-repeat center/cover fixed}
@@ -14,76 +21,104 @@ body{height:110vh;display:flex;justify-content:center;align-items:center;backgro
 .logo{width:80px;margin-bottom:6px}
 .title{font-size:20px;font-weight:700;margin:6px 0}
 .date{margin:2px 0;font-size:14px;font-weight:700}
-
-.news-bar{background:gold;color:#000;font-weight:700;padding:8px 0;border-radius:12px;margin-bottom:10px;overflow:hidden}
-.news-text{white-space:nowrap;display:inline-block;animation:scrollNews 25s linear infinite}
+.news-bar{background:gold;color:#000;font-weight:700;padding:8px 0;border-radius:12px;margin-bottom:10px;overflow:hidden;position:relative}
+.news-text{display:inline-block;white-space:nowrap;animation:scrollNews 25s linear infinite}
 @keyframes scrollNews{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
-
 .table{margin-top:10px}
 .row{display:flex;justify-content:space-between;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.25);font-weight:700}
-
-/* نبض هادئ */
-.row.nextPrayer{
-  background:gold;
-  color:#000;
-  border-radius:12px;
-  animation:softGlow 2.5s ease-in-out infinite;
-}
-@keyframes softGlow{
-  0%{box-shadow:0 0 5px rgba(255,215,0,0.4);}
-  50%{box-shadow:0 0 15px rgba(255,215,0,0.8);}
-  100%{box-shadow:0 0 5px rgba(255,215,0,0.4);}
-}
-
-/* نبض قوي قبل 10 دقائق */
-.row.nextPrayer.activeSoon{
-  animation:strongGlow 1s ease-in-out infinite;
-}
-@keyframes strongGlow{
-  0%{box-shadow:0 0 15px rgba(255,215,0,0.8);}
-  50%{box-shadow:0 0 30px rgba(255,215,0,1);}
-  100%{box-shadow:0 0 15px rgba(255,215,0,0.8);}
-}
-
-#countdownText{font-size:24px;font-weight:700;margin:6px 0;color:gold}
-#nextPrayerClockContainer{border:2px solid gold;border-radius:10px;padding:6px 12px;box-shadow:0 0 10px rgba(255,215,0,.6);display:flex;align-items:center;justify-content:center;gap:8px}
+.row.nextPrayer{background:gold;color:#000;border-radius:12px}
+#countdownText{font-size:24px;font-weight:700;margin:6px 0;color:gold;text-shadow:0 0 8px rgba(255,215,0,.8)}
+#nextPrayerClockContainer{border:2px solid gold;border-radius:10px;padding:6px 12px;box-shadow:0 0 15px rgba(255,215,0,.7);display:flex;align-items:center;justify-content:center;gap:8px}
 #nextPrayerClock{font-size:30px}
-.footer{margin-top:10px;font-size:14px}
+#nextPrayerClockContainer img{width:35px;height:35px}
+.footer{margin-top:10px;font-size:14px;display:flex;justify-content:center;gap:6px}
 </style>
 </head>
 
 <body>
 <div class="overlay">
+<img src="logo.png" class="logo">
 
 <div class="news-bar">
 <div class="news-text">
-تعلن الجمعية الخيرية مسك الختام بالتنسيق مع إمام مسجد عبد الحميد ابن باديس عن إنطلاق قفة رمضان لفائدة العائلات المعوزة
+تعلن الجمعية الخيرية مسك الختام بالتنسيق مع إمام مسجد عبد الحميد ابن باديس عن إنطلاق قفة رمضان لفائدة العائلات المعوزة، للتبرع والإستفسار يرجى الإتصال على الأرقام التالية: 0773708353 - 0699839929 - 0772677691
 </div>
 </div>
 
-<div class="title">الجمعية الخيرية مسك الختام القرارم قوقة</div>
-
+<div class="title"> الجمعية الخيرية مسك الختام القرارم قوقة </div>
 <div class="date" id="gregorian">--</div>
 <div class="date" id="hijri">--</div>
 
 <div id="countdownText">-- بعد:</div>
 <div id="nextPrayerClockContainer">
+<img src="logo.webp">
 <div id="nextPrayerClock">--:--:--</div>
 </div>
 
 <div class="table" id="prayerTable"></div>
-<div class="footer">misk elkhithem ©</div>
-
+<div class="footer"><span>misk elkhithem ©</span></div>
 </div>
 
 <script>
 const TABLE_START_DATE=new Date("2026-02-01T00:00:00");
 const HIJRI_START_DATE=new Date("2026-02-18T00:00:00");
 
-/* جدول كامل بدون تغيير */
-let prayerSchedule = [/* ضع هنا جدولك الكامل */];
+let prayerSchedule=[
 
-/* تبديل الإمساك مع الفجر للعرض */
+// 1 فيفري → 17 فيفري
+["06:09","05:59","12:49","15:40","18:04","19:25"],
+["06:08","05:58","12:49","15:41","18:05","19:26"],
+["06:07","05:57","12:49","15:42","18:07","19:27"],
+["06:07","05:57","12:49","15:42","18:08","19:27"],
+["06:06","05:56","12:49","15:43","18:09","19:28"],
+["06:05","05:55","12:49","15:44","18:10","19:29"],
+["06:04","05:54","12:50","15:45","18:11","19:30"],
+["06:03","05:53","12:50","15:46","18:12","19:31"],
+["06:03","05:53","12:50","15:47","18:13","19:32"],
+["06:02","05:52","12:50","15:47","18:14","19:33"],
+["06:01","05:51","12:50","15:48","18:15","19:34"],
+["06:00","05:50","12:50","15:49","18:16","19:35"],
+["05:59","05:49","12:50","15:50","18:17","19:36"],
+["05:58","05:48","12:50","15:51","18:18","19:37"],
+["05:57","05:47","12:50","15:51","18:19","19:38"],
+["05:56","05:46","12:49","15:52","18:20","19:39"],
+["05:55","05:45","12:49","15:53","18:21","19:40"],
+
+// رمضان
+["05:54","05:44","12:49","15:54","18:22","19:41"],
+["05:53","05:43","12:49","15:54","18:23","19:41"],
+["05:52","05:42","12:49","15:55","18:24","19:42"],
+["05:50","05:40","12:49","15:56","18:25","19:43"],
+["05:49","05:39","12:49","15:56","18:26","19:44"],
+["05:48","05:38","12:49","15:57","18:27","19:45"],
+["05:47","05:37","12:49","15:58","18:28","19:46"],
+["05:46","05:36","12:48","15:58","18:29","19:47"],
+["05:44","05:34","12:48","15:59","18:30","19:48"],
+["05:43","05:33","12:48","16:00","18:31","19:49"],
+["05:42","05:32","12:48","16:00","18:32","19:50"],
+["05:41","05:31","12:48","16:01","18:33","19:51"],
+["05:39","05:29","12:48","16:01","18:34","19:52"],
+["05:38","05:28","12:47","16:02","18:35","19:52"],
+["05:36","05:26","12:47","16:02","18:36","19:53"],
+["05:35","05:25","12:47","16:03","18:37","19:54"],
+["05:34","05:24","12:47","16:04","18:38","19:55"],
+["05:32","05:22","12:46","16:04","18:39","19:56"],
+["05:31","05:21","12:46","16:05","18:39","19:57"],
+["05:30","05:20","12:46","16:05","18:40","19:58"],
+["05:28","05:18","12:46","16:06","18:41","19:59"],
+["05:27","05:17","12:45","16:06","18:42","20:00"],
+["05:25","05:15","12:45","16:06","18:43","20:01"],
+["05:24","05:14","12:45","16:07","18:44","20:02"],
+["05:22","05:12","12:45","16:07","18:45","20:03"],
+["05:21","05:11","12:44","16:08","18:46","20:04"],
+["05:19","05:09","12:44","16:08","18:47","20:05"],
+["05:18","05:08","12:44","16:09","18:48","20:05"],
+["05:16","05:06","12:43","16:09","18:48","20:06"],
+["05:15","05:05","12:43","16:09","18:49","20:07"]
+
+];
+
+/* تبديل الإمساك مع الفجر للعرض فقط */
 prayerSchedule = prayerSchedule.map(day => [day[1], day[0], day[2], day[3], day[4], day[5]]);
 
 const prayerNames=["الإمساك","الفجر","الظهر","العصر","المغرب","العشاء"];
@@ -122,38 +157,41 @@ function updateDateAndTimes(){
 
 function updateCountdown(){
   if(!todayTimes.length) return;
-  const now=new Date();
-  rows.forEach(r=>{r.classList.remove("nextPrayer");r.classList.remove("activeSoon");});
-  let target,index=-1,found=false;
+  const now=new Date();rows.forEach(r=>r.classList.remove("nextPrayer"));
+  let target,index=-1;
+  let found=false;
 
+  // البحث عن الصلاة التالية مع تخطي الإمساك
   for(let i=0;i<todayTimes.length;i++){
     if(i===0) continue; // تخطي الإمساك
     const [h,m]=todayTimes[i].split(":").map(Number);
     const t=new Date();t.setHours(h,m,0,0);
-    if(t>now){target=t;index=i;found=true;break;}
+    if(t>now){
+      target=t;
+      index=i;
+      found=true;
+      break;
+    }
   }
 
+  // إذا انتهى اليوم ولم نجد صلاة بعد الآن، انتقل لغد (تخطي الإمساك)
   if(!found){
     const tomorrow=new Date(now);tomorrow.setDate(tomorrow.getDate()+1);
     const diff=Math.floor((tomorrow-TABLE_START_DATE)/86400000);
     const i=Math.min(Math.max(diff,0),prayerSchedule.length-1);
-    const [h,m]=prayerSchedule[i][1].split(":").map(Number);
+    const [h,m]=prayerSchedule[i][1].split(":").map(Number); // فجر الغد
     target=new Date(now);target.setDate(target.getDate()+1);target.setHours(h,m,0,0);
     index=1;
   }
 
   rows[index].classList.add("nextPrayer");
+  const diff=target-now;if(diff<=0) return;
 
-  // قبل 10 دقائق، نبض أقوى
-  const diffMinutes=(target-now)/60000;
-  if(diffMinutes<=10) rows[index].classList.add("activeSoon");
-
-  const d=target-now;
   $("countdownText").innerText=`${prayerNames[index]} بعد:`;
   $("nextPrayerClock").innerText=
-    `${String(Math.floor(d/3600000)).padStart(2,"0")}:`+
-    `${String(Math.floor(d%3600000/60000)).padStart(2,"0")}:`+
-    `${String(Math.floor(d%60000/1000)).padStart(2,"0")}`;
+    `${String(Math.floor(diff/3600000)).padStart(2,"0")}:`+
+    `${String(Math.floor(diff%3600000/60000)).padStart(2,"0")}:`+
+    `${String(Math.floor(diff%60000/1000)).padStart(2,"0")}`;
 }
 
 buildTable();
