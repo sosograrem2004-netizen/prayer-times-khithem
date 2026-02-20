@@ -19,10 +19,13 @@ body{min-height:100vh;display:flex;justify-content:center;align-items:center;bac
 .title{font-size:20px;font-weight:700;margin:6px 0}
 .date{margin:2px 0;font-size:14px;font-weight:700}
 .news-bar{background:gold;color:#000;font-weight:700;padding:8px 0;border-radius:12px;margin-bottom:10px;overflow:hidden;position:relative}
-.news-text{display:inline-block;white-space:nowrap;animation:scrollNews 25s linear infinite}
+.news-text{display:inline-block;white-space:nowrap}
+.news-text.animate-news {
+  animation: scrollNews 25s linear infinite;
+}
 @keyframes scrollNews {
-  from { transform: translateX(0); }      /* يبدأ من الحافة اليسرى داخل الشريط */
-  to { transform: translateX(100%); }     /* يتحرك لليمين حتى يختفي */
+  from { transform: translateX(-100%); }  /* يبدأ خارج الشريط من اليسار */
+  to { transform: translateX(100%); }      /* يتحرك لليمين حتى يختفي */
 }
 .table{margin-top:10px}
 .row{display:flex;justify-content:space-between;padding:6px 8px;border-bottom:1px solid rgba(255,255,255,.25);font-weight:700}
@@ -197,6 +200,11 @@ updateDateAndTimes();
 updateCountdown();
 setInterval(updateCountdown,1000);
 setInterval(updateDateAndTimes,60000);
+
+// بعد ثانية واحدة من تحميل الصفحة، يتم تفعيل حركة شريط الأخبار
+setTimeout(() => {
+  document.querySelector('.news-text').classList.add('animate-news');
+}, 1000);
 </script>
 </body>
 </html>
